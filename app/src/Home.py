@@ -34,7 +34,7 @@ SideBarLinks(show_home=True)
 
 # set the title of the page and provide a simple prompt. 
 logger.info("Loading the Home page of the app")
-st.title('CS 3200 Sample Semester Project App')
+st.title('NU CLEAR')
 st.write('\n\n')
 st.write('### HI! As which user would you like to log in?')
 
@@ -74,4 +74,9 @@ if st.button('Act as System Administrator',
     st.switch_page('pages/20_Admin_Home.py')
 
 
-
+if st.button('Some Text On the Button',
+             type = 'secondary',
+             use_container_width =True):
+        st.session_state['authenticated'] = True # ensuring they are authenticated in system
+        st.session_state['role'] = 'Professor'
+        st.switch_page('pages/20_Admin_Home.py')

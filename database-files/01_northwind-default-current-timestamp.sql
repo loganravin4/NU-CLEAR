@@ -1,546 +1,300 @@
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+DROP DATABASE IF EXISTS `nu-clear-database`;
+CREATE DATABASE `nu-clear-database`;
+USE `nu-clear-database`;
 
-DROP SCHEMA IF EXISTS `northwind` ;
-CREATE SCHEMA IF NOT EXISTS `northwind` DEFAULT CHARACTER SET latin1 ;
-USE `northwind` ;
+-- Create tables
+CREATE TABLE IF NOT EXISTS UserType (
+    userType varchar(255) PRIMARY KEY
+);
 
--- -----------------------------------------------------
--- Table `northwind`.`customers`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`customers` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `company` VARCHAR(50) NULL DEFAULT NULL,
-  `last_name` VARCHAR(50) NULL DEFAULT NULL,
-  `first_name` VARCHAR(50) NULL DEFAULT NULL,
-  `email_address` VARCHAR(50) NULL DEFAULT NULL,
-  `job_title` VARCHAR(50) NULL DEFAULT NULL,
-  `business_phone` VARCHAR(25) NULL DEFAULT NULL,
-  `home_phone` VARCHAR(25) NULL DEFAULT NULL,
-  `mobile_phone` VARCHAR(25) NULL DEFAULT NULL,
-  `fax_number` VARCHAR(25) NULL DEFAULT NULL,
-  `address` LONGTEXT NULL DEFAULT NULL,
-  `city` VARCHAR(50) NULL DEFAULT NULL,
-  `state_province` VARCHAR(50) NULL DEFAULT NULL,
-  `zip_postal_code` VARCHAR(15) NULL DEFAULT NULL,
-  `country_region` VARCHAR(50) NULL DEFAULT NULL,
-  `web_page` LONGTEXT NULL DEFAULT NULL,
-  `notes` LONGTEXT NULL DEFAULT NULL,
-  `attachments` LONGBLOB NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `city` (`city` ASC),
-  INDEX `company` (`company` ASC),
-  INDEX `first_name` (`first_name` ASC),
-  INDEX `last_name` (`last_name` ASC),
-  INDEX `zip_postal_code` (`zip_postal_code` ASC),
-  INDEX `state_province` (`state_province` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE IF NOT EXISTS User (
+    userId integer PRIMARY KEY,
+    userType varchar(255) NOT NULL,
+    FOREIGN KEY (userType) REFERENCES UserType (userType)
+        ON UPDATE CASCADE ON DELETE RESTRICT
+);
 
+CREATE TABLE IF NOT EXISTS SystemAdmin (
+    userId integer PRIMARY KEY,
+    firstName varchar(255) NOT NULL,
+    lastName varchar(255) NOT NULL,
+    email varchar(255),
+    FOREIGN KEY (userId) REFERENCES User (userId)
+        ON UPDATE cascade ON DELETE restrict
+);
 
--- -----------------------------------------------------
--- Table `northwind`.`employees`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`employees` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `company` VARCHAR(50) NULL DEFAULT NULL,
-  `last_name` VARCHAR(50) NULL DEFAULT NULL,
-  `first_name` VARCHAR(50) NULL DEFAULT NULL,
-  `email_address` VARCHAR(50) NULL DEFAULT NULL,
-  `job_title` VARCHAR(50) NULL DEFAULT NULL,
-  `business_phone` VARCHAR(25) NULL DEFAULT NULL,
-  `home_phone` VARCHAR(25) NULL DEFAULT NULL,
-  `mobile_phone` VARCHAR(25) NULL DEFAULT NULL,
-  `fax_number` VARCHAR(25) NULL DEFAULT NULL,
-  `address` LONGTEXT NULL DEFAULT NULL,
-  `city` VARCHAR(50) NULL DEFAULT NULL,
-  `state_province` VARCHAR(50) NULL DEFAULT NULL,
-  `zip_postal_code` VARCHAR(15) NULL DEFAULT NULL,
-  `country_region` VARCHAR(50) NULL DEFAULT NULL,
-  `web_page` LONGTEXT NULL DEFAULT NULL,
-  `notes` LONGTEXT NULL DEFAULT NULL,
-  `attachments` LONGBLOB NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `city` (`city` ASC),
-  INDEX `company` (`company` ASC),
-  INDEX `first_name` (`first_name` ASC),
-  INDEX `last_name` (`last_name` ASC),
-  INDEX `zip_postal_code` (`zip_postal_code` ASC),
-  INDEX `state_province` (`state_province` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE IF NOT EXISTS Module (
+    moduleId integer PRIMARY KEY,
+    moduleName varchar(255) NOT NULL,
+    moduleStatus varchar(255) NOT NULL,
+    createdBy integer NOT NULL,
+    updatedBy integer,
+    FOREIGN KEY (createdBy) REFERENCES SystemAdmin (userId)
+        ON UPDATE cascade ON DELETE restrict,
+    FOREIGN KEY (updatedBy) REFERENCES SystemAdmin (userId)
+        ON UPDATE cascade ON DELETE restrict
+);
 
+CREATE TABLE IF NOT EXISTS Permission (
+    permissionId integer PRIMARY KEY,
+    editedBy integer NOT NULL,
+    canEditPerms bool DEFAULT false,
+    canEditModule bool DEFAULT false,
+    canEditAccSettings bool DEFAULT false,
+    canCreateReview bool DEFAULT false,
+    canCreateCoopListing bool DEFAULT false,
+    canCreateModule bool DEFAULT false,
+    canViewReview bool DEFAULT false,
+    canViewCoopListing bool DEFAULT false,
+    canViewModule bool DEFAULT false,
+    canDeleteReview bool DEFAULT false,
+    canDeleteCoopListing bool DEFAULT false,
+    canDeleteModule bool DEFAULT false,
+    FOREIGN KEY (editedBy) REFERENCES SystemAdmin (userId)
+        ON UPDATE cascade ON DELETE restrict
+);
 
--- -----------------------------------------------------
--- Table `northwind`.`privileges`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`privileges` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `privilege_name` VARCHAR(50) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE IF NOT EXISTS UserPermission (
+    userType varchar(255),
+    permissionId integer,
+    PRIMARY KEY (userType, permissionId),
+    FOREIGN KEY (userType) REFERENCES UserType (userType)
+        ON UPDATE cascade ON DELETE restrict,
+    FOREIGN KEY (permissionId) REFERENCES Permission (permissionId)
+        ON UPDATE cascade ON DELETE restrict
+);
 
+CREATE TABLE IF NOT EXISTS UserModule (
+    userType varchar(255),
+    moduleId integer,
+    PRIMARY KEY (userType, moduleId),
+    FOREIGN KEY (userType) REFERENCES UserType (userType)
+        ON UPDATE cascade ON DELETE restrict,
+    FOREIGN KEY (moduleId) REFERENCES Module (moduleId)
+        ON UPDATE cascade ON DELETE restrict
+);
 
--- -----------------------------------------------------
--- Table `northwind`.`employee_privileges`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`employee_privileges` (
-  `employee_id` INT(11) NOT NULL,
-  `privilege_id` INT(11) NOT NULL,
-  PRIMARY KEY (`employee_id`, `privilege_id`),
-  INDEX `employee_id` (`employee_id` ASC),
-  INDEX `privilege_id` (`privilege_id` ASC),
-  INDEX `privilege_id_2` (`privilege_id` ASC),
-  CONSTRAINT `fk_employee_privileges_employees1`
-    FOREIGN KEY (`employee_id`)
-    REFERENCES `northwind`.`employees` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_employee_privileges_privileges1`
-    FOREIGN KEY (`privilege_id`)
-    REFERENCES `northwind`.`privileges` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE IF NOT EXISTS Advisor (
+    nuId integer PRIMARY KEY,
+    userId integer UNIQUE NOT NULL,
+    firstName varchar(255) NOT NULL,
+    lastName varchar(255) NOT NULL,
+    email varchar(255),
+    department varchar(255),
+    FOREIGN KEY (userId) REFERENCES User (userId)
+        ON UPDATE cascade ON DELETE restrict
+);
 
+CREATE TABLE IF NOT EXISTS Student (
+    nuId integer PRIMARY KEY,
+    userId integer UNIQUE NOT NULL,
+    firstName varchar(255) NOT NULL,
+    lastName varchar(255) NOT NULL,
+    major varchar(255),
+    coopLevel integer NOT NULL,
+    year integer,
+    advisor integer NOT NULL,
+    FOREIGN KEY (userId) REFERENCES User (userId)
+        ON UPDATE cascade ON DELETE restrict,
+    FOREIGN KEY (advisor) REFERENCES Advisor (nuId)
+        ON UPDATE cascade ON DELETE restrict
+);
 
--- -----------------------------------------------------
--- Table `northwind`.`inventory_transaction_types`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`inventory_transaction_types` (
-  `id` TINYINT(4) NOT NULL,
-  `type_name` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE IF NOT EXISTS Company (
+    companyId integer PRIMARY KEY,
+    companyName varchar(255) NOT NULL,
+    size integer
+);
 
+CREATE TABLE IF NOT EXISTS Coop (
+    jobId integer PRIMARY KEY,
+    locationCity varchar(255),
+    locationState varchar(255),
+    locationCountry varchar(255),
+    title varchar(255),
+    description varchar(255),
+    company integer,
+    FOREIGN KEY (company) REFERENCES Company (companyId)
+        ON UPDATE cascade ON DELETE restrict
+);
 
--- -----------------------------------------------------
--- Table `northwind`.`shippers`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`shippers` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `company` VARCHAR(50) NULL DEFAULT NULL,
-  `last_name` VARCHAR(50) NULL DEFAULT NULL,
-  `first_name` VARCHAR(50) NULL DEFAULT NULL,
-  `email_address` VARCHAR(50) NULL DEFAULT NULL,
-  `job_title` VARCHAR(50) NULL DEFAULT NULL,
-  `business_phone` VARCHAR(25) NULL DEFAULT NULL,
-  `home_phone` VARCHAR(25) NULL DEFAULT NULL,
-  `mobile_phone` VARCHAR(25) NULL DEFAULT NULL,
-  `fax_number` VARCHAR(25) NULL DEFAULT NULL,
-  `address` LONGTEXT NULL DEFAULT NULL,
-  `city` VARCHAR(50) NULL DEFAULT NULL,
-  `state_province` VARCHAR(50) NULL DEFAULT NULL,
-  `zip_postal_code` VARCHAR(15) NULL DEFAULT NULL,
-  `country_region` VARCHAR(50) NULL DEFAULT NULL,
-  `web_page` LONGTEXT NULL DEFAULT NULL,
-  `notes` LONGTEXT NULL DEFAULT NULL,
-  `attachments` LONGBLOB NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `city` (`city` ASC),
-  INDEX `company` (`company` ASC),
-  INDEX `first_name` (`first_name` ASC),
-  INDEX `last_name` (`last_name` ASC),
-  INDEX `zip_postal_code` (`zip_postal_code` ASC),
-  INDEX `state_province` (`state_province` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE IF NOT EXISTS Review (
+    reviewId integer PRIMARY KEY,
+    createdAt timestamp DEFAULT (now()),
+    createdBy integer,
+    role integer NOT NULL,
+    salary decimal(6,2),
+    rating varchar(255) NOT NULL,
+    summary varchar(255),
+    bestPart varchar(255),
+    worstPart varchar(255),
+    FOREIGN KEY (createdBy) REFERENCES Student (userId)
+        ON UPDATE cascade ON DELETE restrict,
+    FOREIGN KEY (role) REFERENCES Coop (jobId)
+        ON UPDATE cascade ON DELETE restrict
+);
 
+CREATE TABLE IF NOT EXISTS Employer (
+    userId integer PRIMARY KEY,
+    firstName varchar(255) NOT NULL,
+    lastName varchar(255) NOT NULL,
+    email varchar(255),
+    role varchar(255),
+    department varchar(255),
+    company integer NOT NULL,
+    FOREIGN KEY (userId) REFERENCES User (userId)
+        ON UPDATE cascade ON DELETE restrict,
+    FOREIGN KEY (company) REFERENCES Company (companyId)
+        ON UPDATE cascade ON DELETE restrict
+);
 
--- -----------------------------------------------------
--- Table `northwind`.`orders_tax_status`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`orders_tax_status` (
-  `id` TINYINT(4) NOT NULL,
-  `tax_status_name` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE IF NOT EXISTS DataAnalyst (
+    userId integer PRIMARY KEY,
+    firstName varchar(255) NOT NULL,
+    lastName varchar(255) NOT NULL,
+    FOREIGN KEY (userId) REFERENCES User (userId)
+        ON UPDATE cascade ON DELETE restrict
+);
 
+CREATE TABLE IF NOT EXISTS Visualization (
+    visualizationId integer PRIMARY KEY,
+    type varchar(255) NOT NULL,
+    filters varchar(255) NOT NULL,
+    company integer,
+    createdBy integer NOT NULL,
+    updatedBy integer,
+    FOREIGN KEY (company) REFERENCES Company (companyId)
+        ON UPDATE cascade ON DELETE restrict,
+    FOREIGN KEY (createdBy) REFERENCES DataAnalyst (userId)
+        ON UPDATE cascade ON DELETE restrict,
+    FOREIGN KEY (updatedBy) REFERENCES DataAnalyst (userId)
+        ON UPDATE cascade ON DELETE restrict
+);
 
--- -----------------------------------------------------
--- Table `northwind`.`orders_status`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`orders_status` (
-  `id` TINYINT(4) NOT NULL,
-  `status_name` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE IF NOT EXISTS SummaryReport (
+    summaryReportId integer PRIMARY KEY,
+    averageRating varchar(255) NOT NULL,
+    generatedSummary varchar(255) NOT NULL,
+    company integer,
+    generatedBy integer NOT NULL,
+    updatedBy integer,
+    FOREIGN KEY (company) REFERENCES Company (companyId)
+        ON UPDATE cascade ON DELETE restrict,
+    FOREIGN KEY (generatedBy) REFERENCES DataAnalyst (userId)
+        ON UPDATE cascade ON DELETE restrict,
+    FOREIGN KEY (updatedBy) REFERENCES DataAnalyst (userId)
+        ON UPDATE cascade ON DELETE restrict
+);
 
+/*
+INSERT INTO UserType (userType)
+    VALUES ('SystemAdmin'), ('Advisor'), ('Student'), ('Employer'), ('DataAnalyst');
 
--- -----------------------------------------------------
--- Table `northwind`.`orders`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`orders` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `employee_id` INT(11) NULL DEFAULT NULL,
-  `customer_id` INT(11) NULL DEFAULT NULL,
-  `order_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `shipped_date` DATETIME NULL DEFAULT NULL,
-  `shipper_id` INT(11) NULL DEFAULT NULL,
-  `ship_name` VARCHAR(50) NULL DEFAULT NULL,
-  `ship_address` LONGTEXT NULL DEFAULT NULL,
-  `ship_city` VARCHAR(50) NULL DEFAULT NULL,
-  `ship_state_province` VARCHAR(50) NULL DEFAULT NULL,
-  `ship_zip_postal_code` VARCHAR(50) NULL DEFAULT NULL,
-  `ship_country_region` VARCHAR(50) NULL DEFAULT NULL,
-  `shipping_fee` DECIMAL(19,4) NULL DEFAULT '0.0000',
-  `taxes` DECIMAL(19,4) NULL DEFAULT '0.0000',
-  `payment_type` VARCHAR(50) NULL DEFAULT NULL,
-  `paid_date` DATETIME NULL DEFAULT NULL,
-  `notes` LONGTEXT NULL DEFAULT NULL,
-  `tax_rate` DOUBLE NULL DEFAULT '0',
-  `tax_status_id` TINYINT(4) NULL DEFAULT NULL,
-  `status_id` TINYINT(4) NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  INDEX `customer_id` (`customer_id` ASC),
-  INDEX `customer_id_2` (`customer_id` ASC),
-  INDEX `employee_id` (`employee_id` ASC),
-  INDEX `employee_id_2` (`employee_id` ASC),
-  INDEX `id` (`id` ASC),
-  INDEX `id_2` (`id` ASC),
-  INDEX `shipper_id` (`shipper_id` ASC),
-  INDEX `shipper_id_2` (`shipper_id` ASC),
-  INDEX `id_3` (`id` ASC),
-  INDEX `tax_status` (`tax_status_id` ASC),
-  INDEX `ship_zip_postal_code` (`ship_zip_postal_code` ASC),
-  CONSTRAINT `fk_orders_customers`
-    FOREIGN KEY (`customer_id`)
-    REFERENCES `northwind`.`customers` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_orders_employees1`
-    FOREIGN KEY (`employee_id`)
-    REFERENCES `northwind`.`employees` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_orders_shippers1`
-    FOREIGN KEY (`shipper_id`)
-    REFERENCES `northwind`.`shippers` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_orders_orders_tax_status1`
-    FOREIGN KEY (`tax_status_id`)
-    REFERENCES `northwind`.`orders_tax_status` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_orders_orders_status1`
-    FOREIGN KEY (`status_id`)
-    REFERENCES `northwind`.`orders_status` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+INSERT INTO User (userId, userType)
+    VALUES
+        (5, 'SystemAdmin'),
+        (101, 'Advisor'),
+        (102, 'Advisor'),
+        (103, 'Advisor'),
+        (201, 'Student'),
+        (202, 'Student'),
+        (203, 'Student'),
+        (301, 'Employer'),
+        (302, 'Employer'),
+        (303, 'Employer'),
+        (401, 'DataAnalyst'),
+        (402, 'DataAnalyst'),
+        (403, 'DataAnalyst');
 
+INSERT INTO SystemAdmin (userId, firstName, lastName, email)
+    VALUES
+        (5, 'Ariana', 'Duke', 'ariana.duke@clearplatform.com');
 
--- -----------------------------------------------------
--- Table `northwind`.`products`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`products` (
-  `supplier_ids` LONGTEXT NULL DEFAULT NULL,
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `product_code` VARCHAR(25) NULL DEFAULT NULL,
-  `product_name` VARCHAR(50) NULL DEFAULT NULL,
-  `description` LONGTEXT NULL DEFAULT NULL,
-  `standard_cost` DECIMAL(19,4) NULL DEFAULT '0.0000',
-  `list_price` DECIMAL(19,4) NOT NULL DEFAULT '0.0000',
-  `reorder_level` INT(11) NULL DEFAULT NULL,
-  `target_level` INT(11) NULL DEFAULT NULL,
-  `quantity_per_unit` VARCHAR(50) NULL DEFAULT NULL,
-  `discontinued` TINYINT(1) NOT NULL DEFAULT '0',
-  `minimum_reorder_quantity` INT(11) NULL DEFAULT NULL,
-  `category` VARCHAR(50) NULL DEFAULT NULL,
-  `attachments` LONGBLOB NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `product_code` (`product_code` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy)
+    VALUES
+    (1, 'How to compare company ratings', 'Active', 5),
+    (2, 'Seeing your students dashboards', 'Active', 5),
+    (3, 'Company profile management', 'Active', 5);
 
+INSERT INTO UserModule (userType, moduleId)
+    VALUES
+        ('Student', 1),
+        ('Advisor', 2),
+        ('Employer', 3);
 
--- -----------------------------------------------------
--- Table `northwind`.`purchase_order_status`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`purchase_order_status` (
-  `id` INT(11) NOT NULL,
-  `status` VARCHAR(50) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+INSERT INTO Permission (permissionId, editedBy, canEditPerms, canEditModule, canEditAccSettings,
+                        canCreateReview, canCreateCoopListing, canCreateModule, canViewReview,
+                        canViewCoopListing, canViewModule, canDeleteReview, canDeleteCoopListing, canDeleteModule)
+    VALUES
+        (1, 5, true, true,
+         true, true, true,
+         true, true, true, true,
+         true, true, true),
+        (2, 5, false, false, false, true, false, false, true, false, true, false, false, false);
 
+INSERT INTO UserPermission (userType, permissionId)
+    VALUES
+        ('Student', 2),
+        ('SystemAdmin', 1);
 
--- -----------------------------------------------------
--- Table `northwind`.`suppliers`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`suppliers` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `company` VARCHAR(50) NULL DEFAULT NULL,
-  `last_name` VARCHAR(50) NULL DEFAULT NULL,
-  `first_name` VARCHAR(50) NULL DEFAULT NULL,
-  `email_address` VARCHAR(50) NULL DEFAULT NULL,
-  `job_title` VARCHAR(50) NULL DEFAULT NULL,
-  `business_phone` VARCHAR(25) NULL DEFAULT NULL,
-  `home_phone` VARCHAR(25) NULL DEFAULT NULL,
-  `mobile_phone` VARCHAR(25) NULL DEFAULT NULL,
-  `fax_number` VARCHAR(25) NULL DEFAULT NULL,
-  `address` LONGTEXT NULL DEFAULT NULL,
-  `city` VARCHAR(50) NULL DEFAULT NULL,
-  `state_province` VARCHAR(50) NULL DEFAULT NULL,
-  `zip_postal_code` VARCHAR(15) NULL DEFAULT NULL,
-  `country_region` VARCHAR(50) NULL DEFAULT NULL,
-  `web_page` LONGTEXT NULL DEFAULT NULL,
-  `notes` LONGTEXT NULL DEFAULT NULL,
-  `attachments` LONGBLOB NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `city` (`city` ASC),
-  INDEX `company` (`company` ASC),
-  INDEX `first_name` (`first_name` ASC),
-  INDEX `last_name` (`last_name` ASC),
-  INDEX `zip_postal_code` (`zip_postal_code` ASC),
-  INDEX `state_province` (`state_province` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+INSERT INTO Advisor (nuId, userId, firstName, lastName, email, department)
+    VALUES
+        (1, 101, 'Quinn', 'Aldridge',
+         'quinn.aldridge@northeastern.edu', 'Counseling'),
+        (2, 102, 'Sophia', 'Brown',
+         'sophia.brown@northeastern.edu', 'Computer Science'),
+        (3, 103, 'James', 'Smith',
+         'james.smith@northeastern.edu', 'Data Science');
 
+INSERT INTO Student (nuId, userId, firstName, lastName, major, coopLevel, year, advisor)
+    VALUES
+        (2239281, 201, 'Amelia', 'Fordham', 'CS', 1, 3, 1),
+        (2234928, 202, 'Jordan', 'Kim', 'DSBA', 2, 4, 2),
+        (2234193, 203, 'Maya', 'Patel', 'BSCS', 0, 2, 2);
 
--- -----------------------------------------------------
--- Table `northwind`.`purchase_orders`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`purchase_orders` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `supplier_id` INT(11) NULL DEFAULT NULL,
-  `created_by` INT(11) NULL DEFAULT NULL,
-  `submitted_date` DATETIME NULL DEFAULT NULL,
-  `creation_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status_id` INT(11) NULL DEFAULT '0',
-  `expected_date` DATETIME NULL DEFAULT NULL,
-  `shipping_fee` DECIMAL(19,4) NOT NULL DEFAULT '0.0000',
-  `taxes` DECIMAL(19,4) NOT NULL DEFAULT '0.0000',
-  `payment_date` DATETIME NULL DEFAULT NULL,
-  `payment_amount` DECIMAL(19,4) NULL DEFAULT '0.0000',
-  `payment_method` VARCHAR(50) NULL DEFAULT NULL,
-  `notes` LONGTEXT NULL DEFAULT NULL,
-  `approved_by` INT(11) NULL DEFAULT NULL,
-  `approved_date` DATETIME NULL DEFAULT NULL,
-  `submitted_by` INT(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `id` (`id` ASC),
-  INDEX `created_by` (`created_by` ASC),
-  INDEX `status_id` (`status_id` ASC),
-  INDEX `id_2` (`id` ASC),
-  INDEX `supplier_id` (`supplier_id` ASC),
-  INDEX `supplier_id_2` (`supplier_id` ASC),
-  CONSTRAINT `fk_purchase_orders_employees1`
-    FOREIGN KEY (`created_by`)
-    REFERENCES `northwind`.`employees` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_purchase_orders_purchase_order_status1`
-    FOREIGN KEY (`status_id`)
-    REFERENCES `northwind`.`purchase_order_status` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_purchase_orders_suppliers1`
-    FOREIGN KEY (`supplier_id`)
-    REFERENCES `northwind`.`suppliers` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+INSERT INTO Company (companyId, companyName, size)
+    VALUES
+        (1, 'BarkTree Bank', 5000),
+        (2, 'Tech Spark Solutions', 200),
+        (3, 'Google', 150000),
+        (4, 'Innovate Labs', 50);
 
+INSERT INTO Coop (jobId, locationCity, locationState, locationCountry, title, description, company)
+    VALUES
+        (1, 'Boston', 'MA', 'USA', 'QA Engineering Intern',
+         'Assist in software quality assurance testing, writing test cases, and debugging applications.',
+         1);
 
--- -----------------------------------------------------
--- Table `northwind`.`inventory_transactions`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`inventory_transactions` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `transaction_type` TINYINT(4) NOT NULL,
-  `transaction_created_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `transaction_modified_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `product_id` INT(11) NOT NULL,
-  `quantity` INT(11) NOT NULL,
-  `purchase_order_id` INT(11) NULL DEFAULT NULL,
-  `customer_order_id` INT(11) NULL DEFAULT NULL,
-  `comments` VARCHAR(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `customer_order_id` (`customer_order_id` ASC),
-  INDEX `customer_order_id_2` (`customer_order_id` ASC),
-  INDEX `product_id` (`product_id` ASC),
-  INDEX `product_id_2` (`product_id` ASC),
-  INDEX `purchase_order_id` (`purchase_order_id` ASC),
-  INDEX `purchase_order_id_2` (`purchase_order_id` ASC),
-  INDEX `transaction_type` (`transaction_type` ASC),
-  CONSTRAINT `fk_inventory_transactions_orders1`
-    FOREIGN KEY (`customer_order_id`)
-    REFERENCES `northwind`.`orders` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_inventory_transactions_products1`
-    FOREIGN KEY (`product_id`)
-    REFERENCES `northwind`.`products` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_inventory_transactions_purchase_orders1`
-    FOREIGN KEY (`purchase_order_id`)
-    REFERENCES `northwind`.`purchase_orders` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_inventory_transactions_inventory_transaction_types1`
-    FOREIGN KEY (`transaction_type`)
-    REFERENCES `northwind`.`inventory_transaction_types` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+INSERT INTO Review (reviewId, createdAt, createdBy, role, salary, rating, summary, bestPart, worstPart)
+    VALUES
+        (1, DEFAULT, 201, 1, 25.00,
+         '4/5', 'Great learning experience with some challenges.',
+         'Learned a lot about QA and testing methodologies.',
+         'Limited mentorship and guidance at times.');
 
+INSERT INTO Employer (userId, firstName, lastName, email, role, department, company)
+    VALUES
+        (301, 'Crystal', 'Cooper', 'crystal.cooper@barktreebank.com', 'Hiring Manager', 'Fintech', 1),
+        (302, 'Marcus', 'Taylor', 'marcus.taylor@techspark.com', 'Director of Engineering', 'Software Development', 2),
+        (303, 'Emma', 'Reed', 'emma.reed@google.com', 'Senior Recruiter', 'Data Science', 3);
 
--- -----------------------------------------------------
--- Table `northwind`.`invoices`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`invoices` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `order_id` INT(11) NULL DEFAULT NULL,
-  `invoice_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `due_date` DATETIME NULL DEFAULT NULL,
-  `tax` DECIMAL(19,4) NULL DEFAULT '0.0000',
-  `shipping` DECIMAL(19,4) NULL DEFAULT '0.0000',
-  `amount_due` DECIMAL(19,4) NULL DEFAULT '0.0000',
-  PRIMARY KEY (`id`),
-  INDEX `id` (`id` ASC),
-  INDEX `id_2` (`id` ASC),
-  INDEX `fk_invoices_orders1_idx` (`order_id` ASC),
-  CONSTRAINT `fk_invoices_orders1`
-    FOREIGN KEY (`order_id`)
-    REFERENCES `northwind`.`orders` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+INSERT INTO DataAnalyst (userId, firstName, lastName)
+    VALUES
+        (401, 'Sabrina', 'Johnson'),
+        (402, 'Daniel', 'Green'),
+        (403, 'Olivia', 'Clark');
 
+INSERT INTO Visualization (visualizationId, type, filters, company, createdBy)
+    VALUES
+        (1, 'Bar Chart', 'Year: 3, Role: QA Engineering Intern', 1, 401),
+        (2, 'Pie Chart', 'Rating: 4/5 and above, Location: USA', 3, 401),
+        (3, 'Line Chart', 'Year: 2, Role: Data Analyst', 2, 402),
+        (4, 'Heatmap', 'Demographics: Gender, Year', 1, 403);
 
--- -----------------------------------------------------
--- Table `northwind`.`order_details_status`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`order_details_status` (
-  `id` INT(11) NOT NULL,
-  `status_name` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `northwind`.`order_details`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`order_details` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `order_id` INT(11) NOT NULL,
-  `product_id` INT(11) NULL DEFAULT NULL,
-  `quantity` DECIMAL(18,4) NOT NULL DEFAULT '0.0000',
-  `unit_price` DECIMAL(19,4) NULL DEFAULT '0.0000',
-  `discount` DOUBLE NOT NULL DEFAULT '0',
-  `status_id` INT(11) NULL DEFAULT NULL,
-  `date_allocated` DATETIME NULL DEFAULT NULL,
-  `purchase_order_id` INT(11) NULL DEFAULT NULL,
-  `inventory_id` INT(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `id` (`id` ASC),
-  INDEX `inventory_id` (`inventory_id` ASC),
-  INDEX `id_2` (`id` ASC),
-  INDEX `id_3` (`id` ASC),
-  INDEX `id_4` (`id` ASC),
-  INDEX `product_id` (`product_id` ASC),
-  INDEX `product_id_2` (`product_id` ASC),
-  INDEX `purchase_order_id` (`purchase_order_id` ASC),
-  INDEX `id_5` (`id` ASC),
-  INDEX `fk_order_details_orders1_idx` (`order_id` ASC),
-  INDEX `fk_order_details_order_details_status1_idx` (`status_id` ASC),
-  CONSTRAINT `fk_order_details_orders1`
-    FOREIGN KEY (`order_id`)
-    REFERENCES `northwind`.`orders` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_order_details_products1`
-    FOREIGN KEY (`product_id`)
-    REFERENCES `northwind`.`products` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_order_details_order_details_status1`
-    FOREIGN KEY (`status_id`)
-    REFERENCES `northwind`.`order_details_status` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `northwind`.`purchase_order_details`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`purchase_order_details` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `purchase_order_id` INT(11) NOT NULL,
-  `product_id` INT(11) NULL DEFAULT NULL,
-  `quantity` DECIMAL(18,4) NOT NULL,
-  `unit_cost` DECIMAL(19,4) NOT NULL,
-  `date_received` DATETIME NULL DEFAULT NULL,
-  `posted_to_inventory` TINYINT(1) NOT NULL DEFAULT '0',
-  `inventory_id` INT(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `id` (`id` ASC),
-  INDEX `inventory_id` (`inventory_id` ASC),
-  INDEX `inventory_id_2` (`inventory_id` ASC),
-  INDEX `purchase_order_id` (`purchase_order_id` ASC),
-  INDEX `product_id` (`product_id` ASC),
-  INDEX `product_id_2` (`product_id` ASC),
-  INDEX `purchase_order_id_2` (`purchase_order_id` ASC),
-  CONSTRAINT `fk_purchase_order_details_inventory_transactions1`
-    FOREIGN KEY (`inventory_id`)
-    REFERENCES `northwind`.`inventory_transactions` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_purchase_order_details_products1`
-    FOREIGN KEY (`product_id`)
-    REFERENCES `northwind`.`products` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_purchase_order_details_purchase_orders1`
-    FOREIGN KEY (`purchase_order_id`)
-    REFERENCES `northwind`.`purchase_orders` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `northwind`.`sales_reports`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`sales_reports` (
-  `group_by` VARCHAR(50) NOT NULL,
-  `display` VARCHAR(50) NULL DEFAULT NULL,
-  `title` VARCHAR(50) NULL DEFAULT NULL,
-  `filter_row_source` LONGTEXT NULL DEFAULT NULL,
-  `default` TINYINT(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`group_by`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `northwind`.`strings`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`strings` (
-  `string_id` INT(11) NOT NULL AUTO_INCREMENT,
-  `string_data` VARCHAR(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`string_id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+INSERT INTO SummaryReport (summaryReportId, averageRating, generatedSummary, company, generatedBy)
+    VALUES
+        (1, '4.2/5', 'BarkTree Bank offers strong mentorship but limited guidance for juniors.', 1, 401),
+        (2, '4.5/5', 'Google excels in supporting students with structured programs and clear goals.', 3, 401),
+        (3, '3.8/5', 'Tech Spark Solutions is great for hands-on experience but has long hours.', 2, 402),
+        (4, '4.0/5', 'Innovate Labs provides creative freedom but lacks formal training.', 4, 403);
+*/

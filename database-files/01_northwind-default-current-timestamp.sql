@@ -128,6 +128,7 @@ CREATE TABLE IF NOT EXISTS Review (
     summary varchar(255),
     bestPart varchar(255),
     worstPart varchar(255),
+    isAnonymous bool NOT NULL DEFAULT FALSE,
     FOREIGN KEY (createdBy) REFERENCES Student (userId)
         ON UPDATE cascade ON DELETE restrict,
     FOREIGN KEY (role) REFERENCES Coop (jobId)

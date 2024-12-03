@@ -1,28 +1,10 @@
-#
-# Converted from MS Access 2010 Northwind database (northwind.accdb) using
-# Bullzip MS Access to MySQL Version 5.1.242. http://www.bullzip.com
-#
-# CHANGES MADE AFTER INITIAL CONVERSION
-# * column and row names in CamelCase converted to lower_case_with_underscore
-# * space and slash ("/") in table and column names replaced with _underscore_
-# * id column names converted to "id"
-# * foreign key column names converted to xxx_id
-# * variables of type TIMESTAMP converted to DATETIME to avoid TIMESTAMP
-#   range limitation (1997 - 2038 UTC), and other limitations.
-# * unique and foreign key checks disabled while loading data
-#
-#------------------------------------------------------------------
-#
-
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 
 USE `nu-clear-database`;
 
-#
-# Dumping data for table 'User'
-#
 
+-- Dumping data for table 'User'
 INSERT INTO `User` (`userId`, `userType`) VALUES (1, 'SystemAdmin');
 INSERT INTO `User` (`userId`, `userType`) VALUES (2, 'SystemAdmin');
 INSERT INTO `User` (`userId`, `userType`) VALUES (3, 'SystemAdmin');
@@ -173,13 +155,10 @@ INSERT INTO `User` (`userId`, `userType`) VALUES (147, 'Employer');
 INSERT INTO `User` (`userId`, `userType`) VALUES (148, 'Employer');
 INSERT INTO `User` (`userId`, `userType`) VALUES (149, 'Employer');
 INSERT INTO `User` (`userId`, `userType`) VALUES (150, 'Employer');
+--150 records
 
-# 150 records
 
-#
-# Dumping data for table 'SystemAdmin'
-#
-
+-- Dumping data for table 'SystemAdmin'
 INSERT INTO SystemAdmin(userId,firstName,lastName,email) VALUES (1,'Malorie','Saterweyte','malorie.saterweyte@yahoo.co.uk');
 INSERT INTO SystemAdmin(userId,firstName,lastName,email) VALUES (2,'Kaitlyn','Ruprecht','kaitlyn.ruprecht@hotmail.com');
 INSERT INTO SystemAdmin(userId,firstName,lastName,email) VALUES (3,'Doe','Woollam','doe.woollam@hotmail.com');
@@ -210,12 +189,9 @@ INSERT INTO SystemAdmin(userId,firstName,lastName,email) VALUES (27,'Marcellina'
 INSERT INTO SystemAdmin(userId,firstName,lastName,email) VALUES (28,'Daisi','Proom','daisi.proom@yahoo.com');
 INSERT INTO SystemAdmin(userId,firstName,lastName,email) VALUES (29,'Darill','Gerdes','darill.gerdes@rambler.ru');
 INSERT INTO SystemAdmin(userId,firstName,lastName,email) VALUES (30,'Tailor','Oneile','tailor.oneile@gmail.com');
- 
-# 30 records
- 
-#
-# Dumping data for table 'Student'
+-- 30 records
 
+-- Dumping data for table 'Student'
 INSERT INTO Student(nuId,userId,firstName,lastName,major,coopLevel,year,advisor) VALUES (2228991,31,'Boot','Basillon','History',2,2,123458);
 INSERT INTO Student(nuId,userId,firstName,lastName,major,coopLevel,year,advisor) VALUES (2228992,32,'Selie','Tythacott','Art',2,1,123466);
 INSERT INTO Student(nuId,userId,firstName,lastName,major,coopLevel,year,advisor) VALUES (2228993,33,'Margy','Phinnis','Information Technology',2,2,123483);
@@ -246,14 +222,10 @@ INSERT INTO Student(nuId,userId,firstName,lastName,major,coopLevel,year,advisor)
 INSERT INTO Student(nuId,userId,firstName,lastName,major,coopLevel,year,advisor) VALUES (2229018,58,'Laurens','Yaus','Information Technology',2,3,123470);
 INSERT INTO Student(nuId,userId,firstName,lastName,major,coopLevel,year,advisor) VALUES (2229019,59,'Francene','Nortcliffe','Political Science',1,1,123456);
 INSERT INTO Student(nuId,userId,firstName,lastName,major,coopLevel,year,advisor) VALUES (2229020,60,'Issi','Renfrew','History',2,2,123457);
+-- 30 records
 
 
-# 30 records
-
-#
-# Dumping data for table 'Advisor'
-#
-
+--Dumping data for table 'Advisor'
 INSERT INTO Advisor(nuId,userId,firstName,lastName,email,department) VALUES (123456,61,'Lonnie','Dowdall','lonnie.dowdall@yahoo.com','College of Professional Studies');
 INSERT INTO Advisor(nuId,userId,firstName,lastName,email,department) VALUES (123457,62,'Denney','Brambill','denney.brambill@gmail.com','Bouvé College of Health Sciences');
 INSERT INTO Advisor(nuId,userId,firstName,lastName,email,department) VALUES (123458,63,'Gael','Cescoti','gael.cescoti@hotmail.com','College of Engineering');
@@ -284,13 +256,10 @@ INSERT INTO Advisor(nuId,userId,firstName,lastName,email,department) VALUES (123
 INSERT INTO Advisor(nuId,userId,firstName,lastName,email,department) VALUES (123483,88,'Trstram','Gircke','trstram.gircke@yahoo.com.br','College of Social Sciences and Humanities');
 INSERT INTO Advisor(nuId,userId,firstName,lastName,email,department) VALUES (123484,89,'Nicki','Jest','nicki.jest@yahoo.com','College of Social Sciences and Humanities');
 INSERT INTO Advisor(nuId,userId,firstName,lastName,email,department) VALUES (123485,90,'Bobbee','Marquese','bobbee.marquese@hotmail.com','College of Social Sciences and Humanities');
+-- 30 records
 
-# 30 records
 
-#
-# Dumping data for table 'Data Analyst'
-#
-
+-- Dumping data for table 'Data Analyst'
 INSERT INTO DataAnalyst(userId,firstName,lastName) VALUES (91,'Rafael','Fontin');
 INSERT INTO DataAnalyst(userId,firstName,lastName) VALUES (92,'Juliane','Rittmeyer');
 INSERT INTO DataAnalyst(userId,firstName,lastName) VALUES (93,'Alard','Piggrem');
@@ -321,14 +290,10 @@ INSERT INTO DataAnalyst(userId,firstName,lastName) VALUES (117,'Wileen','Gilstho
 INSERT INTO DataAnalyst(userId,firstName,lastName) VALUES (118,'Kristian','Billsberry');
 INSERT INTO DataAnalyst(userId,firstName,lastName) VALUES (119,'Shaun','Gartin');
 INSERT INTO DataAnalyst(userId,firstName,lastName) VALUES (120,'Gina','Cours');
-
-
-# 30 records
+-- 30 records
  
-#
-# Dumping data for table 'Employer'
-# 
 
+-- Dumping data for table 'Employer'
 INSERT INTO Employer(userId,firstName,lastName,email,role,department,company) VALUES (121,'Yank','Hemeret','yank.hemeret@yahoo.com','Human Resources Specialist','Customer Service',3);
 INSERT INTO Employer(userId,firstName,lastName,email,role,department,company) VALUES (122,'Elke','McLeary','elke.mcleary@hotmail.com','Marketing Specialist','Research and Development',12);
 INSERT INTO Employer(userId,firstName,lastName,email,role,department,company) VALUES (123,'Emiline','Ankers','emiline.ankers@hotmail.com','Quality Assurance Engineer','Administration',4);
@@ -359,13 +324,10 @@ INSERT INTO Employer(userId,firstName,lastName,email,role,department,company) VA
 INSERT INTO Employer(userId,firstName,lastName,email,role,department,company) VALUES (148,'Cobby','Troak','cobby.troak@hotmail.co.uk','Software Developer','Legal',21);
 INSERT INTO Employer(userId,firstName,lastName,email,role,department,company) VALUES (149,'Jules','Pawling','jules.pawling@yahoo.com','Sales Representative','Finance',19);
 INSERT INTO Employer(userId,firstName,lastName,email,role,department,company) VALUES (150,'Celka','Cancellor','celka.cancellor@gmail.com','Marketing Specialist','Administration',28);
- 
-   
-# 30 records
+-- 30 records
 
-#
-# Dumping data for table 'Company'
-# 
+
+-- Dumping data for table 'Company'
 INSERT INTO Company(companyId,companyName,size) VALUES (1,'Visionary Ideas Group',8712);
 INSERT INTO Company(companyId,companyName,size) VALUES (2,'Data Dynamics Corp.',3504);
 INSERT INTO Company(companyId,companyName,size) VALUES (3,'Advanced Manufacturing Solutions',3234);
@@ -396,15 +358,10 @@ INSERT INTO Company(companyId,companyName,size) VALUES (27,'Visionary Ideas Grou
 INSERT INTO Company(companyId,companyName,size) VALUES (28,'Global Enterprises Inc.',376);
 INSERT INTO Company(companyId,companyName,size) VALUES (29,'Global Enterprises Inc.',2524);
 INSERT INTO Company(companyId,companyName,size) VALUES (30,'Data Dynamics Corp.',1009);
+-- 30 records
 
 
-
-# 30 records
-
-#
-# Dumping data for table 'Coop'
-#
-
+-- Dumping data for table 'Coop'
 INSERT INTO Coop(jobId,locationCity,locationState,locationCountry,title,description,company) VALUES (1,'Cambridge','Massachusetts','United States','Mechanical Engineer Intern','Levis in gravitate brevis soleat esse ut eius magnitudinem celeritas',1);
 INSERT INTO Coop(jobId,locationCity,locationState,locationCountry,title,description,company) VALUES (2,'Fayetteville','North Carolina','United States','Graphic Designer Intern','Vacillare tuentur tamen eum locum seque facile ut mihi videtur',2);
 INSERT INTO Coop(jobId,locationCity,locationState,locationCountry,title,description,company) VALUES (3,'San Francisco','California','United States','Backend Developer Intern','Ut nulli propter eas consequantur dolores et',3);
@@ -435,9 +392,7 @@ INSERT INTO Coop(jobId,locationCity,locationState,locationCountry,title,descript
 INSERT INTO Coop(jobId,locationCity,locationState,locationCountry,title,description,company) VALUES (28,'Honolulu','Hawaii','United States','Full Stack Developer Intern','In Cumanum salutandi causa uterque venisset pauca primo inter nos ea',28);
 INSERT INTO Coop(jobId,locationCity,locationState,locationCountry,title,description,company) VALUES (29,'Spring','Texas','United States','Game Developer Intern','Familiarem nostrum Posidonium Quid Theophrastus mediocriterne delectat cum tractat locos',29);
 INSERT INTO Coop(jobId,locationCity,locationState,locationCountry,title,description,company) VALUES (30,'Little Rock','Arkansas','United States','Graphic Designer Intern','Minus animo aequo e vita cum ea non',30);
-
-
-# 30 records
+--30 records
 
 #
 # Dumping data for table ''

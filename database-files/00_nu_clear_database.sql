@@ -124,8 +124,8 @@ CREATE TABLE IF NOT EXISTS Coop (
 CREATE TABLE IF NOT EXISTS Favorite (
     studentId INT,
     jobId INT,
-    PRIMARY KEY (studentId, jobId),
-    FOREIGN KEY (studentId) REFERENCES Student (userId)
+    PRIMARY KEY (userId, jobId),
+    FOREIGN KEY (userId) REFERENCES User (userId)
         ON UPDATE cascade ON DELETE restrict,
     FOREIGN KEY (jobId) REFERENCES Coop (jobId)
         ON UPDATE cascade ON DELETE restrict

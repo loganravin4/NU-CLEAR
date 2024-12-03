@@ -138,8 +138,8 @@ CREATE TABLE IF NOT EXISTS Review (
     summary VARCHAR(255),
     bestPart VARCHAR(255),
     worstPart VARCHAR(255),
-    isAnonymous BOOLEAN NOT NULL DEFAULT FALSE
-    wouldRecommend BOOLEAN NOT NULL DEFAULT TRUE
+    isAnonymous BOOLEAN NOT NULL DEFAULT FALSE,
+    wouldRecommend BOOLEAN NOT NULL DEFAULT TRUE,
     FOREIGN KEY (createdBy) REFERENCES Student (userId)
         ON UPDATE cascade ON DELETE restrict,
     FOREIGN KEY (role) REFERENCES Coop (jobId)

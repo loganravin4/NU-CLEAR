@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS UserType (
 );
 
 CREATE TABLE IF NOT EXISTS User (
-    userId INT PRIMARY KEY,
+    userId INT PRIMARY KEY AUTO_INCREMENT,
     userType VARCHAR(255) NOT NULL,
     FOREIGN KEY (userType) REFERENCES UserType (userType)
         ON UPDATE cascade ON DELETE restrict
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS SystemAdmin (
 );
 
 CREATE TABLE IF NOT EXISTS Module (
-    moduleId INT PRIMARY KEY,
+    moduleId INT PRIMARY KEY AUTO_INCREMENT,
     moduleName VARCHAR(255) NOT NULL,
     moduleStatus VARCHAR(255) NOT NULL,
     createdBy INT NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS Module (
 );
 
 CREATE TABLE IF NOT EXISTS Permission (
-    permissionId INT PRIMARY KEY,
+    permissionId INT PRIMARY KEY AUTO_INCREMENT,
     editedBy INT NOT NULL,
     canEditPerms BOOLEAN DEFAULT false,
     canEditModule BOOLEAN DEFAULT false,
@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS Favorite (
 );
 
 CREATE TABLE IF NOT EXISTS Review (
-    reviewId INT PRIMARY KEY,
+    reviewId INT PRIMARY KEY AUTO_INCREMENT,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     createdBy INT,
     role INT NOT NULL,
@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS DataAnalyst (
 );
 
 CREATE TABLE IF NOT EXISTS Visualization (
-    visualizationId INT PRIMARY KEY,
+    visualizationId INT PRIMARY KEY AUTO_INCREMENT,
     vizType VARCHAR(255) NOT NULL,
     filters VARCHAR(255) NOT NULL,
     company INT,
@@ -184,7 +184,7 @@ CREATE TABLE IF NOT EXISTS Visualization (
 );
 
 CREATE TABLE IF NOT EXISTS SummaryReport (
-    summaryReportId INT PRIMARY KEY,
+    summaryReportId INT PRIMARY KEY AUTO_INCREMENT,
     averageRating FLOAT NOT NULL,
     generatedSummary VARCHAR(255) NOT NULL,
     company INT NOT NULL,

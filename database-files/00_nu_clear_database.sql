@@ -88,6 +88,14 @@ CREATE TABLE IF NOT EXISTS Advisor (
         ON UPDATE cascade ON DELETE restrict
 );
 
+CREATE TABLE IF NOT EXISTS Announcement (
+    announcementId INT PRIMARY KEY AUTO_INCREMENT,
+    createdBy INT NOT NULL,
+    announcementText TEXT NOT NULL,
+    FOREIGN KEY (createdBy) REFERENCES Advisor (userId)
+        ON UPDATE cascade ON DELETE restrict
+);
+
 CREATE TABLE IF NOT EXISTS Student (
     userId INT PRIMARY KEY,
     nuId INT UNIQUE NOT NULL,

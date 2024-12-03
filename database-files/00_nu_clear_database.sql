@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS Review (
     createdBy INT,
     role FLOAT NOT NULL,
     salary DECIMAL(6,2),
-    rating INT NOT NULL,
+    rating FLOAT NOT NULL,
     summary VARCHAR(255),
     bestPart VARCHAR(255),
     worstPart VARCHAR(255),
@@ -185,7 +185,7 @@ CREATE TABLE IF NOT EXISTS Visualization (
 
 CREATE TABLE IF NOT EXISTS SummaryReport (
     summaryReportId INT PRIMARY KEY,
-    averageRating VARCHAR(255) NOT NULL,
+    averageRating FLOAT NOT NULL,
     generatedSummary VARCHAR(255) NOT NULL,
     company INT NOT NULL,
     generatedBy INT NOT NULL,

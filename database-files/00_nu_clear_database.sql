@@ -130,7 +130,7 @@ CREATE TABLE IF NOT EXISTS Coop (
 );
 
 CREATE TABLE IF NOT EXISTS Favorite (
-    studentId INT,
+    userId INT,
     jobId INT,
     PRIMARY KEY (userId, jobId),
     FOREIGN KEY (userId) REFERENCES User (userId)

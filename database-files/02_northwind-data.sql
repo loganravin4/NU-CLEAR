@@ -164,7 +164,7 @@ INSERT INTO `User` (`userId`, `userType`) VALUES (138, 'Employer');
 INSERT INTO `User` (`userId`, `userType`) VALUES (139, 'Employer');
 INSERT INTO `User` (`userId`, `userType`) VALUES (140, 'Employer');
 INSERT INTO `User` (`userId`, `userType`) VALUES (141, 'Employer');
-INSERT INTO `User` (`userId`s, `userType`) VALUES (142, 'Employer');
+INSERT INTO `User` (`userId`, `userType`) VALUES (142, 'Employer');
 INSERT INTO `User` (`userId`, `userType`) VALUES (143, 'Employer');
 INSERT INTO `User` (`userId`, `userType`) VALUES (144, 'Employer');
 INSERT INTO `User` (`userId`, `userType`) VALUES (145, 'Employer');

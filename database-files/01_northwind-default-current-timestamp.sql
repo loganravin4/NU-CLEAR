@@ -26,7 +26,6 @@ CREATE TABLE IF NOT EXISTS SystemAdmin (
 CREATE TABLE IF NOT EXISTS Module (
     moduleId integer PRIMARY KEY,
     moduleName varchar(255) NOT NULL,
-    moduleStatus varchar(255) NOT NULL,
     createdBy integer NOT NULL,
     updatedBy integer,
     FOREIGN KEY (createdBy) REFERENCES SystemAdmin (userId)
@@ -34,6 +33,19 @@ CREATE TABLE IF NOT EXISTS Module (
     FOREIGN KEY (updatedBy) REFERENCES SystemAdmin (userId)
         ON UPDATE cascade ON DELETE restrict
 );
+
+CREATE TABLE IF NOT EXISTS UserModule (
+  userId int NOT NULL,
+  moduleId int NOT NULL,
+  moduleStatus varchar(255) NOT NULL,
+  CONSTRAINT userId_fk
+        FOREIGN KEY (userId) REFERENCES User (userId)
+            ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT moduleId_fk
+        FOREIGN KEY (moduleId) REFERENCES Module (moduleId)
+            ON UPDATE CASCADE ON DELETE CASCADE,
+  PRIMARY KEY (userId, moduleId)
+)
 
 CREATE TABLE IF NOT EXISTS Permission (
     permissionId integer PRIMARY KEY,

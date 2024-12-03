@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS Review (
     reviewId INT PRIMARY KEY,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     createdBy INT,
-    role FLOAT NOT NULL,
+    role INT NOT NULL,
     salary DECIMAL(6,2),
     rating FLOAT NOT NULL,
     summary VARCHAR(255),

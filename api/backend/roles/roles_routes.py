@@ -15,12 +15,9 @@ role = Blueprint('role', __name__)
 @role.route('//<company_id>/<role_id>', methods=['GET'])
 def get_role(company_id, role_id):
     query = '''
-        SELECT  id, 
-                product_code, 
-                product_name, 
-                list_price, 
-                category 
-        FROM products
+        SELECT * 
+        FROM Review  
+        
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)

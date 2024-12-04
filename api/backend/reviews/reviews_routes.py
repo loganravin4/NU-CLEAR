@@ -150,10 +150,7 @@ def get_role_reviews(company_id, role_id):
 @reviews.route('/reviews/compare/<company_id>', methods = ['GET'])
 def get_company_comparisons(company_id):
     query = '''
-        SELECT DISTINCT category AS label, category as value
-        FROM products
-        WHERE category IS NOT NULL
-        ORDER BY category
+        
     '''
 
     cursor = db.get_db().cursor()

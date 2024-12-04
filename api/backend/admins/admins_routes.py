@@ -48,17 +48,12 @@ def post_modules():
     return response
 
 #------------------------------------------------------------
-# ROUTE DESCRIPTION
+# Get/see a list of all users and their permissions 
 @admin.route('/user_permissions', methods=['GET'])
 def get_user_perms ():
 
-    query = f'''SELECT id, 
-                       product_name, 
-                       description, 
-                       list_price, 
-                       category 
-                FROM products 
-                WHERE id = {str(id)}
+    query = f'''SELECT *
+                FROM UserPermission 
     '''
     
     cursor = db.get_db().cursor()

@@ -12,36 +12,40 @@ role = Blueprint('role', __name__)
 
 #------------------------------------------------------------
 # ROUTE DESCRIPTION
-@role.route('//<company_id>/<role_id>', methods=['GET'])
+@role.route('/<company_id>/<job_id>', methods=['GET'])
 def get_role(company_id, role_id):
     query = '''
-        SELECT r.* 
-        FROM Review r 
-        JOIN Coop co ON r.role = co.jobId
-        JOIN Company c ON co.company = c.companyId 
+        SELECT co.* 
+        FROM Coop co 
+        JOIN Company c ON co.company = c.companyID
         WHERE c.companyId = {company_id} 
-        AND co.job_id = {job_id} 
-        
-    '''
+        AND co.job_id = {job_id}
+    ''' 
     cursor = db.get_db().cursor()
     cursor.execute(query)
     theData = cursor.fetchall()
     response = make_response(jsonify(theData))
     response.status_code = 200
-    return response
+    return response 
 
 #------------------------------------------------------------
 # ROUTE DESCRIPTION
 @role.route('/<company_id>/<job_id>', methods=['POST'])
 def add_role(company_id, job_id):
-    query = '''
-      
-    '''
     
+    the_data = request.json
+    query = f'''
+        INSERT INTO Coop (locationCity, locationState, locationCountry, title, description, company, jobId)
+        VALUES ('{the_data["locationCity"]}', '{the_data["locationState"]}','{the_data["locationCountry"]}', '{the_data["title"]}',
+                '{the_data["description"]}', '{company_id}, '{job_id}') 
+    ''' 
+          
+       
     cursor = db.get_db().cursor()
     cursor.execute(query)
-    theData = cursor.fetchall()
-    response = make_response(jsonify(theData))
+    db.get_db().commit()
+  
+    response = make_response("Job added to favorites")
     response.status_code = 200
     return response
 
@@ -75,7 +79,7 @@ def add_favorite():
     '''
 
     the_data = request.json
-    query = f'''
+    query = f'''  
         INSERT INTO Favorite (studentId, jobId)
         VALUES ('{the_data["studentId"]}', '{the_data["jobId"]}')
     '''

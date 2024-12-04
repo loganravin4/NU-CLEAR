@@ -17,14 +17,12 @@ advisor = Blueprint('advisor', __name__)
 
 
 #------------------------------------------------------------
-# View all announcements sent prior
+# View all announcements sent by advisors
 @advisor.route('/announcements', methods=['GET'])
 def get_messages(student_id):
 
-    the_data = request.json
-
     cursor = db.get_db().cursor()
-    cursor.execute(f'''SELECT DISTINCT announcementText
+    cursor.execute(f'''SELECT DISTINCT createdBy, announcementText
                         FROM Announcement
     ''')
     
@@ -35,29 +33,32 @@ def get_messages(student_id):
     return the_response
 
 #------------------------------------------------------------
-# ROUTE DESCRIPTION
-@advisor.route('/announcements/<student_id>', methods=['PUT'])
+# Send out a new announcement
+@advisor.route('/announcements', methods=['PUT'])
 def send_messages(student_id):
 
+    the_data = request.json
+
     cursor = db.get_db().cursor()
-    cursor.execute('''SELECT id, company, last_name,
-                    first_name, job_title, business_phone FROM customers
+    cursor.execute(f'''
+        INSERT INTO Announcement (announcementId, createdBy, announcementText)
+        VALUES ('{the_data["announcementId"]}', '{the_data["createdBy"]}', '{the_data["announcementText"]}')
     ''')
-    
-    theData = cursor.fetchall()
     
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
     return the_response
 
 #------------------------------------------------------------
-# ROUTE DESCRIPTION
-@advisor.route('/announcements/<student_id>', methods=['DELETE'])
+# Delete an announcement from board
+@advisor.route('/announcements', methods=['DELETE'])
 def delete_messages(student_id):
+    the_data = request.json
 
     cursor = db.get_db().cursor()
-    cursor.execute('''SELECT id, company, last_name,
-                    first_name, job_title, business_phone FROM customers
+    cursor.execute(f'''
+        DELETE FROM Announcement 
+        WHERE Announcement.announcementId = {the_data['announcementId']})
     ''')
     
     theData = cursor.fetchall()

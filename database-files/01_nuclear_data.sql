@@ -445,8 +445,6 @@ INSERT INTO Visualization(vizType,filters,company,createdBy,updatedBy) VALUES ('
 INSERT INTO Visualization(vizType,filters,company,createdBy,updatedBy) VALUES ('Radar Chart','Non legat? Nisi qui se Latina scripta dicunt contemnere. In quibus nulla solida utilitas omnisque puerilis est delectatio, aut se, ut Plato, in musicis, geometria, numeris, astris contereret, quae et terroribus cupiditatibusque detractis et omnium falsarum opinionum temeritate derepta.',24,106,106);
 
 
-
-
 # 40 records
  
 #
@@ -593,57 +591,101 @@ INSERT INTO Review(reviewId,createdAt,createdBy,role,salary,rating,summary,bestP
 # 40 records 
 
 #
-# Dumping data for table ''
+# Dumping data for table 'Favorite'
+#
+
+INSERT INTO Favorite (userId, jobId) VALUES ('25', '80');
+INSERT INTO Favorite (userId, jobId) VALUES ('31', '57');
+INSERT INTO Favorite (userId, jobId) VALUES ('39', '18');
+INSERT INTO Favorite (userId, jobId) VALUES ('18', '41');
+INSERT INTO Favorite (userId, jobId) VALUES ('28', '96');
+INSERT INTO Favorite (userId, jobId) VALUES ('32', '17');
+INSERT INTO Favorite (userId, jobId) VALUES ('11', '76');
+INSERT INTO Favorite (userId, jobId) VALUES ('29', '91');
+INSERT INTO Favorite (userId, jobId) VALUES ('1', '95');
+INSERT INTO Favorite (userId, jobId) VALUES ('38', '100');
+INSERT INTO Favorite (userId, jobId) VALUES ('23', '87');
+INSERT INTO Favorite (userId, jobId) VALUES ('32', '11');
+INSERT INTO Favorite (userId, jobId) VALUES ('3', '12');
+INSERT INTO Favorite (userId, jobId) VALUES ('30', '31');
+INSERT INTO Favorite (userId, jobId) VALUES ('40', '28');
+INSERT INTO Favorite (userId, jobId) VALUES ('2', '87');
+INSERT INTO Favorite (userId, jobId) VALUES ('12', '65');
+INSERT INTO Favorite (userId, jobId) VALUES ('5', '45');
+INSERT INTO Favorite (userId, jobId) VALUES ('29', '11');
+INSERT INTO Favorite (userId, jobId) VALUES ('18', '82');
+INSERT INTO Favorite (userId, jobId) VALUES ('7', '8');
+INSERT INTO Favorite (userId, jobId) VALUES ('1', '15');
+INSERT INTO Favorite (userId, jobId) VALUES ('19', '28');
+INSERT INTO Favorite (userId, jobId) VALUES ('12', '77');
+INSERT INTO Favorite (userId, jobId) VALUES ('15', '52');
+INSERT INTO Favorite (userId, jobId) VALUES ('25', '51');
+INSERT INTO Favorite (userId, jobId) VALUES ('1', '37');
+INSERT INTO Favorite (userId, jobId) VALUES ('22', '9');
+INSERT INTO Favorite (userId, jobId) VALUES ('30', '19');
+INSERT INTO Favorite (userId, jobId) VALUES ('12', '14');
+INSERT INTO Favorite (userId, jobId) VALUES ('25', '49');
+INSERT INTO Favorite (userId, jobId) VALUES ('34', '84');
+INSERT INTO Favorite (userId, jobId) VALUES ('1', '48');
+INSERT INTO Favorite (userId, jobId) VALUES ('14', '2');
+INSERT INTO Favorite (userId, jobId) VALUES ('39', '45');
+INSERT INTO Favorite (userId, jobId) VALUES ('36', '80');
+INSERT INTO Favorite (userId, jobId) VALUES ('6', '48');
+INSERT INTO Favorite (userId, jobId) VALUES ('2', '9');
+INSERT INTO Favorite (userId, jobId) VALUES ('33', '74');
+INSERT INTO Favorite (userId, jobId) VALUES ('1', '30');
+
+
+# 40 records
+
+#
+# Dumping data for table 'Module'
 # 
 
-# _ records
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('1', 'Student Module', 'pending', '37', '37');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('2', 'Admin Dashboard Module', 'completed', '29', '29');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('3', 'Advisor Toolkit Module', 'completed', '35', '35');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('4', 'Data Analysis Module', 'completed', '19', '19');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('5', 'Employer Review Portal', 'inactive', '12', '12');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('6', 'Co-op Application Tracker', 'completed', '29', '29');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('7', 'Internship Management Module', 'completed', '8', '8');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('8', 'Feedback & Evaluation Module', 'active', '15', '15');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('9', 'Resume Builder Module', 'active', '19', '19');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('10', 'Interview Preparation Module', 'archived', '18', '18');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('11', 'Job Posting Management Module', 'inactive', '15', '15');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('12', 'Student Performance Analytics Module', 'completed', '37', '37');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('13', 'Career Guidance Module', 'pending', '37', '37');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('14', 'Skills Assessment Module', 'inactive', '6', '6');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('15', 'Co-op Job Board Module', 'completed', '17', '17');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('16', 'Application Status Tracker Module', 'active', '35', '35');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('17', 'Networking Opportunities Module', 'archived', '5', '5');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('18', 'Event Scheduling Module', 'inactive', '1', '1');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('19', 'Resource Sharing Module', 'pending', '18', '18');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('20', 'Mentorship Module', 'inactive', '16', '16');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('21', 'Reporting & Insights Module', 'archived', '5', '5');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('22', 'User Management Module', 'archived', '5', '5');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('23', 'User Engagement Analytics Module', 'active', '24', '24');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('24', 'Content Management System Module', 'inactive', '5', '5');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('25', 'Profile Customization Module', 'active', '22', '22');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('26', 'Communication Hub Module', 'archived', '26', '26');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('27', 'Training and Workshops Module', 'archived', '37', '37');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('28', 'Student Portfolio Module', 'archived', '6', '6');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('29', 'Performance Benchmarking Module', 'inactive', '23', '23');
+INSERT INTO Module (moduleId, moduleName, moduleStatus, createdBy, updatedBy) VALUES ('30', 'Compliance Tracking Module', 'pending', '38', '38');
+
+# 30 records
 
 #
-# Dumping data for table ''
+# Dumping data for table 'UserPermission'
 #
 
-
-
-#
-# Dumping data for table ''
-#
-
-
-# 4 records
+# 100 records
 
 #
-# Dumping data for table ''
+# Dumping data for table 'UserModule'
 #
 
-
-# _ records
-
-#
-# Dumping data for table ''
-#
-
-
-# _ records
-
-#
-# Dumping data for table ''
-#
-
-
-# _ records
-
-#
-# Dumping data for table ''
-#
-
-
-# _ records
-
-#
-# Dumping data for table 'suppliers'
-#
-
-# _ records
+# 100 records
 
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS; 

@@ -58,20 +58,20 @@ CREATE TABLE IF NOT EXISTS Permission (
 );
 
 CREATE TABLE IF NOT EXISTS UserPermission (
-    userType VARCHAR(255),
+    userId VARCHAR(255),
     permissionId INT,
-    PRIMARY KEY (userType, permissionId),
-    FOREIGN KEY (userType) REFERENCES UserType (userType)
+    PRIMARY KEY (userId, permissionId),
+    FOREIGN KEY (userId) REFERENCES User (userId)
         ON UPDATE cascade ON DELETE restrict,
     FOREIGN KEY (permissionId) REFERENCES Permission (permissionId)
         ON UPDATE cascade ON DELETE restrict
 );
 
 CREATE TABLE IF NOT EXISTS UserModule (
-    userType VARCHAR(255),
+    userId VARCHAR(255),
     moduleId INT,
-    PRIMARY KEY (userType, moduleId),
-    FOREIGN KEY (userType) REFERENCES UserType (userType)
+    PRIMARY KEY (userId, moduleId),
+    FOREIGN KEY (userId) REFERENCES User (userId)
         ON UPDATE cascade ON DELETE restrict,
     FOREIGN KEY (moduleId) REFERENCES Module (moduleId)
         ON UPDATE cascade ON DELETE restrict
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS Company (
 );
 
 CREATE TABLE IF NOT EXISTS Coop (
-    jobId INT PRIMARY KEY,
+    jobId INT PRIMARY KEY AUTO_INCREMENT,
     locationCity VARCHAR(255),
     locationState VARCHAR(255),
     locationCountry VARCHAR(255),

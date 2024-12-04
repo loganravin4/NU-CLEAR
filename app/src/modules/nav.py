@@ -14,10 +14,10 @@ def AboutPageNav():
     st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
 
 
-#### ------------------------ Examples for Role of pol_strat_advisor ------------------------
-def PolStratAdvHomeNav():
+#### ------------------------ Employer Role ------------------------
+def EmployerHomeNav():
     st.sidebar.page_link(
-        "pages/00_Pol_Strat_Home.py", label="Political Strategist Home", icon="👤"
+        "pages/00_Employer_Home.py", label="Employer Home", icon="👤"
     )
 
 
@@ -31,21 +31,55 @@ def MapDemoNav():
     st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
 
 
-## ------------------------ Examples for Role of usaid_worker ------------------------
-def ApiTestNav():
-    st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon="🛜")
-
-
-def PredictionNav():
+#### ------------------------ Data Analyst Role ------------------------
+def DataAnalystHomeNav():
     st.sidebar.page_link(
-        "pages/11_Prediction.py", label="Regression Prediction", icon="📈"
+        "pages/01_DataAnalyst_Home.py", label="Data Analyst Home", icon="👤"
     )
 
 
-def ClassificationNav():
+def WorldBankVizNav():
     st.sidebar.page_link(
-        "pages/13_Classification.py", label="Classification Demo", icon="🌺"
+        "pages/01_World_Bank_Viz.py", label="World Bank Visualization", icon="🏦"
     )
+
+
+def MapDemoNav():
+    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
+
+
+#### ------------------------ Student Role ------------------------
+def StudentHomeNav():
+    st.sidebar.page_link(
+        "pages/02_Student_Home.py", label="Student Home", icon="👤"
+    )
+
+
+def WorldBankVizNav():
+    st.sidebar.page_link(
+        "pages/01_World_Bank_Viz.py", label="World Bank Visualization", icon="🏦"
+    )
+
+
+def MapDemoNav():
+    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
+
+
+#### ------------------------ Advisor Role ------------------------
+def AdvisorHomeNav():
+    st.sidebar.page_link(
+        "pages/03_Advisor_Home.py", label="Advisor Home", icon="👤"
+    )
+
+
+def WorldBankVizNav():
+    st.sidebar.page_link(
+        "pages/01_World_Bank_Viz.py", label="World Bank Visualization", icon="🏦"
+    )
+
+
+def MapDemoNav():
+    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
 
 
 #### ------------------------ System Admin Role ------------------------
@@ -78,8 +112,8 @@ def SideBarLinks(show_home=False):
     if st.session_state["authenticated"]:
 
         # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
-        if st.session_state["role"] == "pol_strat_advisor":
-            PolStratAdvHomeNav()
+        if st.session_state["role"] == "employer":
+            EmployerHomeNav()
             WorldBankVizNav()
             MapDemoNav()
 

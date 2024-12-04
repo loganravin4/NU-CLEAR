@@ -10,16 +10,12 @@ from backend.db_connection import db
 admin = Blueprint('admin', __name__)
 
 #------------------------------------------------------------
-# ROUTE DESCRIPTION
+# Return a lost of all modules and statuses 
 @admin.route('/modules', methods=['GET'])
 def get_modules():
-    query = '''
-        SELECT  id, 
-                product_code, 
-                product_name, 
-                list_price, 
-                category 
-        FROM products
+    query = f'''
+        SELECT moduleName, moduleStatus, 
+        FROM Module
     '''
     
     cursor = db.get_db().cursor()

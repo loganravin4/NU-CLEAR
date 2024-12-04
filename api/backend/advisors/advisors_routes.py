@@ -65,13 +65,15 @@ def delete_messages(student_id):
     return the_response
 
 #------------------------------------------------------------
-# Return a list of recomended jobs for the student 
+# Get a list of favorited/recommended jobs  
 @advisor.route('/recommendations/<student_id>', methods=['GET'])
 def get_recommendations(student_id):
+    the_data = request.json
 
     cursor = db.get_db().cursor()
-    cursor.execute('''SELECT id, company, last_name,
-                    first_name, job_title, business_phone FROM customers
+    cursor.execute(f'''SELECT {the_data['jobId']}
+                        FROM Favorite 
+                        WHERE Favorite.studentId = {the_data['studentId']}
     ''')
     
     theData = cursor.fetchall()

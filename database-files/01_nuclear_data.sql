@@ -3,6 +3,11 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 
 USE `nu-clear-database`;
 
+-- Dumping data for table 'UserType'
+INSERT INTO UserType (userType)
+    VALUES ('SystemAdmin'), ('Advisor'), ('Student'), ('Employer'), ('DataAnalyst');
+
+-- 5 records
 
 -- Dumping data for table 'User'
 INSERT INTO `User` (`userId`, `userType`) VALUES (1, 'SystemAdmin');

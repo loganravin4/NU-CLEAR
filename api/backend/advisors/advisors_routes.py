@@ -17,18 +17,18 @@ advisor = Blueprint('advisor', __name__)
 
 
 #------------------------------------------------------------
-# ROUTE DESCRIPTION
-@advisor.route('/chat/<student_id>', methods=['GET'])
+# View all announcements sent prior
+@advisor.route('/announcements', methods=['GET'])
 def get_messages(student_id):
 
+    the_data = request.json
+
     cursor = db.get_db().cursor()
-    cursor.execute('''SELECT id, company, last_name,
-                    first_name, job_title, business_phone FROM customers
+    cursor.execute(f'''SELECT DISTINCT announcementText
+                        FROM Announcement
     ''')
     
     theData = cursor.fetchall()
-
-    the_data = request.json
     
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
@@ -36,7 +36,7 @@ def get_messages(student_id):
 
 #------------------------------------------------------------
 # ROUTE DESCRIPTION
-@advisor.route('/chat/<student_id>', methods=['PUT'])
+@advisor.route('/announcements/<student_id>', methods=['PUT'])
 def send_messages(student_id):
 
     cursor = db.get_db().cursor()
@@ -52,7 +52,7 @@ def send_messages(student_id):
 
 #------------------------------------------------------------
 # ROUTE DESCRIPTION
-@advisor.route('/chat/<student_id>', methods=['DELETE'])
+@advisor.route('/announcements/<student_id>', methods=['DELETE'])
 def delete_messages(student_id):
 
     cursor = db.get_db().cursor()

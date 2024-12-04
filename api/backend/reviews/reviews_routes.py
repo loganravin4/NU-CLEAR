@@ -63,7 +63,7 @@ def add_user_reviews(user_id):
     cursor = db.get_db().cursor()
     cursor.execute(query)
     db.get_db().commit()
-
+ 
     response = make_response("Review added successfully")
     response.status_code = 200
     return response
@@ -144,14 +144,14 @@ def get_role_reviews(company_id, role_id):
     response.status_code = 200
     return response
 
-
+ 
 # ------------------------------------------------------------
 # Returns reviews for other companies to compare it to my company
 @reviews.route('/reviews/compare/<company_id>', methods = ['GET'])
 def get_company_comparisons(company_id):
     query = '''
         
-    '''
+    ''' 
 
     cursor = db.get_db().cursor()
     cursor.execute(query)

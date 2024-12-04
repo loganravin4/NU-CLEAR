@@ -102,10 +102,12 @@ def create_recommendations(student_id):
 # Delete recomendations for the student 
 @advisor.route('/recommendations/<student_id>', methods=['DELETE'])
 def delete_recommendations(student_id):
+    the_data = request.json
 
     cursor = db.get_db().cursor()
-    cursor.execute('''SELECT id, company, last_name,
-                    first_name, job_title, business_phone FROM customers
+    cursor.execute(f'''
+        DELETE FROM  Favorite 
+        WHERE Favorite.studentId = {the_data['studentId']} AND Favorite.jobId = '{the_data["jobId"]}')
     ''')
     
     theData = cursor.fetchall()

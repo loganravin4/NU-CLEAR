@@ -11,15 +11,42 @@ from backend.db_connection import db
 reviews = Blueprint('reviews', __name__)
 
 # ------------------------------------------------------------
-# Return all reviews written
+# Return all reviews written based on desired filters
 @reviews.route('/reviews', methods = ['GET'])
 def get_reviews():
     query = '''
         SELECT reviewId, createdAt, createdBy, role, salary, rating, 
-               summary, bestPart, worstPart, isAnonymous
+               summary, bestPart, worstPart, isAnonymous, wouldRecommend
         FROM Review
-        ORDER BY createdAt DESC
     '''
+
+    # Dynamically build WHERE conditions
+    filters = []
+    if request.args.get('createdBy'):
+        filters.append(f"createdBy = {request.args.get('createdBy')}")
+    if request.args.get('role'):
+        filters.append(f"role = {request.args.get('role')}")
+    if request.args.get('rating'):
+        filters.append(f"rating >= {request.args.get('rating')}")
+    if request.args.get('isAnonymous'):
+        filters.append(f"isAnonymous = {request.args.get('isAnonymous').lower() == 'true'}")
+    if request.args.get('wouldRecommend'):
+        filters.append(f"wouldRecommend = {request.args.get('wouldRecommend').lower() == 'true'}")
+    if request.args.get('salary'):
+        filters.append(f"salary >= {request.args.get('salary')}")
+    if request.args.get('dateFrom') and request.args.get('dateTo'):
+        filters.append(f"createdAt BETWEEN '{request.args.get('dateFrom')}' AND '{request.args.get('dateTo')}'")
+    elif request.args.get('dateFrom'):
+        filters.append(f"createdAt >= '{request.args.get('dateFrom')}'")
+    elif request.args.get('dateTo'):
+        filters.append(f"createdAt <= '{request.args.get('dateTo')}'")
+
+    # Add filters to the query
+    if filters:
+        query += " WHERE " + " AND ".join(filters)
+
+    # Add sorting
+    query += " ORDER BY createdAt DESC"
 
     cursor = db.get_db().cursor()
     cursor.execute(query)

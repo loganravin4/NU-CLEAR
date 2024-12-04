@@ -30,16 +30,14 @@ def get_modules():
     return response
 
 #------------------------------------------------------------
-# ROUTE DESCRIPTION
+# Allow the Admin add a new module 
 @admin.route('/modules', methods=['POST'])
 def post_modules():
-    query = '''
-        SELECT  id, 
-                product_code, 
-                product_name, 
-                list_price, 
-                category 
-        FROM products
+    the_data = request.json
+
+    query = f'''
+        INSERT INTO Module (moduleName, moduleStatus, createdBy)
+        VALUES ({the_data['moduleName']}, {the_data['moduleStatus']}, {the_data['createdBy']}),
     '''
     
     cursor = db.get_db().cursor()
@@ -71,17 +69,13 @@ def get_user_perms ():
     return response
 
 #------------------------------------------------------------
-# ROUTE DESCRIPTION
+# Add a new user and permissions 
 @admin.route('/user_permissions', methods=['POST'])
 def add_user_perms ():
+    the_data = request.json
+    query = f'''INSERT INTO UserPermission (userType, permissionId)
+                VALUES ({the_data['userType']},{the_data['permissionId']})
 
-    query = f'''SELECT id, 
-                       product_name, 
-                       description, 
-                       list_price, 
-                       category 
-                FROM products 
-                WHERE id = {str(id)}
     '''
     
     cursor = db.get_db().cursor()
@@ -92,17 +86,13 @@ def add_user_perms ():
     return response
 
 #------------------------------------------------------------
-# ROUTE DESCRIPTION
+# Update existing user permissions 
 @admin.route('/user_permissions', methods=['PUT'])
 def update_user_perms ():
-
-    query = f'''SELECT id, 
-                       product_name, 
-                       description, 
-                       list_price, 
-                       category 
-                FROM products 
-                WHERE id = {str(id)}
+    the_data = request.json
+    query = f'''UPDATE UserPermission
+                SET permissionId = {the_data['permissionId']}
+                WHERE userType = {the_data['userType']}
     '''
     
     cursor = db.get_db().cursor()
@@ -113,19 +103,14 @@ def update_user_perms ():
     return response
 
 #------------------------------------------------------------
-# ROUTE DESCRIPTION
+# Delete a user or permissions 
 @admin.route('/user_permissions', methods=['DELETE'])
 def delete_user_perms ():
+    the_data = request.json
+    query = f'''DELETE FROM User
+                WHERE userId = {the_data['userId']}; 
 
-    query = f'''SELECT id, 
-                       product_name, 
-                       description, 
-                       list_price, 
-                       category 
-                FROM products 
-                WHERE id = {str(id)}
     '''
-    
     cursor = db.get_db().cursor()
     cursor.execute(query)
     theData = cursor.fetchall()

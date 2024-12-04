@@ -12,7 +12,7 @@ role = Blueprint('role', __name__)
 
 #------------------------------------------------------------
 # ROUTE DESCRIPTION
-@role.route('//<company_id>/<role_id>', methods=['GET'])
+@role.route('/<company_id>/<role_id>', methods=['GET'])
 def get_role(company_id, role_id):
     query = '''
         SELECT * 
@@ -47,15 +47,22 @@ def add_role(company_id, role_id):
 
 #------------------------------------------------------------
 # Return a list of favorited/saved jobs
-@role.route('/favorites', methods=['GET'])
-def get_favorites():
-    query = '''
-        SELECT  id, 
-                product_code, 
-                product_name, 
-                list_price, 
-                category 
-        FROM products
+@role.route('/favorites/<user_id>', methods=['GET'])
+def get_favorites(user_id):
+    query = f'''
+        SELECT 
+            c.jobId, 
+            c.title, 
+            cmp.companyName AS companyName, 
+            c.locationCity, 
+            c.locationState, 
+            c.locationCountry, 
+            c.description
+        FROM Favorite f
+        JOIN Coop c ON f.jobId = c.jobId
+        JOIN Company cmp ON c.company = cmp.companyId
+        WHERE f.userId = '{user_id}'
+        ORDER BY c.title ASC
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)
@@ -66,18 +73,12 @@ def get_favorites():
 
 #------------------------------------------------------------
 # Add a job to the favorites list
-@role.route('/favorites', methods=['POST'])
-def add_favorite():
+@role.route('/favorites/<user_id>', methods=['POST'])
+def add_favorite(user_id):
     the_data = request.json
     query = f'''
-        INSERT INTO Favorite (studentId, jobId)
-        VALUES ('{the_data["studentId"]}', '{the_data["jobId"]}')
-    '''
-
-    the_data = request.json
-    query = f'''
-        INSERT INTO Favorite (studentId, jobId)
-        VALUES ('{the_data["studentId"]}', '{the_data["jobId"]}')
+        INSERT INTO Favorite (userId, jobId)
+        VALUES ('{user_id}', '{the_data["jobId"]}')
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)
@@ -89,12 +90,12 @@ def add_favorite():
 
 #------------------------------------------------------------
 # Remove a job from the favorites list
-@role.route('/favorites', methods=['DELETE'])
-def delete_favorite():
+@role.route('/favorites/<user_id>', methods=['DELETE'])
+def delete_favorite(user_id):
     the_data = request.json
     query = f'''
         DELETE FROM Favorite
-        WHERE studentId = '{the_data["studentId"]}' AND jobId = '{the_data["jobId"]}'
+        WHERE userId = '{user_id}' AND jobId = '{the_data["jobId"]}'
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)

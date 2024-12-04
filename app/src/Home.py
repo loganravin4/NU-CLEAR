@@ -94,4 +94,4 @@ if st.button('Some Text on the Button',
              use_container_width=True):
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'Professor'
-    st.switch_page('pages/20_Admin_Home.py')
+    st.switch_page('pages/04_Admin_Home.py')

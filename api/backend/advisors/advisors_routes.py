@@ -34,7 +34,7 @@ def get_messages(student_id):
 
 #------------------------------------------------------------
 # Send out a new announcement
-@advisor.route('/announcements', methods=['PUT'])
+@advisor.route('/announcements', methods=['POST'])
 def send_messages(student_id):
 
     the_data = request.json
@@ -45,6 +45,8 @@ def send_messages(student_id):
         VALUES ('{the_data["announcementId"]}', '{the_data["createdBy"]}', '{the_data["announcementText"]}')
     ''')
     
+    theData = cursor.fetchall()
+
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
     return the_response

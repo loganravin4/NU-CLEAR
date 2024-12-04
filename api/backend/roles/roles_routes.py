@@ -39,8 +39,7 @@ def add_role(company_id, job_id):
         VALUES ('{the_data["locationCity"]}', '{the_data["locationState"]}','{the_data["locationCountry"]}', '{the_data["title"]}',
                 '{the_data["description"]}', '{company_id}, '{job_id}') 
     ''' 
-           
-         
+                 
     cursor = db.get_db().cursor()
     cursor.execute(query)
     db.get_db().commit()

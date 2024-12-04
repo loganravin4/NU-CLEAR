@@ -70,14 +70,14 @@ def add_user_reviews(user_id):
 
 # ------------------------------------------------------------
 # Update a review
-@reviews.route('/reviews/<user_id>', methods = ['PUT'])
-def update_user_reviews(user_id):
+@reviews.route('/reviews/<user_id>/<review_id>', methods = ['PUT'])
+def update_user_reviews(user_id, review_id):
     the_data = request.json
     query = f'''
         UPDATE Review
         SET summary = '{the_data["summary"]}', bestPart = '{the_data["bestPart"]}', 
             worstPart = '{the_data["worstPart"]}', rating = {the_data["rating"]}
-        WHERE reviewId = {the_data["reviewId"]} AND createdBy = '{user_id}'
+        WHERE reviewId = '{review_id}' AND createdBy = '{user_id}'
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)

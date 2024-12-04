@@ -20,7 +20,6 @@ def get_reviews():
         FROM Review
     '''
 
-    # Dynamically build WHERE conditions
     filters = []
     if request.args.get('createdBy'):
         filters.append(f"createdBy = {request.args.get('createdBy')}")
@@ -41,11 +40,9 @@ def get_reviews():
     elif request.args.get('dateTo'):
         filters.append(f"createdAt <= '{request.args.get('dateTo')}'")
 
-    # Add filters to the query
     if filters:
         query += " WHERE " + " AND ".join(filters)
 
-    # Add sorting
     query += " ORDER BY createdAt DESC"
 
     cursor = db.get_db().cursor()

@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS Company (
 );
 
 CREATE TABLE IF NOT EXISTS Coop (
-    jobId INT PRIMARY KEY,
+    jobId INT PRIMARY KEY AUTO_INCREMENT,
     locationCity VARCHAR(255),
     locationState VARCHAR(255),
     locationCountry VARCHAR(255),

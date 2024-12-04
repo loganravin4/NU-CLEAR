@@ -160,3 +160,33 @@ def get_company_comparisons(company_id):
     response = make_response(jsonify(theData))
     response.status_code = 200
     return response
+
+
+
+# ------------------------------------------------------------
+# Returns summary report of a specific company
+@reviews.route('/analysis/summary_report/{company_id}', methods = ['GET'])
+
+def get_analysis_report(company_id):
+    query = '''
+    SELECT 
+        SUM(r.rating < 3) AS bad_reviews_count,
+        SUM(r.rating >= 3) AS good_reviews_count,
+        sr.company, 
+        sr.generatedSummary
+    FROM Review r
+    JOIN Coop c ON r.role = c.jobId
+    JOIN Company co ON c.company = co.companyId
+    JOIN SummaryReport sr ON co.companyId = sr.company
+    WHERE co.companyId = {company_id}
+    GROUP BY sr.company, sr.generatedSummary;
+
+    ''' 
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    theData = cursor.fetchall()
+        
+    response = make_response(jsonify(theData))
+    response.status_code = 200
+    return response

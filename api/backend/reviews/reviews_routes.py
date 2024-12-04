@@ -11,7 +11,7 @@ from backend.db_connection import db
 reviews = Blueprint('reviews', __name__)
 
 # ------------------------------------------------------------
-# Return all reviews
+# Return all reviews written
 @reviews.route('/reviews', methods = ['GET'])
 def get_reviews():
     query = '''
@@ -50,7 +50,7 @@ def get_user_reviews(user_id):
     return response
 
 # ------------------------------------------------------------
-# Add an anonymous review
+# Add an anonymous review to the database
 @reviews.route('/reviews/<user_id>', methods = ['POST'])
 def add_user_reviews(user_id):
     the_data = request.json
@@ -69,7 +69,7 @@ def add_user_reviews(user_id):
     return response
 
 # ------------------------------------------------------------
-# Update a review
+# Update a review previously written by a student
 @reviews.route('/reviews/<user_id>/<review_id>', methods = ['PUT'])
 def update_user_reviews(user_id, review_id):
     the_data = request.json

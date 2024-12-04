@@ -14,17 +14,22 @@ st.write('')
 st.write('')
 st.write('### What would you like to do today?')
 
-if st.button('Predict Value Based on Regression Model', 
+if st.button('View Co-op Listings', 
              type='primary',
              use_container_width=True):
   st.switch_page('pages/11_Prediction.py')
 
-if st.button('View the Simple API Demo', 
+if st.button('View Co-op Reviews', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/11_Prediction.py')
+
+if st.button('Create a Co-op Review', 
              type='primary',
              use_container_width=True):
   st.switch_page('pages/12_API_Test.py')
 
-if st.button("View Classification Demo",
+if st.button("View Your Existing Reviews",
              type='primary',
              use_container_width=True):
   st.switch_page('pages/13_Classification.py')

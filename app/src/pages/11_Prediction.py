@@ -10,7 +10,7 @@ st.set_page_config(layout = 'wide')
 # Display the appropriate sidebar links for the role of the logged in user
 SideBarLinks()
 
-st.title('Prediction with Regression')
+st.title('Current Co-op Listings')
 
 # create a 2 column layout
 col1, col2 = st.columns(2)

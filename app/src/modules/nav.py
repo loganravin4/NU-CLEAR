@@ -118,11 +118,21 @@ def SideBarLinks(show_home=False):
             MapDemoNav()
 
         # If the user role is usaid worker, show the Api Testing page
-        if st.session_state["role"] == "usaid_worker":
-            PredictionNav()
+        if st.session_state["role"] == "student":
+            StudentHomeNav()
             ApiTestNav()
             ClassificationNav()
-
+        
+        if st.session_state["role"] == "data_analyst":
+            DataAnalystHomeNav()
+            ApiTestNav()
+            ClassificationNav()
+        
+        if st.session_state["role"] == "advisor":
+            AdvisorHomeNav()
+            ApiTestNav()
+            ClassificationNav()
+        
         # If the user is an administrator, give them access to the administrator pages
         if st.session_state["role"] == "administrator":
             AdminPageNav()

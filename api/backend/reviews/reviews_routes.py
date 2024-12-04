@@ -188,12 +188,12 @@ def get_company_comparisons(company_id):
 
 
 # ------------------------------------------------------------
-# Returns summary report of a specific company
+# Returns summary report of a specific company and total number of good/bad reviews
 @reviews.route('/analysis/summary_report/{company_id}', methods = ['GET'])
 
-def get_analysis_report(company_id):
+def get_analysis_report_and_reviews(company_id):
     query = '''
-    SELECT 
+    SELECT  
         SUM(r.rating < 3) AS bad_reviews_count,
         SUM(r.rating >= 3) AS good_reviews_count,
         sr.company, 
@@ -205,12 +205,32 @@ def get_analysis_report(company_id):
     WHERE co.companyId = {company_id}
     GROUP BY sr.company, sr.generatedSummary;
 
-    ''' 
+    '''  
 
     cursor = db.get_db().cursor()
     cursor.execute(query)
     theData = cursor.fetchall()
         
     response = make_response(jsonify(theData))
+    response.status_code = 200
+    return response
+
+
+#  Add a summary report for a specific company
+@reviews.route('/analysis/summary_report/{company_id}', methods = ['POST'])
+
+def make_summary_report(company_id):
+
+    the_data = request.json
+    query = f'''  
+        INSERT INTO SummaryReport (averageRating, generatedSummary, company, generatedBy, updatedBy, summaryReportId) 
+        VALUES ('{the_data["averageRating"]}', '{the_data["generatedSummary"]}', '{company_id}' , '{the_data["generatedBy"]}',
+                '{the_data["updatedBy"]}', '{the_data["summaryReportId"]}')
+    '''
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
+    response = make_response("Job added to favorites")
     response.status_code = 200
     return response

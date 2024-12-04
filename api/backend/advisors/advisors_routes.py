@@ -65,13 +65,15 @@ def delete_messages(student_id):
     return the_response
 
 #------------------------------------------------------------
-# ROUTE DESCRIPTION
+# Get a list of favorited/recommended jobs  
 @advisor.route('/recommendations/<student_id>', methods=['GET'])
 def get_recommendations(student_id):
+    the_data = request.json
 
     cursor = db.get_db().cursor()
-    cursor.execute('''SELECT id, company, last_name,
-                    first_name, job_title, business_phone FROM customers
+    cursor.execute(f'''SELECT {the_data['jobId']}
+                        FROM Favorite 
+                        WHERE Favorite.studentId = {the_data['studentId']}
     ''')
     
     theData = cursor.fetchall()
@@ -81,29 +83,33 @@ def get_recommendations(student_id):
     return the_response
 
 #------------------------------------------------------------
-# ROUTE DESCRIPTION
+# Inserts list of recomended jobs into the students favorite 
 @advisor.route('/recommendations/<student_id>', methods=['POST'])
 def create_recommendations(student_id):
+    the_data = request.json
 
     cursor = db.get_db().cursor()
-    cursor.execute('''SELECT id, company, last_name,
-                    first_name, job_title, business_phone FROM customers
+    cursor.execute(f'''
+        INSERT INTO Favorite (studentId, jobId)
+        VALUES ('{the_data["studentId"]}', '{the_data["jobId"]}')
     ''')
     
     theData = cursor.fetchall()
     
-    the_response = make_response(jsonify(theData))
+    the_response = make_response('Advisor recommended a job to a student' )
     the_response.status_code = 200
     return the_response
 
 #------------------------------------------------------------
-# ROUTE DESCRIPTION
+# Delete recomendations for the student 
 @advisor.route('/recommendations/<student_id>', methods=['DELETE'])
 def delete_recommendations(student_id):
+    the_data = request.json
 
     cursor = db.get_db().cursor()
-    cursor.execute('''SELECT id, company, last_name,
-                    first_name, job_title, business_phone FROM customers
+    cursor.execute(f'''
+        DELETE FROM  Favorite 
+        WHERE Favorite.studentId = {the_data['studentId']} AND Favorite.jobId = '{the_data["jobId"]}')
     ''')
     
     theData = cursor.fetchall()

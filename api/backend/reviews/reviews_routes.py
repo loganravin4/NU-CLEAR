@@ -146,7 +146,7 @@ def get_role_reviews(company_id, role_id):
 
 
 # ------------------------------------------------------------
-# ROUTE DESCRIPTION
+# Returns reviews for other companies to compare it to my company
 @reviews.route('/reviews/compare/<company_id>', methods = ['GET'])
 def get_company_comparisons(company_id):
     query = '''

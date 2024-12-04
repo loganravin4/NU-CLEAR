@@ -76,6 +76,12 @@ def add_favorite():
         INSERT INTO Favorite (studentId, jobId)
         VALUES ('{the_data["studentId"]}', '{the_data["jobId"]}')
     '''
+
+    the_data = request.json
+    query = f'''
+        INSERT INTO Favorite (studentId, jobId)
+        VALUES ('{the_data["studentId"]}', '{the_data["jobId"]}')
+    '''
     cursor = db.get_db().cursor()
     cursor.execute(query)
     db.get_db().commit()

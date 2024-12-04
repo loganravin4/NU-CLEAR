@@ -27,6 +27,8 @@ def get_messages(student_id):
     ''')
     
     theData = cursor.fetchall()
+
+    the_data = request.json
     
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200

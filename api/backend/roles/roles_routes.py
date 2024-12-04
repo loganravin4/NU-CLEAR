@@ -15,12 +15,13 @@ role = Blueprint('role', __name__)
 @role.route('//<company_id>/<role_id>', methods=['GET'])
 def get_role(company_id, role_id):
     query = '''
-        SELECT  id, 
-                product_code, 
-                product_name, 
-                list_price, 
-                category 
-        FROM products
+        SELECT r.* 
+        FROM Review r 
+        JOIN Coop co ON r.role = co.jobId
+        JOIN Company c ON co.company = c.companyId 
+        WHERE c.companyId = {company_id} 
+        AND co.job_id = {job_id} 
+        
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)
@@ -31,16 +32,12 @@ def get_role(company_id, role_id):
 
 #------------------------------------------------------------
 # ROUTE DESCRIPTION
-@role.route('/<company_id>/<role_id>', methods=['POST'])
-def add_role(company_id, role_id):
+@role.route('/<company_id>/<job_id>', methods=['POST'])
+def add_role(company_id, job_id):
     query = '''
-        SELECT  id, 
-                product_code, 
-                product_name, 
-                list_price, 
-                category 
-        FROM products
+      
     '''
+    
     cursor = db.get_db().cursor()
     cursor.execute(query)
     theData = cursor.fetchall()

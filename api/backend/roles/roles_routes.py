@@ -45,7 +45,7 @@ def add_role(company_id, job_id):
     cursor.execute(query)
     db.get_db().commit()
   
-    response = make_response("Job added to favorites")
+    response = make_response("New Coop Listing Posted")
     response.status_code = 200
     return response
 

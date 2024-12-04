@@ -63,21 +63,21 @@ def add_user_reviews(user_id):
     cursor = db.get_db().cursor()
     cursor.execute(query)
     db.get_db().commit()
-
+ 
     response = make_response("Review added successfully")
     response.status_code = 200
     return response
 
 # ------------------------------------------------------------
 # Update a review
-@reviews.route('/reviews/<user_id>', methods = ['PUT'])
-def update_user_reviews(user_id):
+@reviews.route('/reviews/<user_id>/<review_id>', methods = ['PUT'])
+def update_user_reviews(user_id, review_id):
     the_data = request.json
     query = f'''
         UPDATE Review
         SET summary = '{the_data["summary"]}', bestPart = '{the_data["bestPart"]}', 
             worstPart = '{the_data["worstPart"]}', rating = {the_data["rating"]}
-        WHERE reviewId = {the_data["reviewId"]} AND createdBy = '{user_id}'
+        WHERE reviewId = '{review_id}' AND createdBy = '{user_id}'
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)
@@ -144,14 +144,14 @@ def get_role_reviews(company_id, role_id):
     response.status_code = 200
     return response
 
-
+ 
 # ------------------------------------------------------------
 # Returns reviews for other companies to compare it to my company
 @reviews.route('/reviews/compare/<company_id>', methods = ['GET'])
 def get_company_comparisons(company_id):
     query = '''
         
-    '''
+    ''' 
 
     cursor = db.get_db().cursor()
     cursor.execute(query)

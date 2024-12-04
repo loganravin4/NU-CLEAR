@@ -163,37 +163,3 @@ def get_company_comparisons(company_id):
     response = make_response(jsonify(theData))
     response.status_code = 200
     return response
-
-# ------------------------------------------------------------
-# Add a job to the favorites list
-@reviews.route('/favorites', methods=['POST'])
-def add_favorite_job():
-    the_data = request.json
-    query = f'''
-        INSERT INTO Favorite (studentId, jobId)
-        VALUES ('{the_data["studentId"]}', '{the_data["jobId"]}')
-    '''
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    db.get_db().commit()
-
-    response = make_response("Job added to favorites")
-    response.status_code = 200
-    return response
-
-# ------------------------------------------------------------
-# Remove a job from the favorites list
-@reviews.route('/favorites', methods=['DELETE'])
-def remove_favorite_job():
-    the_data = request.json
-    query = f'''
-        DELETE FROM Favorite
-        WHERE studentId = '{the_data["studentId"]}' AND jobId = '{the_data["jobId"]}'
-    '''
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    db.get_db().commit()
-
-    response = make_response("Job removed from favorites")
-    response.status_code = 200
-    return response

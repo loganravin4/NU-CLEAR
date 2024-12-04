@@ -88,10 +88,9 @@ def update_user_reviews(user_id):
     return response
 
 # ------------------------------------------------------------
-# Delete reviews previously written
-@reviews.route('/reviews/<user_id>', methods = ['DELETE'])
-def delete_user_reviews(user_id):
-    review_id = request.args.get('review_id')  # Review ID passed as a query param
+# Delete a specific review previously written by a student
+@reviews.route('/reviews/<user_id>/<review_id>', methods=['DELETE'])
+def delete_user_reviews(user_id, review_id):
     query = f'''
         DELETE FROM Review
         WHERE reviewId = {review_id} AND createdBy = '{user_id}'

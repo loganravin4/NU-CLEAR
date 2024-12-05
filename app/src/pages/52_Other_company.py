@@ -15,6 +15,7 @@ st.title('Other Companies Reviews to Compare')
 col1, col2, col3 = st.columns(3)
 
 with col1:
+    company = st.text_input('Filter by Company (CompanyId)', placeholder= 'e.g, 123')
     role = st.text_input('Filter by Role (Job ID)', placeholder='e.g., 45')
 
 with col2:
@@ -24,6 +25,7 @@ with col3:
     date_to = st.date_input('End Date')
 
 logger.info(f'role = {role}')
+logger.info(f'rating_min = {company}')
 logger.info(f'date_from = {date_from}')
 logger.info(f'date_to = {date_to}')
 

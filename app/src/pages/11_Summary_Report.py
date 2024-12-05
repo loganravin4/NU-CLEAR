@@ -29,6 +29,11 @@ if st.button("Add Summary"):
             "generatedBy": generated_by,
         }
 
-        if updated_by.strip():  
-            data["updatedBy"] = updated_by
 
+        if updated_by.strip():   
+                data["updatedBy"] = updated_by
+
+        api = f'http://localhost:4000/analysis/summary_report/{company_id}'
+        response = requests.post(api, json=data)
+
+    

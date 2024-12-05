@@ -23,3 +23,29 @@ with col2:
 
 with col3:
     date_to = st.date_input('End Date')
+
+logger.info(f'role = {role}')
+logger.info(f'rating_min = {rating_min}')
+logger.info(f'date_from = {date_from}')
+logger.info(f'date_to = {date_to}')
+
+
+if st.button('Get Reviews', 
+             type='primary', 
+             use_container_width=True):
+    url = 'http://api:4000/reviews'
+    filters = {}
+
+    if role:
+        filters['role'] = role
+    if rating_min > 0.0:
+        filters['rating'] = rating_min
+    if date_from:
+        filters['dateFrom'] = date_from.strftime('%Y-%m-%d')
+    if date_to:
+        filters['dateTo'] = date_to.strftime('%Y-%m-%d')
+
+    response = requests.get(url, params=filters)
+    logger.info(response)
+    st.dataframe(response)
+

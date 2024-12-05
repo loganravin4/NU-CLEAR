@@ -142,7 +142,6 @@ CREATE TABLE IF NOT EXISTS Review (
     summary TEXT,
     bestPart TEXT,
     worstPart TEXT,
-    isAnonymous BOOLEAN NOT NULL DEFAULT false,
     wouldRecommend BOOLEAN NOT NULL DEFAULT true,
     FOREIGN KEY (createdBy) REFERENCES Student (userId)
         ON UPDATE cascade ON DELETE restrict,

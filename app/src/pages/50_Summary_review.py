@@ -11,7 +11,6 @@ SideBarLinks()
 
 st.title('Summaries of my Companies Data')
 
-
 col1, col2, col3 = st.columns(3)
 
 with col1:
@@ -32,11 +31,25 @@ logger.info(f'top_benefit = {top_benefit}')
 if st.button('Get Summary', 
              type='primary', 
              use_container_width=True):
-    url = 'http://api:4000/reviews'
+    url = 'http://api:4000/analysis/summary_report/{company_id}'
     filters = {}
     
     #need to add a line so it only filters by the users company
     #figure out what to do to connect the to backend so that it actually does summaries 
+  
+    #need to add a line so it only filters by the users company
+    if avg_rating:
+        filters['avg_rating'] = True
+    if count:
+        filters['count'] = True
+    if top_benefit:
+        filters['top_benefit'] = True
+    if top_problem:
+        filters['top_problem'] = True
+
+    response = requests.get(url, params=filters)
+    logger.info(response)
+    st.dataframe(response)
 
 
     response = requests.get(url, params=filters)

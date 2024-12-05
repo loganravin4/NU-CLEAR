@@ -58,20 +58,20 @@ CREATE TABLE IF NOT EXISTS Permission (
 );
 
 CREATE TABLE IF NOT EXISTS UserPermission (
-    userId VARCHAR(255),
+    userType VARCHAR(255),
     permissionId INT,
-    PRIMARY KEY (userId, permissionId),
-    FOREIGN KEY (userId) REFERENCES User (userId)
+    PRIMARY KEY (userType, permissionId),
+    FOREIGN KEY (userType) REFERENCES UserType (userType)
         ON UPDATE cascade ON DELETE restrict,
     FOREIGN KEY (permissionId) REFERENCES Permission (permissionId)
         ON UPDATE cascade ON DELETE restrict
 );
 
 CREATE TABLE IF NOT EXISTS UserModule (
-    userId VARCHAR(255),
+    userType VARCHAR(255),
     moduleId INT,
-    PRIMARY KEY (userId, moduleId),
-    FOREIGN KEY (userId) REFERENCES User (userId)
+    PRIMARY KEY (userType, moduleId),
+    FOREIGN KEY (userType) REFERENCES UserType (userType)
         ON UPDATE cascade ON DELETE restrict,
     FOREIGN KEY (moduleId) REFERENCES Module (moduleId)
         ON UPDATE cascade ON DELETE restrict

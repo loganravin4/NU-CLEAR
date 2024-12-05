@@ -19,10 +19,10 @@ if st.button('Add a Summary Report for a Company',
              use_container_width=True):
   st.switch_page('pages/11_Summary_Report.py')
  
-if st.button('Look at Co-op Reviews', 
+if st.button('Look at Co-op Reviews and Studetn Demographics', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/12_API_Test.py')
+  st.switch_page('pages/12_Coop_Review_by_Demographic.py')
 
 if st.button("Create Visualizations from Reviews",
              type='primary', 

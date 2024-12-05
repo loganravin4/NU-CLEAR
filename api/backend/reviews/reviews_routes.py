@@ -54,7 +54,7 @@ def get_reviews():
     return response
 
 # ------------------------------------------------------------
-# Return all reviews submitted by a specific user
+# Return all reviews submitted and the student information
 @reviews.route('/reviews/<user_id>', methods = ['GET'])
 def get_user_reviews():
     query = f'''
@@ -72,7 +72,7 @@ def get_user_reviews():
     response = make_response(jsonify(theData))
     response.status_code = 200
     return response
-
+ 
 # ------------------------------------------------------------
 # Add an anonymous review
 @reviews.route('/reviews/<user_id>', methods = ['POST'])

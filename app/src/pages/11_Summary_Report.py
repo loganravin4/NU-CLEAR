@@ -7,7 +7,7 @@ import requests
 
 st.set_page_config(layout = 'wide')
 
-SideBarLinks()  
+SideBarLinks()   
 
 st.title('Add a Summary Report')
 

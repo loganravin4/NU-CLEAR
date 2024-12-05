@@ -238,7 +238,7 @@ def make_summary_report(company_id):
  
 
 # ------------------------------------------------------------
-#  Add a summary report for a specific company
+#  Add a visualization report for a specific company
 @reviews.route('analysis/visualization/{company_id}', methods = ['POST'])
 
 def add_visualization(company_id):

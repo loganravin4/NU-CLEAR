@@ -34,14 +34,14 @@ def get_announcements():
 #------------------------------------------------------------
 # Send out a new announcement
 @advisor.route('/announcements', methods=['POST'])
-def post_announcement():
+def post_announcement(userId):
 
     the_data = request.json
 
     cursor = db.get_db().cursor()
     cursor.execute(f'''
-        INSERT INTO Announcement (announcementId, createdBy, announcementText)
-        VALUES ('{the_data["announcementId"]}', '{the_data["createdBy"]}', '{the_data["announcementText"]}')
+        INSERT INTO Announcement (createdBy, announcementText)
+        VALUES ({userId}, '{the_data["announcementText"]}')
     ''')
     
     theData = cursor.fetchall()

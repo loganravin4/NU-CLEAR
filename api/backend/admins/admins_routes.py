@@ -33,7 +33,7 @@ def post_modules():
 
     query = f'''
         INSERT INTO Module (moduleName, moduleStatus, createdBy)
-        VALUES ({the_data['moduleName']}, {the_data['moduleStatus']}, {the_data['createdBy']}),
+        VALUES ('{the_data['moduleName']}', '{the_data['moduleStatus']}', {the_data['createdBy']}),
     '''
     
     cursor = db.get_db().cursor()
@@ -49,7 +49,7 @@ def post_modules():
 def get_user_perms ():
 
     query = f'''SELECT *
-                FROM UserPermission 
+                FROM Permission 
     '''
     
     cursor = db.get_db().cursor()
@@ -62,10 +62,16 @@ def get_user_perms ():
 #------------------------------------------------------------
 # Add a new user and permissions 
 @admin.route('/user_permissions', methods=['POST'])
-def add_user_perms ():
+def add_user_perms (userId):
     the_data = request.json
-    query = f'''INSERT INTO UserPermission (userType, permissionId)
-                VALUES ({the_data['userType']},{the_data['permissionId']})
+    query = f'''INSERT INTO Permission (createdBy, userType, canEditPerms, canEditModule, canEditAccSettings, 
+                    canCreateReview, canCreateCoopListing, canCreateModule, canViewReview, canViewCoopListing, 
+                    canViewModule, canDeleteReview, canDeleteCoopListing, canDeleteModule)
+                VALUES ({userId},'{the_data['userType']}',{the_data['canEditPerms']}, {the_data['canEditModule']}, 
+                {the_data['canEditAccSettings']}, {the_data['canCreateReview']}, {the_data['canCreateCoopListing']}, 
+                {the_data['canCreateModule']}, {the_data['canViewReview']}, {the_data['canViewCoopListing']}, 
+                {the_data['canViewModule']}, {the_data['canDeleteReview']}, {the_data['canDeleteReview']}, 
+                {the_data['canDeleteReview']}) 
 
     '''
     
@@ -81,7 +87,7 @@ def add_user_perms ():
 @admin.route('/user_permissions', methods=['PUT'])
 def update_user_perms ():
     the_data = request.json
-    query = f'''UPDATE UserPermission
+    query = f'''UPDATE Permission
                 SET permissionId = {the_data['permissionId']}
                 WHERE userType = {the_data['userType']}
     '''

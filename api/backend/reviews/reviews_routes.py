@@ -78,11 +78,12 @@ def get_user_reviews():
 @reviews.route('/reviews/<user_id>', methods = ['POST'])
 def add_user_reviews(user_id):
     the_data = request.json
+    is_anonymous = 1 if the_data["isAnonymous"] else 0
     query = f'''
         INSERT INTO Review (createdAt, createdBy, role, salary, rating, 
                             summary, bestPart, worstPart, isAnonymous)
-        VALUES (now(), '{user_id}', '{the_data["role"]}', {the_data["salary"]}, {the_data["rating"]}, 
-                '{the_data["summary"]}', '{the_data["bestPart"]}', '{the_data["worstPart"]}', TRUE)
+        VALUES (now(), '{user_id}', '{the_data["role"]}', '{the_data["salary"]}', '{the_data["rating"]}', 
+                '{the_data["summary"]}', '{the_data["bestPart"]}', '{the_data["worstPart"]}', '{is_anonymous}')
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)

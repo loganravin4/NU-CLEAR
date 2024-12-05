@@ -21,10 +21,10 @@ if st.button("Add Summary"):
         data = {
             "announcement": announcement,
         }
+    url = 'http://api:4000/announcements'
+  
+    response = requests.post(url)
+    logger.info(response)
+    st.dataframe(response)     
     #how to make sure its added 
     #how to see other previously posted announcements 
-        
-
-
-
-

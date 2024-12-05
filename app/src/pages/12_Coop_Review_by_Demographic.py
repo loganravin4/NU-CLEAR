@@ -12,7 +12,7 @@ SideBarLinks()
 st.title('Filter Reviews by Student Demographics')
 
 coopLevel_options = ['All', 1, 2] 
-coopLevel_input = st.selectbox('Select Student Year (Optional):', coopLevel_options)
+coopLevel_input = st.selectbox('Select Student Co-op Level(Optional):', coopLevel_options)
 
 year_options = ['All', 1, 2,3,4,5] 
 year_input = st.selectbox('Select Student Year (Optional):', year_options)

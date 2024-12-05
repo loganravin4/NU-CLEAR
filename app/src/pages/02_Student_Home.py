@@ -27,7 +27,7 @@ if st.button('View Co-op Reviews',
 if st.button('Create a Co-op Review', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/12_API_Test.py')
+  st.switch_page('pages/22_Create_Review.py')
 
 if st.button("View Your Existing Reviews",
              type='primary',

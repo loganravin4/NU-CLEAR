@@ -234,7 +234,7 @@ def make_summary_report(company_id):
     response = make_response("Job added to favorites")
     response.status_code = 200
     return response
-
+ 
 
 # ------------------------------------------------------------
 #  Add a summary report for a specific company

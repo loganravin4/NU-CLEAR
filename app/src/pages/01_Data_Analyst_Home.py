@@ -24,7 +24,7 @@ if st.button('Look at Co-op Reviews and Student Demographics',
              use_container_width=True):
   st.switch_page('pages/12_Coop_Review_by_Demographic.py')
 
-if st.button("Create Visualizations from Reviews",
+if st.button("Add Visualizations from Reviews",
              type='primary', 
              use_container_width=True): 
-  st.switch_page('pages/13_Classification.py')    
+  st.switch_page('pages/13_Add_Visualization.py')    

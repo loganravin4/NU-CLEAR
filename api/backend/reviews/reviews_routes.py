@@ -215,7 +215,7 @@ def get_analysis_report_and_reviews(company_id):
     response.status_code = 200
     return response
 
-
+# ------------------------------------------------------------
 #  Add a summary report for a specific company
 @reviews.route('/analysis/summary_report/{company_id}', methods = ['POST'])
 
@@ -234,3 +234,25 @@ def make_summary_report(company_id):
     response = make_response("Job added to favorites")
     response.status_code = 200
     return response
+
+
+# ------------------------------------------------------------
+#  Add a summary report for a specific company
+@reviews.route('analysis/visualization/{company_id}', methods = ['POST'])
+
+def add_visualization(company_id):
+
+    the_data = request.json
+    query = f'''  
+        INSERT INTO Visualization(vizType, filters, company, createdBy, updatedBy) 
+        VALUES ('{the_data["vizType"]}', '{the_data["filters"]}', '{company_id}' , '{the_data["createdBy"]}',
+                '{the_data["updatedBy"]}')
+    '''
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
+    response = make_response("Job added to favorites")
+    response.status_code = 200
+    return response
+

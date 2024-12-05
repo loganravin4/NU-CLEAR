@@ -14,8 +14,16 @@ SideBarLinks()
 
 st.title(f"Manage Modules")
 
+# search for a module
+search = st.text_input("Search for a module...", "")
+button_clicked = st.button("OK")
 
-## testing view
+# popover to add a new module
+st.popover("Assign a new module", help=None, icon=None, disabled=False, use_container_width=False)
+
+# results = requests.get('http://api:4000/backend/').json()
+
+## dummy dataframe view for now bc endpoint for modules hasn't been tested yet
 df = pd.DataFrame(
     [
         {"command": "st.selectbox", "rating": 4, "is_widget": True},
@@ -26,4 +34,3 @@ df = pd.DataFrame(
 
 st.dataframe(df, use_container_width=True)
 
-# results = requests.get('http://api:4000/backend/').json()

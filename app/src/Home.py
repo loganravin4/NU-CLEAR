@@ -88,10 +88,3 @@ if st.button('Act as Ariana Duke, A System Administrator',
     st.session_state['role'] = 'administrator'
     st.session_state['first_name'] = 'Ariana'
     st.switch_page('pages/04_Admin_Home.py')
-
-if st.button('Some Text on the Button', 
-             type = 'primary', 
-             use_container_width=True):
-    st.session_state['authenticated'] = True
-    st.session_state['role'] = 'Professor'
-    st.switch_page('pages/04_Admin_Home.py')

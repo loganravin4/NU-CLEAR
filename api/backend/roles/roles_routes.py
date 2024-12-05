@@ -12,14 +12,12 @@ role = Blueprint('role', __name__)
 
 #------------------------------------------------------------
 # See all roles in a company 
-@role.route('/<company_id>/<job_id>', methods=['GET'])
-def get_role(company_id, job_id):
+@role.route('/coops', methods=['GET'])
+def get_role():
     query = '''
-        SELECT co.* 
-        FROM Coop co 
-        JOIN Company c ON co.company = c.companyID
-        WHERE c.companyId = {company_id} 
-        AND co.job_id = {job_id}
+        SELECT * 
+        FROM Coop
+     
     ''' 
     cursor = db.get_db().cursor()
     cursor.execute(query)
@@ -30,16 +28,16 @@ def get_role(company_id, job_id):
 
 #------------------------------------------------------------
 # Add a new co-op listing 
-@role.route('/<company_id>/<job_id>', methods=['POST'])
-def add_role(company_id, job_id):
+@role.route('/coop', methods=['POST'])
+def add_role():        
     
     the_data = request.json
     query = f'''
         INSERT INTO Coop (locationCity, locationState, locationCountry, title, description, company, jobId)
         VALUES ('{the_data["locationCity"]}', '{the_data["locationState"]}','{the_data["locationCountry"]}', '{the_data["title"]}',
-                '{the_data["description"]}', '{company_id}, '{job_id}') 
-    ''' 
-                 
+                '{the_data["description"]}', '{the_data['company_id']}, '{the_data['job_id}']}) 
+    '''  
+                   
     cursor = db.get_db().cursor()
     cursor.execute(query)
     db.get_db().commit()

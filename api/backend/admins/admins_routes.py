@@ -14,7 +14,7 @@ admin = Blueprint('admin', __name__)
 @admin.route('/modules', methods=['GET'])
 def get_modules():
     query = f'''
-        SELECT moduleName, moduleStatus, 
+        SELECT moduleName, moduleStatus
         FROM Module
     '''
     
@@ -39,7 +39,7 @@ def post_modules():
     cursor = db.get_db().cursor()
     cursor.execute(query)
     theData = cursor.fetchall()
-    response = make_response(jsonify(theData))
+    response = make_response("Module created")
     response.status_code = 200
     return response
 
@@ -70,15 +70,15 @@ def add_user_perms (userId):
                 VALUES ({userId},'{the_data['userType']}',{the_data['canEditPerms']}, {the_data['canEditModule']}, 
                 {the_data['canEditAccSettings']}, {the_data['canCreateReview']}, {the_data['canCreateCoopListing']}, 
                 {the_data['canCreateModule']}, {the_data['canViewReview']}, {the_data['canViewCoopListing']}, 
-                {the_data['canViewModule']}, {the_data['canDeleteReview']}, {the_data['canDeleteReview']}, 
-                {the_data['canDeleteReview']}) 
+                {the_data['canViewModule']}, {the_data['canDeleteReview']}, {the_data['canDeleteCoopListing']}, 
+                {the_data['canDeleteModule']}) 
 
     '''
     
     cursor = db.get_db().cursor()
     cursor.execute(query)
     theData = cursor.fetchall()
-    response = make_response(jsonify(theData))
+    response = make_response("User Permission Created")
     response.status_code = 200
     return response
 
@@ -88,7 +88,11 @@ def add_user_perms (userId):
 def update_user_perms ():
     the_data = request.json
     query = f'''UPDATE Permission
-                SET permissionId = {the_data['permissionId']}
+                SET canEditPerms = {the_data['canEditPerms']}, canEditModule = {the_data['canEditModule']}, 
+                canEditAccSettings = {the_data['canEditAccSettings']}, canCreateReview = {the_data['canCreateReview']}, canCreateCoopListing = {the_data['canCreateCoopListing']}, canCreateModule = {the_data['canCreateModule']}, canViewReview = {the_data['canViewReview']}, canViewCoopListing = {the_data['canViewCoopListing']}, 
+                canViewModule = {the_data['canViewModule']}, canDeleteReview = {the_data['canDeleteReview']}, 
+                canDeleteCoopListing = {the_data['canDeleteCoopListing']}, canDeleteModule = {the_data['canDeleteModule']})
+                {the_data['canEditModule']}
                 WHERE userType = {the_data['userType']}
     '''
     

@@ -28,6 +28,6 @@ if st.button('Other Companies Reviews',
 if st.button('Summary of Reviews', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/53_summary_reviews.py')
+  st.switch_page('pages/53_summary.py')
 
   

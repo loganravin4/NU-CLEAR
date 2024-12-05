@@ -21,14 +21,10 @@ def get_reviews():
     '''
 
     filters = []
-    if request.args.get('createdBy'):
-        filters.append(f"createdBy = {request.args.get('createdBy')}")
     if request.args.get('role'):
         filters.append(f"role = {request.args.get('role')}")
     if request.args.get('rating'):
         filters.append(f"rating >= {request.args.get('rating')}")
-    if request.args.get('isAnonymous'):
-        filters.append(f"isAnonymous = {request.args.get('isAnonymous').lower() == 'true'}")
     if request.args.get('wouldRecommend'):
         filters.append(f"wouldRecommend = {request.args.get('wouldRecommend').lower() == 'true'}")
     if request.args.get('salary'):
@@ -59,7 +55,7 @@ def get_reviews():
 def get_user_reviews(user_id):
     query = f'''
         SELECT r.reviewId, r.role,r.salary, r.rating, 
-               r.summary, s.{user_id}, s.firstName, s.lastName, 
+               r.summary, s.firstName, s.lastName, 
                s.major, s.coopLevel, s.year
         FROM Review r
         JOIN Students s ON r.createdBy = s.{user_id}
@@ -78,12 +74,11 @@ def get_user_reviews(user_id):
 @reviews.route('/reviews/<user_id>', methods = ['POST'])
 def add_user_reviews(user_id):
     the_data = request.json
-    is_anonymous = 1 if the_data["isAnonymous"] else 0
     query = f'''
         INSERT INTO Review (createdAt, createdBy, role, salary, rating, 
-                            summary, bestPart, worstPart, isAnonymous)
-        VALUES (now(), '{user_id}', '{the_data["role"]}', '{the_data["salary"]}', '{the_data["rating"]}', 
-                '{the_data["summary"]}', '{the_data["bestPart"]}', '{the_data["worstPart"]}', '{is_anonymous}')
+                            summary, bestPart, worstPart)
+        VALUES (now(), {user_id}, '{the_data["role"]}', {the_data["salary"]}, {the_data["rating"]}, 
+                '{the_data["summary"]}', '{the_data["bestPart"]}', '{the_data["worstPart"]}')
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)
@@ -102,7 +97,7 @@ def update_user_reviews(user_id):
         UPDATE Review
         SET summary = '{the_data["summary"]}', bestPart = '{the_data["bestPart"]}', 
             worstPart = '{the_data["worstPart"]}', rating = {the_data["rating"]}
-        WHERE reviewId = {the_data["reviewId"]} AND createdBy = '{user_id}'
+        WHERE reviewId = {the_data["reviewId"]} AND createdBy = {user_id}
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)
@@ -118,7 +113,7 @@ def update_user_reviews(user_id):
 def delete_user_reviews(user_id, review_id):
     query = f'''
         DELETE FROM Review
-        WHERE reviewId = {review_id} AND createdBy = '{user_id}'
+        WHERE reviewId = {review_id} AND createdBy = {user_id}
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)
@@ -133,11 +128,12 @@ def delete_user_reviews(user_id, review_id):
 @reviews.route('/reviews/<company_id>', methods = ['GET'])
 def get_company_reviews(company_id):
     query = f'''
-        SELECT r.reviewId, r.createdAt, r.role, r.salary, r.rating, 
-               r.summary, r.bestPart, r.worstPart, r.isAnonymous
+        SELECT r.reviewId, r.createdAt, cp.companyName, r.rating, 
+               r.summary, r.bestPart, r.worstPart
         FROM Review r
-        JOIN Coop c ON r.role = c.jobId
-        WHERE c.companyId = '{company_id}'
+        JOIN Coop c ON r.role = c.coopId
+        JOIN Company cp ON c.company = cp.companyId
+        WHERE c.company = {company_id}
         ORDER BY r.createdAt DESC
     '''
 
@@ -151,13 +147,14 @@ def get_company_reviews(company_id):
 
 # ------------------------------------------------------------
 # Return reviews for a specific role
-@reviews.route('/reviews/<company_id>/<job_id>', methods = ['GET'])
-def get_role_reviews(company_id, job_id):
+@reviews.route('/reviews/<company_id>/<coop_id>', methods = ['GET'])
+def get_role_reviews(company_id, coop_id):
     query = f'''
-        SELECT reviewId, createdAt, salary, rating, summary, 
-               bestPart, worstPart, isAnonymous
-        FROM Review
-        WHERE role = '{job_id}' AND companyId = '{company_id}'
+        SELECT r.reviewId, c.title, r.createdAt, r.salary, r.rating, r.summary, 
+               r.bestPart, r.worstPart
+        FROM Review r
+        JOIN Coop c ON r.role = c.coopId
+        WHERE r.role = {coop_id} AND c.company = {company_id}
         ORDER BY createdAt DESC
     '''
 
@@ -173,9 +170,22 @@ def get_role_reviews(company_id, job_id):
 # ------------------------------------------------------------
 # Returns reviews for other companies to compare it to my company
 @reviews.route('/reviews/compare/<company_id>', methods = ['GET'])
-def get_company_comparisons(company_id):
+def get_company_comparisons(company_id, compare_company_id):
     query = '''
-       
+       SELECT r.reviewId, r.createdAt, r.role, r.salary, r.rating, 
+               r.summary, r.bestPart, r.worstPart
+        FROM Review r
+        JOIN Coop c ON r.role = c.jobId
+        WHERE c.companyId = {company_id}
+        ORDER BY r.createdAt DESC
+
+        SELECT r.reviewId, r.createdAt, r.role, r.salary, r.rating, 
+               r.summary, r.bestPart, r.worstPart
+        FROM Review r
+        JOIN Coop c ON r.role = c.jobId
+        JOIN Company cp ON c.company = cp.companyId
+        WHERE c.company = {compare_company_id}
+        ORDER BY r.createdAt DESC
     '''
 
     cursor = db.get_db().cursor()
@@ -224,9 +234,8 @@ def make_summary_report(company_id):
 
     the_data = request.json
     query = f'''  
-        INSERT INTO SummaryReport (averageRating, generatedSummary, company, generatedBy, updatedBy, summaryReportId) 
-        VALUES ('{the_data["averageRating"]}', '{the_data["generatedSummary"]}', '{company_id}' , '{the_data["generatedBy"]}',
-                '{the_data["updatedBy"]}', '{the_data["summaryReportId"]}')
+        INSERT INTO SummaryReport (averageRating, generatedSummary, company, generatedBy) 
+        VALUES ({the_data["averageRating"]}, '{the_data["generatedSummary"]}', {company_id}, {the_data["generatedBy"]})
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)
@@ -245,9 +254,8 @@ def add_visualization(company_id):
 
     the_data = request.json
     query = f'''  
-        INSERT INTO Visualization(vizType, filters, company, createdBy, updatedBy) 
-        VALUES ('{the_data["vizType"]}', '{the_data["filters"]}', '{company_id}' , '{the_data["createdBy"]}',
-                '{the_data["updatedBy"]}')
+        INSERT INTO Visualization(vizType, filters, company, createdBy) 
+        VALUES ('{the_data["vizType"]}', '{the_data["filters"]}', {company_id}, {the_data["createdBy"]})
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)

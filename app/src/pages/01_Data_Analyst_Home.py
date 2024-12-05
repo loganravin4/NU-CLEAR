@@ -14,17 +14,17 @@ st.write('')
 st.write('')
 st.write('### What would you like to do today?')
 
-if st.button('Predict Value Based on Regression Model', 
+if st.button('Add a Summary Report for a Company', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/11_Prediction.py')
-
-if st.button('View the Simple API Demo', 
+  st.switch_page('pages/11_Summary_Report.py')
+ 
+if st.button('Look at Co-op Reviews', 
              type='primary',
              use_container_width=True):
   st.switch_page('pages/12_API_Test.py')
 
-if st.button("View Classification Demo",
-             type='primary',
-             use_container_width=True):
-  st.switch_page('pages/13_Classification.py')
+if st.button("Create Visualizations from Reviews",
+             type='primary', 
+             use_container_width=True): 
+  st.switch_page('pages/13_Classification.py')    

@@ -1,9 +1,11 @@
 from flask import Flask
 
 from backend.db_connection import db
-from backend.customers.customer_routes import customers
-from backend.products.products_routes import products
-from backend.simple.simple_routes import simple_routes
+from backend.admins.admins_routes import admin
+from backend.advisors.advisors_routes import advisor
+from backend.reviews.reviews_routes import reviews
+from backend.roles.roles_routes import role
+
 import os
 from dotenv import load_dotenv
 
@@ -29,7 +31,7 @@ def create_app():
     app.config['MYSQL_DATABASE_PASSWORD'] = os.getenv('MYSQL_ROOT_PASSWORD').strip()
     app.config['MYSQL_DATABASE_HOST'] = os.getenv('DB_HOST').strip()
     app.config['MYSQL_DATABASE_PORT'] = int(os.getenv('DB_PORT').strip())
-    app.config['MYSQL_DATABASE_DB'] = os.getenv('NU_CLEAR').strip()
+    app.config['MYSQL_DATABASE_DB'] = os.getenv('DB_NAME').strip()
 
     # Initialize the database object with the settings above. 
     app.logger.info('current_app(): starting the database connection')

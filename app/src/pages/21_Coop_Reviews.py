@@ -9,7 +9,7 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
-st.title('Current Co-op Listings')
+st.title('Co-op Reviews')
 
 col1, col2, col3 = st.columns(3)
 
@@ -59,5 +59,5 @@ if st.button('Get Reviews',
         filters['dateTo'] = date_to.strftime('%Y-%m-%d')
 
     response = requests.get(url, params=filters)
-    response = response.json()
+    logger.info(response)
     st.dataframe(response)

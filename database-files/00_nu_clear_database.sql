@@ -2,7 +2,7 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 
 DROP DATABASE IF EXISTS `nu-clear-database`;
-CREATE DATABASE `nu-clear-database`;
+CREATE DATABASE IF NOT EXISTS `nu-clear-database`;
 USE `nu-clear-database`;
 
 -- Create tables

@@ -32,4 +32,4 @@ if st.button('Create a Co-op Review',
 if st.button("View Your Existing Reviews",
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/13_Classification.py')
+  st.switch_page('pages/23_User_Reviews.py')

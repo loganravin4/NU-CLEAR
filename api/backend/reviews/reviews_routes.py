@@ -12,7 +12,7 @@ reviews = Blueprint('reviews', __name__)
 
 # ------------------------------------------------------------
 # Return all reviews written based on desired filters
-@reviews.route('/', methods = ['GET'])
+@reviews.route('/reviews', methods = ['GET'])
 def get_reviews():
     query = '''
         SELECT reviewId, createdAt, createdBy, role, salary, rating, 

@@ -35,7 +35,7 @@ def add_role():
     query = f'''
         INSERT INTO Coop (locationCity, locationState, locationCountry, title, description, company, jobId)
         VALUES ('{the_data["locationCity"]}', '{the_data["locationState"]}','{the_data["locationCountry"]}', '{the_data["title"]}',
-                '{the_data["description"]}', '{company_id}', '{job_id}') 
+                '{the_data["description"]}', '{the_data["company"]}', '{the_data["jobId"]}') 
     ''' 
                  
     cursor = db.get_db().cursor()

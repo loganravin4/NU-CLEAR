@@ -397,7 +397,7 @@ INSERT INTO Coop(jobId,locationCity,locationState,locationCountry,title,descript
 INSERT INTO Coop(jobId,locationCity,locationState,locationCountry,title,description,company) VALUES (28,'Honolulu','Hawaii','United States','Full Stack Developer Intern','In Cumanum salutandi causa uterque venisset pauca primo inter nos ea',28);
 INSERT INTO Coop(jobId,locationCity,locationState,locationCountry,title,description,company) VALUES (29,'Spring','Texas','United States','Game Developer Intern','Familiarem nostrum Posidonium Quid Theophrastus mediocriterne delectat cum tractat locos',29);
 INSERT INTO Coop(jobId,locationCity,locationState,locationCountry,title,description,company) VALUES (30,'Little Rock','Arkansas','United States','Graphic Designer Intern','Minus animo aequo e vita cum ea non',30);
---30 records
+-- 30 records
 
 -- Dumping data for table 'Visualization'   
 INSERT INTO Visualization(vizType,filters,company,createdBy,updatedBy) VALUES ('Area Chart','Omnes veri erunt, ut Epicuri ratio docet, tum denique poterit aliquid cognosci et percipi. Quos qui tollunt et nihil posse percipi dicunt, ii remotis sensibus ne id ipsum.',23,117,117);
@@ -440,8 +440,6 @@ INSERT INTO Visualization(vizType,filters,company,createdBy,updatedBy) VALUES ('
 INSERT INTO Visualization(vizType,filters,company,createdBy,updatedBy) VALUES ('Bubble Chart','asdf',5,97,97);
 INSERT INTO Visualization(vizType,filters,company,createdBy,updatedBy) VALUES ('Histogram','Quam ut ipse constituit, e regione ferrentur et, ut modo docui, cognitionis regula et iudicio ab eadem illa.',12,107,107);
 INSERT INTO Visualization(vizType,filters,company,createdBy,updatedBy) VALUES ('Radar Chart','asdf',24,106,106);
-
-
 -- 40 records
  
 
@@ -487,7 +485,7 @@ INSERT INTO Permission(permissionId,editedBy,canEditPerms,canEditModule,canEditA
 INSERT INTO Permission(permissionId,editedBy,canEditPerms,canEditModule,canEditAccSettings,canCreateReview,canCreateCoopListing,canCreateModule,canViewReview,canViewCoopListing,canViewModule,canDeleteReview,canDeleteCoopListing,canDeleteModule) VALUES (39,23,1,1,1,1,0,0,0,1,0,0,0,1);
 INSERT INTO Permission(permissionId,editedBy,canEditPerms,canEditModule,canEditAccSettings,canCreateReview,canCreateCoopListing,canCreateModule,canViewReview,canViewCoopListing,canViewModule,canDeleteReview,canDeleteCoopListing,canDeleteModule) VALUES (40,3,0,1,0,1,1,1,0,1,0,0,0,0);
  
---40 records
+-- 40 records
 
 -- Dumping data for table 'SummaryReport'
 INSERT INTO SummaryReport(summaryReportId,averageRating,generatedSummary,company,generatedBy,updatedBy) VALUES (1,4.0,'Contenta sit.',6,117,117);

@@ -15,8 +15,8 @@ reviews = Blueprint('reviews', __name__)
 @reviews.route('/reviews', methods = ['GET'])
 def get_reviews():
     query = '''
-        SELECT reviewId, createdAt, createdBy, role, salary, rating, 
-               summary, bestPart, worstPart, isAnonymous, wouldRecommend
+        SELECT reviewId, createdAt, role, salary, rating, 
+               summary, bestPart, worstPart, wouldRecommend
         FROM Review
     '''
 

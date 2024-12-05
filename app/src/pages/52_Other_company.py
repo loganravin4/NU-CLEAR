@@ -15,7 +15,7 @@ st.title('My Companies Reviews')
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    rating_min = st.number_input('Minimum Rating', min_value=0.0, max_value=5.0, step=0.1)
+    company = st.text_input('Filter by Company (CompanyId)', placeholder= 'e.g, 123')
     role = st.text_input('Filter by Role (Job ID)', placeholder='e.g., 45')
 
 with col2:
@@ -25,7 +25,7 @@ with col3:
     date_to = st.date_input('End Date')
 
 logger.info(f'role = {role}')
-logger.info(f'rating_min = {rating_min}')
+logger.info(f'rating_min = {company}')
 logger.info(f'date_from = {date_from}')
 logger.info(f'date_to = {date_to}')
 
@@ -38,8 +38,8 @@ if st.button('Get Reviews',
     #need to add a line so it only filters by the users company
     if role:
         filters['role'] = role
-    if rating_min > 0.0:
-        filters['rating'] = rating_min
+    if company > 0.0:
+        filters['company'] = company
     if date_from:
         filters['dateFrom'] = date_from.strftime('%Y-%m-%d')
     if date_to:
@@ -48,4 +48,3 @@ if st.button('Get Reviews',
     response = requests.get(url, params=filters)
     logger.info(response)
     st.dataframe(response)
-

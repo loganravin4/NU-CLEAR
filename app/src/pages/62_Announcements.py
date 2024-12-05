@@ -17,3 +17,5 @@ url = 'http://api:4000/announcements'
 response = requests.get(url)
 logger.info(response)
 st.dataframe(response)      
+
+

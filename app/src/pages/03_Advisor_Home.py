@@ -19,10 +19,10 @@ if st.button('Make an Announcement',
              use_container_width=True):
   st.switch_page('pages/61_Make_announcement.py')
 
-  if st.button('Delete and View Announcements', 
+if st.button('Delete and View Announcements', 
              type='primary',
              use_container_width=True):
-    st.switch_page('pages/62_Delete_and_View_Announcements.py')
+  st.switch_page('pages/62_Announcements.py')
 
 if st.button('Recommend Jobs to Students', 
              type='primary',

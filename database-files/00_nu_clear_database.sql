@@ -2,7 +2,7 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 
 DROP DATABASE IF EXISTS `nu-clear-database`;
-CREATE DATABASE IF NOT EXISTS `nu-clear-database`;
+CREATE DATABASE `nu-clear-database`;
 USE `nu-clear-database`;
 
 -- Create tables
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS UserType (
 );
 
 CREATE TABLE IF NOT EXISTS User (
-    userId INT PRIMARY KEY AUTO_INCREMENT,
+    userId INT PRIMARY KEY,
     userType VARCHAR(255) NOT NULL,
     FOREIGN KEY (userType) REFERENCES UserType (userType)
         ON UPDATE cascade ON DELETE restrict
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS Permission (
 
 CREATE TABLE IF NOT EXISTS UserPermission (
     userType VARCHAR(255),
-    permissionId INT AUTO_INCREMENT,
+    permissionId INT,
     PRIMARY KEY (userType, permissionId),
     FOREIGN KEY (userType) REFERENCES UserType (userType)
         ON UPDATE cascade ON DELETE restrict,
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS Company (
 );
 
 CREATE TABLE IF NOT EXISTS Coop (
-    jobId INT PRIMARY KEY AUTO_INCREMENT,
+    coopId INT PRIMARY KEY AUTO_INCREMENT,
     locationCity VARCHAR(255),
     locationState VARCHAR(255),
     locationCountry VARCHAR(255),
@@ -131,29 +131,29 @@ CREATE TABLE IF NOT EXISTS Coop (
 
 CREATE TABLE IF NOT EXISTS Favorite (
     userId INT,
-    jobId INT,
-    PRIMARY KEY (userId, jobId),
+    coopId INT,
+    PRIMARY KEY (userId, coopId),
     FOREIGN KEY (userId) REFERENCES User (userId)
         ON UPDATE cascade ON DELETE restrict,
-    FOREIGN KEY (jobId) REFERENCES Coop (jobId)
+    FOREIGN KEY (coopId) REFERENCES Coop (coopId)
         ON UPDATE cascade ON DELETE restrict
 );
 
 CREATE TABLE IF NOT EXISTS Review (
-    reviewId INT PRIMARY KEY AUTO_INCREMENT,
+    reviewId INT PRIMARY KEY,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    createdBy INT,
+    createdBy INT NOT NULL,
     role INT NOT NULL,
     salary DECIMAL(6,2),
     rating FLOAT NOT NULL,
-    summary VARCHAR(255),
-    bestPart VARCHAR(255),
-    worstPart VARCHAR(255),
-    isAnonymous BOOLEAN NOT NULL DEFAULT FALSE,
-    wouldRecommend BOOLEAN NOT NULL DEFAULT TRUE,
+    summary TEXT,
+    bestPart TEXT,
+    worstPart TEXT,
+    isAnonymous BOOLEAN NOT NULL DEFAULT false,
+    wouldRecommend BOOLEAN NOT NULL DEFAULT true,
     FOREIGN KEY (createdBy) REFERENCES Student (userId)
         ON UPDATE cascade ON DELETE restrict,
-    FOREIGN KEY (role) REFERENCES Coop (jobId)
+    FOREIGN KEY (role) REFERENCES Coop (coopId)
         ON UPDATE cascade ON DELETE restrict
 );
 

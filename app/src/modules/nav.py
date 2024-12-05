@@ -34,7 +34,7 @@ def MapDemoNav():
 #### ------------------------ Data Analyst Role ------------------------
 def DataAnalystHomeNav():
     st.sidebar.page_link(
-        "pages/01_DataAnalyst_Home.py", label="Data Analyst Home", icon="👤"
+        "pages/01_Data_Analyst_Home.py", label="Data Analyst Home", icon="👤"
     )
 
 

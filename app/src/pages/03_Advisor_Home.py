@@ -12,9 +12,8 @@ SideBarLinks()
 st.title(f"Welcome Advisor, {st.session_state['first_name']}.")
 st.write('')
 st.write('')
-st.write('### What would you like to do today?')
 
-if st.button('Predict Value Based on Regression Model', 
+if st.button('Make an announcement', 
              type='primary',
              use_container_width=True):
   st.switch_page('pages/11_Prediction.py')

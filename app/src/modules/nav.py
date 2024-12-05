@@ -7,87 +7,37 @@ import streamlit as st
 
 #### ------------------------ General ------------------------
 def HomeNav():
-    st.sidebar.page_link("Home.py", label="Home", icon="🏠")
+    st.sidebar.page_link("Home.py", label="Home")
 
 
 def AboutPageNav():
-    st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
+    st.sidebar.page_link("pages/30_About.py", label="About")
 
 
 #### ------------------------ Employer Role ------------------------
 def EmployerHomeNav():
-    st.sidebar.page_link(
-        "pages/00_Employer_Home.py", label="Employer Home", icon="👤"
-    )
-
-
-def WorldBankVizNav():
-    st.sidebar.page_link(
-        "pages/01_World_Bank_Viz.py", label="World Bank Visualization", icon="🏦"
-    )
-
-
-def MapDemoNav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
+    st.sidebar.page_link("pages/00_Employer_Home.py", label="Employer Home")
 
 
 #### ------------------------ Data Analyst Role ------------------------
 def DataAnalystHomeNav():
-    st.sidebar.page_link(
-        "pages/01_Data_Analyst_Home.py", label="Data Analyst Home", icon="👤"
-    )
-
-
-def WorldBankVizNav():
-    st.sidebar.page_link(
-        "pages/01_World_Bank_Viz.py", label="World Bank Visualization", icon="🏦"
-    )
-
-
-def MapDemoNav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
+    st.sidebar.page_link("pages/01_Data_Analyst_Home.py", label="Data Analyst Home")
 
 
 #### ------------------------ Student Role ------------------------
 def StudentHomeNav():
-    st.sidebar.page_link(
-        "pages/02_Student_Home.py", label="Student Home", icon="👤"
-    )
+    st.sidebar.page_link("pages/02_Student_Home.py", label="Student Home", icon="👤")
 
-
-def WorldBankVizNav():
-    st.sidebar.page_link(
-        "pages/01_World_Bank_Viz.py", label="World Bank Visualization", icon="🏦"
-    )
-
-
-def MapDemoNav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
 
 
 #### ------------------------ Advisor Role ------------------------
 def AdvisorHomeNav():
-    st.sidebar.page_link(
-        "pages/03_Advisor_Home.py", label="Advisor Home", icon="👤"
-    )
-
-
-def WorldBankVizNav():
-    st.sidebar.page_link(
-        "pages/01_World_Bank_Viz.py", label="World Bank Visualization", icon="🏦"
-    )
-
-
-def MapDemoNav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
+    st.sidebar.page_link("pages/03_Advisor_Home.py", label="Advisor Home")
 
 
 #### ------------------------ System Admin Role ------------------------
 def AdminPageNav():
-    st.sidebar.page_link("pages/04_Admin_Home.py", label="System Admin", icon="🖥️")
-    st.sidebar.page_link(
-        "pages/21_ML_Model_Mgmt.py", label="ML Model Management", icon="🏢"
-    )
+    st.sidebar.page_link("pages/04_Admin_Home.py", label="System Admin")
 
 
 # --------------------------------Links Function -----------------------------------------------

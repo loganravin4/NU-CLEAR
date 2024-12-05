@@ -56,13 +56,13 @@ def get_reviews():
 # ------------------------------------------------------------
 # Return all reviews submitted and the student information
 @reviews.route('/reviews/<user_id>', methods = ['GET'])
-def get_user_reviews():
+def get_user_reviews(user_id):
     query = f'''
         SELECT r.reviewId, r.role,r.salary, r.rating, 
                r.summary, s.userId, s.firstName, s.lastName, 
                s.major, s.coopLevel, s.year
         FROM Review r
-        JOIN Students s ON r.createdBy = s.userId 
+        JOIN Students s ON r.createdBy = s.'{user_id}'
     '''
 
     cursor = db.get_db().cursor()

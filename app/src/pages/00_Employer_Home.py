@@ -14,12 +14,18 @@ st.write('')
 st.write('')
 st.write('### What would you like to do today?')
 
-if st.button('View World Bank Data Visualization', 
+if st.button('My Company Reviews', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/01_World_Bank_Viz.py')
+  st.switch_page('pages/00_My_company.py')
 
-if st.button('View World Map Demo', 
+if st.button('Other Companies Reviews', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/02_Map_Demo.py')
+  st.switch_page('pages/00_Other_company_reviews.py')
+
+
+if st.button('Summary of Reviews', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/00_summary_reviews.py')

@@ -20,7 +20,7 @@ updated_by = st.text_input("Updated By (If Updated)")
 
  
 if st.button("Add Summary"):
-    if not all([company_id, average_rating, generated_summary, generated_by, summary_report_id]):
+    if not all([company_id, average_rating, generated_summary, generated_by]):
         st.error("All required fields must be filled!")
     else:
         data = {

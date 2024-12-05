@@ -15,7 +15,7 @@ st.title('My Companies Reviews')
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    company = st.number_input('CompanyId', min_value=0.0, max_value=100.0, step=1)
+    company = st.text_input('Filter by Company (CompanyId)', placeholder= 'e.g, 123')
     role = st.text_input('Filter by Role (Job ID)', placeholder='e.g., 45')
 
 with col2:

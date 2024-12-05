@@ -38,7 +38,7 @@ if st.button('Get Reviews',
     #need to add a line so it only filters by the users company
     if role:
         filters['role'] = role
-    if int(company) > 0.0:
+    if company:
         filters['company'] = company
     if date_from:
         filters['dateFrom'] = date_from.strftime('%Y-%m-%d')

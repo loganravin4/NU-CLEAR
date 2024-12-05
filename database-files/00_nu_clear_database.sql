@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS Module (
 CREATE TABLE IF NOT EXISTS Permission (
     permissionId INT PRIMARY KEY AUTO_INCREMENT,
     createdBy INT NOT NULL,
+    userType VARCHAR(255) NOT NULL,
     canEditPerms BOOLEAN DEFAULT false,
     canEditModule BOOLEAN DEFAULT false,
     canEditAccSettings BOOLEAN DEFAULT false,
@@ -54,16 +55,8 @@ CREATE TABLE IF NOT EXISTS Permission (
     canDeleteCoopListing BOOLEAN DEFAULT false,
     canDeleteModule BOOLEAN DEFAULT false,
     FOREIGN KEY (createdBy) REFERENCES SystemAdmin (userId)
-        ON UPDATE cascade ON DELETE restrict
-);
-
-CREATE TABLE IF NOT EXISTS UserPermission (
-    userType VARCHAR(255),
-    permissionId INT,
-    PRIMARY KEY (userType, permissionId),
-    FOREIGN KEY (userType) REFERENCES UserType (userType)
         ON UPDATE cascade ON DELETE restrict,
-    FOREIGN KEY (permissionId) REFERENCES Permission (permissionId)
+    FOREIGN KEY (userType) REFERENCES UserType (userType)
         ON UPDATE cascade ON DELETE restrict
 );
 
@@ -133,7 +126,7 @@ CREATE TABLE IF NOT EXISTS Favorite (
     userId INT,
     coopId INT,
     PRIMARY KEY (userId, coopId),
-    FOREIGN KEY (userId) REFERENCES User (userId)
+    FOREIGN KEY (userId) REFERENCES Student (userId)
         ON UPDATE cascade ON DELETE restrict,
     FOREIGN KEY (coopId) REFERENCES Coop (coopId)
         ON UPDATE cascade ON DELETE restrict
@@ -197,7 +190,7 @@ CREATE TABLE IF NOT EXISTS Visualization (
 CREATE TABLE IF NOT EXISTS SummaryReport (
     summaryReportId INT PRIMARY KEY AUTO_INCREMENT,
     averageRating FLOAT NOT NULL,
-    generatedSummary VARCHAR(255) NOT NULL,
+    generatedSummary TEXT NOT NULL,
     company INT NOT NULL,
     generatedBy INT NOT NULL,
     updatedBy INT,

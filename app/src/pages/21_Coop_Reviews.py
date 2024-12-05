@@ -39,7 +39,7 @@ logger.info(f'date_to = {date_to}')
 if st.button('Get Reviews', 
              type='primary', 
              use_container_width=True):
-    url = 'http://api:4000/reviews'
+    url = 'http://api:4000/rev/reviews'
     filters = {}
     if created_by:
         filters['createdBy'] = created_by

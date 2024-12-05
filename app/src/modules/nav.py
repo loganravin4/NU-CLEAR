@@ -61,25 +61,28 @@ def SideBarLinks(show_home=False):
     # Show the other page navigators depending on the users' role.
     if st.session_state["authenticated"]:
 
-        # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
+        # Employer Role Pages
         if st.session_state["role"] == "employer":
             EmployerHomeNav()
 
-        # If the user role is usaid worker, show the Api Testing page
+        # Student Role Pages
         if st.session_state["role"] == "student":
             StudentHomeNav()
         
+        # Data Analyst Role Pages
         if st.session_state["role"] == "data_analyst":
             DataAnalystHomeNav()
         
+        # Advisor Role Pages
         if st.session_state["role"] == "advisor":
             AdvisorHomeNav()
         
-        # If the user is an administrator, give them access to the administrator pages
+        # Admin Role Pages
         if st.session_state["role"] == "administrator":
             AdminPageNav()
 
-    # Always show the About page at the bottom of the list of links
+    # Always show
+    HomeNav()
     AboutPageNav()
 
     if st.session_state["authenticated"]:

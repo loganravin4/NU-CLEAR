@@ -16,12 +16,12 @@ st.write('')
 if st.button('Make an announcement', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/11_Prediction.py')
+  st.switch_page('pages/61_Make_announcement.py')
 
-if st.button('View the Simple API Demo', 
+if st.button('Recommend Jobs to Students', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/12_API_Test.py')
+  st.switch_page('pages/62_Recs_students.py')
 
 if st.button("View Classification Demo",
              type='primary',

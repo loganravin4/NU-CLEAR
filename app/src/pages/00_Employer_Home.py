@@ -24,7 +24,6 @@ if st.button('Other Companies Reviews',
              use_container_width=True):
   st.switch_page('pages/52_Other_company.py')
 
-
 if st.button('Summary of Reviews', 
              type='primary',
              use_container_width=True):

@@ -17,7 +17,6 @@ with col1:
     avg_rating = st.checkbox('Show Average Ratings by Year')
     count = st.checkbox('Count of bad reviews and good reviews')
     
-    
 with col2:
     top_benefit = st.checkbox('Show Top Benefit')
 
@@ -50,9 +49,3 @@ if st.button('Get Summary',
     response = requests.get(url, params=filters)
     logger.info(response)
     st.dataframe(response)
-
-
-    response = requests.get(url, params=filters)
-    logger.info(response)
-    st.dataframe(response)
-

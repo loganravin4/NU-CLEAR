@@ -26,7 +26,7 @@ def DataAnalystHomeNav():
 
 #### ------------------------ Student Role ------------------------
 def StudentHomeNav():
-    st.sidebar.page_link("pages/02_Student_Home.py", label="Student Home", icon="👤")
+    st.sidebar.page_link("pages/02_Student_Home.py", label="Student Home")
 
 
 
@@ -47,16 +47,15 @@ def SideBarLinks(show_home=False):
     """
 
     # add a logo to the sidebar always
-    st.sidebar.image("assets/logo.png", width=150)
+    st.sidebar.image("assets/logo.png", width=200)
 
     # If there is no logged in user, redirect to the Home (Landing) page
     if "authenticated" not in st.session_state:
         st.session_state.authenticated = False
         st.switch_page("Home.py")
 
-    if show_home:
-        # Show the Home page link (the landing page)
-        HomeNav()
+    # Always show
+    HomeNav()
 
     # Show the other page navigators depending on the users' role.
     if st.session_state["authenticated"]:
@@ -81,8 +80,8 @@ def SideBarLinks(show_home=False):
         if st.session_state["role"] == "administrator":
             AdminPageNav()
 
+
     # Always show
-    HomeNav()
     AboutPageNav()
 
     if st.session_state["authenticated"]:

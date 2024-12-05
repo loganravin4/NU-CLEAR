@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS Module (
 
 CREATE TABLE IF NOT EXISTS Permission (
     permissionId INT PRIMARY KEY AUTO_INCREMENT,
-    editedBy INT NOT NULL,
+    createdBy INT NOT NULL,
     canEditPerms BOOLEAN DEFAULT false,
     canEditModule BOOLEAN DEFAULT false,
     canEditAccSettings BOOLEAN DEFAULT false,
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS Permission (
     canDeleteReview BOOLEAN DEFAULT false,
     canDeleteCoopListing BOOLEAN DEFAULT false,
     canDeleteModule BOOLEAN DEFAULT false,
-    FOREIGN KEY (editedBy) REFERENCES SystemAdmin (userId)
+    FOREIGN KEY (createdBy) REFERENCES SystemAdmin (userId)
         ON UPDATE cascade ON DELETE restrict
 );
 

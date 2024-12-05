@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS Permission (
 
 CREATE TABLE IF NOT EXISTS UserPermission (
     userType VARCHAR(255),
-    permissionId INT,
+    permissionId INT AUTO_INCREMENT,
     PRIMARY KEY (userType, permissionId),
     FOREIGN KEY (userType) REFERENCES UserType (userType)
         ON UPDATE cascade ON DELETE restrict,

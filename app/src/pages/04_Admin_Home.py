@@ -17,14 +17,17 @@ st.write('### What would you like to do today?')
 if st.button('Manage User Database', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/11_Prediction.py')
+  st.switch_page('pages/04_User_Management.py')
 
 if st.button('Manage Modules', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/12_API_Test.py')
+  st.switch_page('pages/04_Module_Management.py')
 
-if st.button("View Classification Demo",
-             type='primary',
-             use_container_width=True):
-  st.switch_page('pages/13_Classification.py')
+## this last button can go to co op listing page
+
+
+# if st.button("View Classification Demo",
+#              type='primary',
+#              use_container_width=True):
+#   st.switch_page('pages/13_Classification.py')

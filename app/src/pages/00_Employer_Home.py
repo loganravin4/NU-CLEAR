@@ -22,7 +22,7 @@ if st.button('My Company Reviews',
 if st.button('Other Companies Reviews', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/00_Other_company_reviews.py')
+  st.switch_page('app/src/pages/00_Other_company_reviews.py')
 
 
 if st.button('Summary of Reviews', 

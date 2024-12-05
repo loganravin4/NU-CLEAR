@@ -56,13 +56,13 @@ def get_reviews():
 # ------------------------------------------------------------
 # Return all reviews submitted and the student information
 @reviews.route('/reviews/<user_id>', methods = ['GET'])
-def get_user_reviews():
+def get_user_reviews(user_id):
     query = f'''
         SELECT r.reviewId, r.role,r.salary, r.rating, 
                r.summary, s.userId, s.firstName, s.lastName, 
                s.major, s.coopLevel, s.year
         FROM Review r
-        JOIN Students s ON r.createdBy = s.userId 
+        JOIN Students s ON r.createdBy = s.'{user_id}'
     '''
 
     cursor = db.get_db().cursor()
@@ -232,7 +232,7 @@ def make_summary_report(company_id):
     cursor.execute(query)
     db.get_db().commit()
 
-    response = make_response("Job added to favorites")
+    response = make_response("Summary Report Created")
     response.status_code = 200
     return response
  
@@ -253,7 +253,7 @@ def add_visualization(company_id):
     cursor.execute(query)
     db.get_db().commit()
 
-    response = make_response("Job added to favorites")
+    response = make_response("Visualization Created")
     response.status_code = 200
     return response
 

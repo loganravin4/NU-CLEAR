@@ -232,7 +232,7 @@ def make_summary_report(company_id):
     cursor.execute(query)
     db.get_db().commit()
 
-    response = make_response("Job added to favorites")
+    response = make_response("Summary Report Created")
     response.status_code = 200
     return response
  
@@ -253,7 +253,7 @@ def add_visualization(company_id):
     cursor.execute(query)
     db.get_db().commit()
 
-    response = make_response("Job added to favorites")
+    response = make_response("Visualization Created")
     response.status_code = 200
     return response
 

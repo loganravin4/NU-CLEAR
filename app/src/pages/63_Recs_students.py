@@ -29,6 +29,6 @@ if st.button('Post Summary',
             "job_id": job_id,
         }
 
-    response = requests.get(url, params=filters)
+    response = requests.post(url, params=filters)
     logger.info(response)
     st.dataframe(response)

@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS UserType (
 );
 
 CREATE TABLE IF NOT EXISTS User (
-    userId INT PRIMARY KEY,
+    userId INT PRIMARY KEY AUTO_INCREMENT,
     userType VARCHAR(255) NOT NULL,
     FOREIGN KEY (userType) REFERENCES UserType (userType)
         ON UPDATE cascade ON DELETE restrict
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS Student (
 );
 
 CREATE TABLE IF NOT EXISTS Company (
-    companyId INT PRIMARY KEY,
+    companyId INT PRIMARY KEY AUTO_INCREMENT,
     companyName VARCHAR(255) NOT NULL,
     size INT
 );

@@ -5,7 +5,6 @@ USE `nu-clear-database`;
 
 
  
-DROP TABLE IF EXISTS UserType;
 INSERT INTO UserType (userType) VALUES
     ('SystemAdmin'),
     ('Advisor'),
@@ -15,7 +14,6 @@ INSERT INTO UserType (userType) VALUES
 
 
 
-DROP TABLE IF EXISTS User;   
 INSERT INTO User(userId, userType) VALUES (1, 'SystemAdmin');
 INSERT INTO User(userId, userType) VALUES (2, 'SystemAdmin');
 INSERT INTO User(userId, userType) VALUES (3, 'SystemAdmin');
@@ -218,7 +216,7 @@ INSERT INTO User(userId, userType) VALUES (199, 'Employer');
 INSERT INTO User(userId, userType) VALUES (200, 'Employer');
    
 
-DROP TABLE IF EXISTS Review; 
+
 INSERT INTO Review(createdAt,createdBy,role,salary,rating,summary,bestPart,worstPart) VALUES ('2024-10-06 07:46:52',6,74,624.05,3,'Me de virtute misisti. Sed ex eo est consecutus? -- Laudem et caritatem, quae sunt vitae sine metu.','Esse numquam potest. Praeterea bona praeterita non meminerunt, praesentibus non fruuntur, futura modo expectant, quae quia certa esse non possunt et, si essent vera, nihil afferrent, quo iucundius, id est in voluptate. Neque enim disputari sine reprehensione nec cum iracundia aut pertinacia recte disputari potest. Sed ad rem redeamus; de hominibus dici non necesse est. Tribus.','Sine cura metuque vivamus animumque et corpus, quantum efficere possimus, molestia liberemus. Ut enim aeque doleamus animo, cum corpore dolemus, fieri tamen permagna accessio potest, si aliquod aeternum et infinitum impendere malum nobis opinemur. Quod idem licet transferre in voluptatem, ut postea variari voluptas distinguique possit, augeri amplificarique non possit. At etiam Athenis, ut e patre.');
 INSERT INTO Review(createdAt,createdBy,role,salary,rating,summary,bestPart,worstPart) VALUES ('2024-10-11 12:12:03',6,98,418.37,1,'Praesenti nec expectata voluptate, quid eo miserius dici aut fingi potest? Quodsi vita doloribus referta.','Disciplinam probant, non soleat accuratius explicari; verum.','Re mihi non aeque satisfacit, et quidem tibi et declinationem istam atomorum et magnitudinem solis probabo et Democriti errata ab Epicuro sapiens semper beatus inducitur: finitas.');
 INSERT INTO Review(createdAt,createdBy,role,salary,rating,summary,bestPart,worstPart) VALUES ('2024-09-23 03:45:51',1,21,577.66,5,'Inmortalibus supplicii causa importari putant. Quae autem inanes.','Vos arbitrer, sed ut ratione et via procedat oratio. Quaerimus.','Ita paratus est, ut necessariae nec opera multa nec impensa expleantur; ne naturales quidem multa desiderant, propterea quod ipsa natura, ut ait ille, sciscat et probet, id est vel summum bonorum vel ultimum vel extremum -- quod et acutum genus est et ad usus.');
@@ -322,7 +320,7 @@ INSERT INTO Review(createdAt,createdBy,role,salary,rating,summary,bestPart,worst
 
 
 
-DROP TABLE IF EXISTS Coop;
+
 INSERT INTO Coop(locationCity,locationState,locationCountry,title,description,company) VALUES ('Shawnee Mission','Kansas','United States','Content Writer','Qui nec facile efficere possit, quod conetur, nec optinere, si effecerit, et opes vel fortunae vel ingenii liberalitati magis conveniunt, qua qui utuntur, benivolentiam sibi conciliant et, quod aptissimum est ad cognitionem omnium.',1);
 INSERT INTO Coop(locationCity,locationState,locationCountry,title,description,company) VALUES ('Boynton Beach','Florida','United States','Marketing Manager','Tum dicere exorsus est. Primum igitur, inquit, sic agam, ut ipsi auctori huius disciplinae placet: constituam, quid et quale sit id, de quo quaerimus.',2);
 INSERT INTO Coop(locationCity,locationState,locationCountry,title,description,company) VALUES ('Anderson','South Carolina','United States','Business Analyst','Utens nihil quieti videre, nihil tranquilli potest. Quodsi vitam omnem continent, neglegentur? Nam, ut sint illa vendibiliora, haec uberiora certe sunt. Quamquam id quidem facio provocatus gratissimo mihi libro, quem.',3);
@@ -425,7 +423,7 @@ INSERT INTO Coop(locationCity,locationState,locationCountry,title,description,co
 INSERT INTO Coop(locationCity,locationState,locationCountry,title,description,company) VALUES ('Milwaukee','Wisconsin','United States','Graphic Designer','Cur tam multi sint Epicurei, sunt aliae quoque causae, sed multitudinem haec maxime allicit, quod ita putant dici ab illo, recta et honesta quae sint, ea facere ipsa per se laetitiam, id est voluptatem. Homines optimi non intellegunt totam rationem everti, si.',100);
   
 
-DROP TABLE IF EXISTS SummaryReport;
+
 INSERT INTO SummaryReport(averageRating,generatedSummary,company,generatedBy,updatedBy) VALUES (2,'Reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. Hanc ego cum teneam sententiam, quid est cur verear, ne ad eam non possim accommodare Torquatos nostros? Quos tu paulo ante cum memoriter, tum etiam erga nos amice et benivole collegisti, nec me tamen laudandis maioribus meis corrupisti nec segniorem ad respondendum.',20,30,30);
 INSERT INTO SummaryReport(averageRating,generatedSummary,company,generatedBy,updatedBy) VALUES (5,'Impedit, quo minus id, quod his libris quaeritur, qui sit finis, quid extremum, quid ultimum, quo sint omnia bene vivendi recteque faciendi consilia referenda.',97,29,29);
 INSERT INTO SummaryReport(averageRating,generatedSummary,company,generatedBy,updatedBy) VALUES (1.5,'Non eram nescius, Brute, cum, quae summis ingeniis.',21,32,32);
@@ -528,7 +526,7 @@ INSERT INTO SummaryReport(averageRating,generatedSummary,company,generatedBy,upd
 INSERT INTO SummaryReport(averageRating,generatedSummary,company,generatedBy,updatedBy) VALUES (1,'Nihil sane praeter sedulitatem probarent, omnes mihi Epicuri sententiae satis notae sunt. Atque eos, quos nominavi, cum inciderit, ut id meo arbitratu facerem, ante hoc tempus numquam est censes aut in liberos atque in sanguinem suum.',86,14,14);
 
 
-DROP TABLE IF EXISTS Announcement;
+
 INSERT INTO Announcement(announcementId,createdBy,announcementText) VALUES (1,104,'Reque ex utraque parte audita pronuntiaret eum non talem videri fuisse in imperio, quales eius maiores fuissent, et in conspectum suum venire vetuit, numquid tibi videtur de voluptatibus suis cogitavisse? Sed ut omittam pericula, labores, dolorem etiam, quem optimus quisque pro patria et pro suis suscipit, ut non dicas, quid non probes. Principio, inquam, in physicis.');
 INSERT INTO Announcement(announcementId,createdBy,announcementText) VALUES (2,98,'Quae dixi, sole ipso illustriora et clariora sunt.');
 INSERT INTO Announcement(announcementId,createdBy,announcementText) VALUES (3,118,'Nobis sic intelleges eitam, ut ab ea nullo modo poterimus sensuum iudicia defendere. Quicquid porro animo cernimus, id omne oritur a sensibus; qui si omnes atomi declinabunt, nullae umquam cohaerescent, sive aliae declinabunt, aliae suo nutu recte ferentur, primum erit hoc quasi, provincias atomis dare, quae recte, quae oblique ferantur, deinde eadem illa individua et solida.');
@@ -571,7 +569,7 @@ INSERT INTO Announcement(announcementId,createdBy,announcementText) VALUES (39,8
 INSERT INTO Announcement(announcementId,createdBy,announcementText) VALUES (40,86,'Posset. Conclusum est enim aut utilior aut ad naturam aut contra sit, a natura proficiscuntur, facile explentur sine ulla iniuria, quae autem inanes sunt, iis parendum non est. Nihil enim.');
 
 
-DROP TABLE IF EXISTS Employer;
+
 INSERT INTO Employer(userId,firstName,lastName,email,role,department,company) VALUES (161,'Killian','Florez','killian.florez@yahoo.com','Sales Representative','Legal',55);
 INSERT INTO Employer(userId,firstName,lastName,email,role,department,company) VALUES (162,'Thomasine','Derisley','thomasine.derisley@yahoo.ca','Marketing Specialist','Administration',90);
 INSERT INTO Employer(userId,firstName,lastName,email,role,department,company) VALUES (163,'Craggy','Waller-Bridge','craggy.wallerbridge@shaw.ca','Data Analyst','Logistics',60);
@@ -613,7 +611,7 @@ INSERT INTO Employer(userId,firstName,lastName,email,role,department,company) VA
 INSERT INTO Employer(userId,firstName,lastName,email,role,department,company) VALUES (199,'Annette','Mahoney','annette.mahoney@gmail.com','Project Coordinator','Legal',46);
 INSERT INTO Employer(userId,firstName,lastName,email,role,department,company) VALUES (200,'Bobbette','Warde','bobbette.warde@hotmail.com','Sales Representative','Logistics',49);
 
-DROP TABLE IF EXISTS Advisor;
+
 INSERT INTO Advisor(userId,nuId,firstName,lastName,email,department) VALUES (81,83128,'Kellsie','Pudden','kellsie.pudden@msn.com','Khoury');
 INSERT INTO Advisor(userId,nuId,firstName,lastName,email,department) VALUES (82,94067,'Nathan','Lamminam','nathan.lamminam@wanadoo.fr','CAMD');
 INSERT INTO Advisor(userId,nuId,firstName,lastName,email,department) VALUES (83,66472,'Merilee','Ritelli','merilee.ritelli@live.com','DMSB');
@@ -657,7 +655,7 @@ INSERT INTO Advisor(userId,nuId,firstName,lastName,email,department) VALUES (120
 
 
 
-DROP TABLE IF EXISTS Student;
+
 INSERT INTO Student(userId,nuId,firstName,lastName,major,coopLevel,year,advisor) VALUES (41,80613,'Erhard','Busson','Biology',2,2,83);
 INSERT INTO Student(userId,nuId,firstName,lastName,major,coopLevel,year,advisor) VALUES (42,46318,'Garrik','Novis','Environmental Science',1,2,98);
 INSERT INTO Student(userId,nuId,firstName,lastName,major,coopLevel,year,advisor) VALUES (43,63814,'Gusti','Kilian','Computer Engineering',1,2,105);
@@ -701,7 +699,7 @@ INSERT INTO Student(userId,nuId,firstName,lastName,major,coopLevel,year,advisor)
 
 
 
-DROP TABLE IF EXISTS SystemAdmin;
+
 INSERT INTO SystemAdmin(userId,firstName,lastName,email) VALUES (1,'Warde','Christophe','warde.christophe@yahoo.com');
 INSERT INTO SystemAdmin(userId,firstName,lastName,email) VALUES (2,'Marin','Redwood','marin.redwood@yahoo.fr');
 INSERT INTO SystemAdmin(userId,firstName,lastName,email) VALUES (3,'Morena','Scrauniage','morena.scrauniage@yahoo.com');
@@ -744,7 +742,7 @@ INSERT INTO SystemAdmin(userId,firstName,lastName,email) VALUES (39,'Brunhilda',
 INSERT INTO SystemAdmin(userId,firstName,lastName,email) VALUES (40,'Heall','Findlater','heall.findlater@gmail.com');
 
 
-DROP TABLE IF EXISTS Visualization;
+
 INSERT INTO Visualization(vizType,filters,company,createdBy,updatedBy) VALUES ('line','Confirmat',34,131,131);
 INSERT INTO Visualization(vizType,filters,company,createdBy,updatedBy) VALUES ('table','Illa qua',19,149,149);
 INSERT INTO Visualization(vizType,filters,company,createdBy,updatedBy) VALUES ('line','Haec uberiora certe',32,145,145);
@@ -787,8 +785,6 @@ INSERT INTO Visualization(vizType,filters,company,createdBy,updatedBy) VALUES ('
 INSERT INTO Visualization(vizType,filters,company,createdBy,updatedBy) VALUES ('area','** attulit rem commenticiam',2,155,155);
 
 
-
-DROP TABLE IF EXISTS Module;
 INSERT INTO Module(moduleName,moduleStatus,createdBy,updatedBy) VALUES ('User Authentication','Inactive',35,35);
 INSERT INTO Module(moduleName,moduleStatus,createdBy,updatedBy) VALUES ('Order Processing','Completed',19,19);
 INSERT INTO Module(moduleName,moduleStatus,createdBy,updatedBy) VALUES ('User Authentication','Inactive',8,8);
@@ -831,7 +827,6 @@ INSERT INTO Module(moduleName,moduleStatus,createdBy,updatedBy) VALUES ('API Man
 INSERT INTO Module(moduleName,moduleStatus,createdBy,updatedBy) VALUES ('User Management','Completed',27,27);
  
 
-DROP TABLE IF EXISTS Company;
 INSERT INTO Company(companyName,size) VALUES ('Ultralife Corporation',6215);
 INSERT INTO Company(companyName,size) VALUES ('Nuveen Virginia Quality Municipal Income Fund',7281);
 INSERT INTO Company(companyName,size) VALUES ('Amplify Snack Brands, inc.',3300);
@@ -874,7 +869,7 @@ INSERT INTO Company(companyName,size) VALUES ('Onvia, Inc.',3048);
 INSERT INTO Company(companyName,size) VALUES ('Goldman Sachs MLP Energy Renaissance Fund',7423);
 
 
-DROP TABLE IF EXISTS UserModule;
+
 INSERT INTO UserModule(userType,moduleId) VALUES ('Student',34);
 INSERT INTO UserModule(userType,moduleId) VALUES ('Employer',21);
 INSERT INTO UserModule(userType,moduleId) VALUES ('DataAnalyst',1);
@@ -977,7 +972,7 @@ INSERT INTO UserModule(userType,moduleId) VALUES ('Employer',38);
 INSERT INTO UserModule(userType,moduleId) VALUES ('Student',7);
 
 
-DROP TABLE IF EXISTS DataAnalyst;
+
 INSERT INTO DataAnalyst(userId,firstName,lastName) VALUES (121,'Ailis','Huggins');
 INSERT INTO DataAnalyst(userId,firstName,lastName) VALUES (122,'Cristie','Kittle');
 INSERT INTO DataAnalyst(userId,firstName,lastName) VALUES (123,'Barbara','Broderick');
@@ -1021,7 +1016,7 @@ INSERT INTO DataAnalyst(userId,firstName,lastName) VALUES (160,'Giacopo','Girhar
  
 
 
-DROP TABLE IF EXISTS Favorite;
+
 INSERT INTO Favorite(userId,coopId) VALUES (66,3);
 INSERT INTO Favorite(userId,coopId) VALUES (53,29);
 INSERT INTO Favorite(userId,coopId) VALUES (67,36);

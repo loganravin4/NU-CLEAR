@@ -32,4 +32,4 @@ if st.button('Recommend Co-ops to Students',
 if st.button('Announcements', 
              type='primary', 
              use_container_width=True):
-  st.switch_page('pages/03_Announcements.py')
+  st.switch_page('pages/03_Make_and_Delete_Announcements.py')

@@ -50,7 +50,6 @@ if st.button('Filter Reviews'):
                 st.write(f"Salary: {review['salary']}")
                 st.write(f"Rating: {review['rating']}")
                 st.write(f"Summary: {review['summary']}")
-                st.write(f"Student: {review['firstName']} {review['lastName']}")
                 st.write(f"Major: {review['major']}")
                 st.write(f"Year: {review['year']}")
                 st.write("----")

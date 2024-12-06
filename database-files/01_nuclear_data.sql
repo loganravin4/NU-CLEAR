@@ -613,7 +613,7 @@ INSERT INTO Employer(userId,firstName,lastName,email,role,department,company) VA
 INSERT INTO Employer(userId,firstName,lastName,email,role,department,company) VALUES (199,'Annette','Mahoney','annette.mahoney@gmail.com','Project Coordinator','Legal',46);
 INSERT INTO Employer(userId,firstName,lastName,email,role,department,company) VALUES (200,'Bobbette','Warde','bobbette.warde@hotmail.com','Sales Representative','Logistics',49);
 
-DROP TABLE IF EXISTS UserType;
+DROP TABLE IF EXISTS Advisor;
 INSERT INTO Advisor(userId,nuId,firstName,lastName,email,department) VALUES (81,83128,'Kellsie','Pudden','kellsie.pudden@msn.com','Khoury');
 INSERT INTO Advisor(userId,nuId,firstName,lastName,email,department) VALUES (82,94067,'Nathan','Lamminam','nathan.lamminam@wanadoo.fr','CAMD');
 INSERT INTO Advisor(userId,nuId,firstName,lastName,email,department) VALUES (83,66472,'Merilee','Ritelli','merilee.ritelli@live.com','DMSB');

@@ -3,8 +3,8 @@ from flask import Flask
 from backend.db_connection import db
 from backend.admins.admins_routes import admin
 from backend.advisors.advisors_routes import advisor
-from backend.reviews.reviews_routes import reviews
-from api.backend.roles.coops_routes import role
+from backend.reviews.reviews_routes import review
+from backend.coops.coops_routes import coop
 
 import os
 from dotenv import load_dotenv
@@ -43,8 +43,8 @@ def create_app():
     app.logger.info('current_app(): registering blueprints with Flask app object.')  
     app.register_blueprint(admin,   url_prefix='/adm')
     app.register_blueprint(advisor,   url_prefix='/advi')
-    app.register_blueprint(role,   url_prefix='/role')
-    app.register_blueprint(reviews,   url_prefix='/rev')
+    app.register_blueprint(coop,   url_prefix='/coop')
+    app.register_blueprint(review,   url_prefix='/rev')
 
     # Don't forget to return the app object
     return app

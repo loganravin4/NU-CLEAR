@@ -26,7 +26,17 @@ if st.button("Search",type='primary',
 
         url = f'http://api:4000/advi/student_dashboard/{user_id}'
 
-        response = requests.get(url, params=filters).json()
+            
+        response = requests.get(url, params=filters)
         logger.info(response)
-        st.dataframe(response)  
-         
+
+        if response.status_code == 200:  
+            data = response.json()
+            logger.info(data)
+
+            if data:  
+                st.dataframe(data)
+            else:
+                st.write("No students found")
+  
+           

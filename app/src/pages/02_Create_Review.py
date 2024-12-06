@@ -16,8 +16,8 @@ with st.form("add_review_form"):
     with col1:
         user_id = st.text_input("User ID", placeholder="e.g., 123", key="user_id")
         role = st.text_input("Role", placeholder="e.g., Software Engineer Intern", key="role")
-        salary = st.number_input("Salary", min_value=0.0, step=500.0, key="salary")
-        rating = st.slider("Rating", min_value=0.0, max_value=5.0, step=0.5, key="rating")
+        salary = st.number_input("Salary", min_value=0.0, step=1.0, key="salary")
+        rating = st.slider("Rating", min_value=0.0, max_value=5.0, step=0.1, key="rating")
     with col2:
         summary = st.text_area("Summary", placeholder="A short summary of your experience", key="summary")
         best_part = st.text_area("Best Part", placeholder="What was the best part of this co-op?", key="best_part")

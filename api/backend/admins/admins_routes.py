@@ -63,7 +63,7 @@ def get_user_perms():
 #------------------------------------------------------------
 # Add a new user 
 @admin.route('/user_permissions', methods=['POST'])
-def add_user_perms (userId):
+def add_user_perms():
     the_data = request.json
     query = f'''
     INSERT INTO User (userType)
@@ -116,7 +116,7 @@ def update_user_perms ():
 #------------------------------------------------------------
 # Delete a user or permissions 
 @admin.route('/user_permissions', methods=['DELETE'])
-def delete_user_perms(user_id):
+def delete_user_perms():
     the_data = request.json
     query = f'''DELETE FROM User
                 WHERE userId = {the_data['userId']}; 

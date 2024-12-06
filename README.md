@@ -30,9 +30,6 @@ CLEAR collects, analyzes, and presents detailed co-op feedback, allowing student
 
 ## **Features**
 
-- Highlight key features and functionality of your project.  
-E.g., *"User authentication, task prioritization, email reminders, etc."*
-
 In NU-CLEAR, you can act as one of 5 personas or users who may want to use this application. 
 
 ### Employer
@@ -44,7 +41,11 @@ As a data analyst, you can retrieve review data to generate reports and visualiz
 ### Student
 As a student, you can do a variety of things, such as viewing all co-op listings. You can also view co-op reviews to aid you in your co-op search and filter by the role, minimum rating, minimum salary, start and end date, and whether the reviewer is anonymous and/or if they would recommend the role. You can also create your own co-op review and choose whether or not to post anonymously. You can go back and see the reviews you've posted in the past as well.
 
+### Advisor
+As an advisor, you can make, delete, and view announcements to quickly convey information to all students using the site to help them with their job search. Additionally, you can recommend jobs to students and view all reviews that have been posted to better advise students on what to look for in co-ops.
 
+### System Administrator
+As a system administrator, you can manage all the users of the site and their permissions. You can also assign modules and manage the co-op listings that have been posted on the site to ensure functional system performance.
 
 ---
 

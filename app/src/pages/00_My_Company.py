@@ -30,6 +30,10 @@ logger.info(f'company_name = {company_name}')
 if st.button('Get Reviews', 
              type='primary', 
              use_container_width=True):
+    if not company_id:
+        st.error("Company ID is required.")
+    if not company_name:
+        st.error("Company Name is required.")
     url = f'http://api:4000/rev/reviews/{company_name}/{company_id}'
     filters = {}
     #need to add a line so it only filters by the users company

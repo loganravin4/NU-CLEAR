@@ -11,42 +11,14 @@ SideBarLinks()
 
 st.title('Summary of My Company\'s Reviews')
 
-col1, col2, col3 = st.columns(3)
+company_id = st.text_input("Company ID", placeholder="e.g., 123", key="company_id")
 
-with col1:
-    avg_rating = st.checkbox('Show Average Ratings by Year')
-    count = st.checkbox('Count of Bad and Good Reviews')
-    
-with col2:
-    top_benefit = st.checkbox('Show Top Benefit')
-    company_id = st.text_input("Company ID", placeholder="e.g., 123", key="company_id")
-
-with col3:
-    top_problem = st.checkbox('Show Top Problem')
-
-logger.info(f'avg_rating = {avg_rating}')
-logger.info(f'top_problem = {top_problem}')
-logger.info(f'top_benefit = {top_benefit}')
 
 if st.button('Get Summary', 
              type='primary', 
              use_container_width=True):
-    url = 'http://api:4000/rev/analysis/summary_report/{company_id}'
-    filters = {}
-    
-    #need to add a line so it only filters by the users company
-    #figure out what to do to connect the to backend so that it actually does summaries 
-  
-    #need to add a line so it only filters by the users company
-    if avg_rating:
-        filters['avg_rating'] = True
-    if count:
-        filters['count'] = True
-    if top_benefit:
-        filters['top_benefit'] = True
-    if top_problem:
-        filters['top_problem'] = True
+    url = f'http://api:4000/rev/analysis/summary_report/{company_id}'
 
-    response = requests.get(url, params=filters)
+    response = requests.get(url).json()
     logger.info(response)
     st.dataframe(response)

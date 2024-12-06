@@ -61,9 +61,9 @@ def AdvisorHomeNav():
 
     st.sidebar.page_link("pages/03_Student_Recs.py", label="Recommend Co-ops")
 
-    st.sidebar.page_link("pages/03_Make_and_Delete_Announcements.py", label="Announcements")
+    st.sidebar.page_link("pages/03_View_Announcements.py", label="View Announcements")
 
-    st.sidebar.page_link("pages/03_Make_and_Delete_Announcements.py", label="Announcements")
+    st.sidebar.page_link("pages/03_Make_and_Delete_Announcements.py", label="Make An Announcement")
  
 #### ------------------------ System Admin Role ------------------------
 def AdminPageNav():

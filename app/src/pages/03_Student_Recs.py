@@ -25,8 +25,8 @@ if st.button('Post Recommendation',
         st.error("All required fields must be filled!")
     else:
         filters = {
-            "comapany_id": user_id,
-            "job_id": job_id,
+            "userId": user_id,
+            "coopId": job_id,
         }
 
     response = requests.post(url, json=filters)

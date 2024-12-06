@@ -72,7 +72,7 @@ with st.popover("Update a permission", help=None, icon=None, disabled=False, use
             "canEditPerms": canEditPerms,
             "canEditModule": canEditModule,
             "canEditAccSettings": canEditAccSettings,
-            "canCreateReivew": canCreateReview,
+            "canCreateReview": canCreateReview,
             "canCreateCoopListing": canCreateCoopListing,
             "canCreateModule": canCreateModule,
             "canViewReview": canViewReview,

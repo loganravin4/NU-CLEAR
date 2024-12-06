@@ -141,7 +141,7 @@ def add_favorite(user_id):
     the_data = request.json
     query = f'''
         INSERT INTO Favorite (userId, coopId)
-        VALUES ({user_id}, {the_data["coop_id"]})
+        VALUES ({user_id}, {the_data["coopId"]})
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)

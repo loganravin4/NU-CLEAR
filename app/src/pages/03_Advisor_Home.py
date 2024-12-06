@@ -22,7 +22,7 @@ if st.button('See My Students',
 if st.button("View All Reviews",
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/02_Coop_Reviews.py') 
+  st.switch_page('pages/03_Coop_Reviews.py') 
 
 if st.button('Recommend Co-ops to Students', 
              type='primary',

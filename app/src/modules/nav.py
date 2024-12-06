@@ -55,14 +55,15 @@ def StudentHomeNav():
 def AdvisorHomeNav():
     st.sidebar.page_link("pages/03_Advisor_Home.py", label="Advisor Home")
 
-
     st.sidebar.page_link("pages/03_Advisor_Student_Dashboard.py", label="Student Dashboard")
 
-    st.sidebar.page_link("pages/02_Coop_Reviews.py", label="Co-op Reviews")
+    st.sidebar.page_link("pages/03_Coop_Reviews.py", label="Co-op Reviews")
 
     st.sidebar.page_link("pages/03_Student_Recs.py", label="Recommend Co-ops")
 
-    st.sidebar.page_link("pages/03_Make_and_Delete_Announcements.py", label="Delete Announcements")
+    st.sidebar.page_link("pages/03_Make_and_Delete_Announcements.py", label="Announcements")
+
+    st.sidebar.page_link("pages/03_Make_and_Delete_Announcements.py", label="Announcements")
  
 #### ------------------------ System Admin Role ------------------------
 def AdminPageNav():

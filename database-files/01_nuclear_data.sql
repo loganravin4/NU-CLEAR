@@ -1116,6 +1116,28 @@ INSERT INTO Favorite(userId,coopId) VALUES (67,15);
 INSERT INTO Favorite(userId,coopId) VALUES (69,19);
 INSERT INTO Favorite(userId,coopId) VALUES (45,38);
 
+INSERT INTO Permission (createdBy, userType, canEditPerms, canEditModule, canEditAccSettings, canCreateReview, 
+    canCreateCoopListing, canCreateModule, canViewReview, canViewCoopListing, canViewModule, 
+    canDeleteReview, canDeleteCoopListing, canDeleteModule)
+VALUES (1, 'SystemAdmin', true, true, true, true, true, true, true, true, true, true, true, true);
 
+INSERT INTO Permission (createdBy, userType, canEditPerms, canEditModule, canEditAccSettings, canCreateReview, 
+    canCreateCoopListing, canCreateModule, canViewReview, canViewCoopListing, canViewModule, 
+    canDeleteReview, canDeleteCoopListing, canDeleteModule)
+VALUES (2, 'Student', false, false, true, true, false, false, true, true, true, false, false, false);
 
+INSERT INTO Permission (createdBy, userType, canEditPerms, canEditModule, canEditAccSettings, canCreateReview, 
+    canCreateCoopListing, canCreateModule, canViewReview, canViewCoopListing, canViewModule, 
+    canDeleteReview, canDeleteCoopListing, canDeleteModule)
+VALUES (3, 'Advisor', false, false, true, false, false, false, true, true, true, false, false, false);
+
+INSERT INTO Permission (createdBy, userType, canEditPerms, canEditModule, canEditAccSettings, canCreateReview, 
+    canCreateCoopListing, canCreateModule, canViewReview, canViewCoopListing, canViewModule, 
+    canDeleteReview, canDeleteCoopListing, canDeleteModule)
+VALUES (4, 'Data Analyst', false, false, false, true, false, false, false, true, true, false, false, false);
+
+INSERT INTO Permission (createdBy, userType, canEditPerms, canEditModule, canEditAccSettings, canCreateReview, 
+    canCreateCoopListing, canCreateModule, canViewReview, canViewCoopListing, canViewModule, 
+    canDeleteReview, canDeleteCoopListing, canDeleteModule)
+VALUES (5, 'Employer', false, true, false, false, true, true, false, true, true, false, true, false);
 

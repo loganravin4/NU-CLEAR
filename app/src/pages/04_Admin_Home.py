@@ -14,7 +14,7 @@ st.write('')
 st.write('')
 st.write('### What would you like to do today?')
 
-if st.button('Manage User Database', 
+if st.button('Manage User Permissions', 
              type='primary',
              use_container_width=True):
   st.switch_page('pages/04_User_Management.py')

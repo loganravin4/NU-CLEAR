@@ -18,18 +18,10 @@ st.title(f"Manage Users")
 search = st.text_input("Search for a user by name...", "")
 button_clicked = st.button("OK")
 
-url = 'http://api:4000/announcements/'
-  
-response = requests.get(url)
-logger.info(response)
+results = requests.get('http://api:4000/adm/user_permissions').json()
 
-## dummy dataframe view for now bc endpoint for users hasn't been tested yet
-df = pd.DataFrame(
-    [
-        {"command": "st.selectbox", "rating": 4, "is_widget": True},
-        {"command": "st.balloons", "rating": 5, "is_widget": False},
-        {"command": "st.time_input", "rating": 3, "is_widget": True},
-    ]
-)
+df = pd.DataFrame(results)
+
+logger.info(results)
 
 st.dataframe(df, use_container_width=True)

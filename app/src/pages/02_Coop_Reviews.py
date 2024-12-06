@@ -48,6 +48,6 @@ if st.button('Get Reviews',
     if would_recommend:
         filters['wouldRecommend'] = 'true'
 
-    response = requests.get(url, params=filters)
+    response = requests.get(url, params=filters).json()
     logger.info(response)
     st.dataframe(response)

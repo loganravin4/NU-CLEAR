@@ -100,6 +100,23 @@ def post_announcement():
     response.status_code = 200
     return response
 
+#------------------------------------------------------------
+# Update an announcement
+@advisor.route('/announcements', methods=['PUT'])
+def post_announcement():
+    the_data = request.json
+
+    cursor = db.get_db().cursor()
+    cursor.execute(f'''
+        UPDATE Announcement
+        SET announcementText = '{the_data["announcementText"]}'
+        WHERE announcementId = {the_data["announcementId"]}
+    ''')
+    db.get_db().commit()
+
+    response = make_response("Announcement posted successfully")
+    response.status_code = 200
+    return response
 
 #------------------------------------------------------------
 # Delete an announcement from board

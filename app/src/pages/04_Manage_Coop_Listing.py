@@ -63,7 +63,7 @@ if st.button("Update Announcement"):
             'locationState' : state,
             'locationCountry' : country
         }
-    url = 'http://api:4000/coop/coop'
+    url = f'http://api:4000/coop/coop'
 
     response = requests.put(url, json=data)
     if response.status_code == 200:
@@ -84,7 +84,7 @@ if st.button("Delete Co-op Listing"):
         data = {
             'coopId' : coopId,
         }
-    url = 'http://api:4000/coop/coop'
+    url = f'http://api:4000/coop/coop'
 
     response = requests.delete(url, json=data)
     if response.status_code == 200:

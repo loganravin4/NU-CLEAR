@@ -11,12 +11,12 @@ from backend.db_connection import db
 coops = Blueprint('coops', __name__)
 
 #------------------------------------------------------------
-# See all roles in a company 
+# See all roles
 @coops.route('/coops', methods=['GET'])
 def get_role():
     query = '''
-        SELECT * 
-        FROM Coop
+        SELECT c.coopId, c.title, cp.companyName, c.description, c.locationCity AS city, c.locationCountry AS country
+        FROM Coop c JOIN Company cp ON c.company = cp.companyId
      
     ''' 
     cursor = db.get_db().cursor()
@@ -33,16 +33,16 @@ def add_role():
     
     the_data = request.json
     query = f'''
-        INSERT INTO Coop (locationCity, locationState, locationCountry, title, description, company, jobId)
+        INSERT INTO Coop (locationCity, locationState, locationCountry, title, description, company)
         VALUES ('{the_data["locationCity"]}', '{the_data["locationState"]}','{the_data["locationCountry"]}', '{the_data["title"]}',
-                '{the_data["description"]}', '{the_data["company"]}', '{the_data["jobId"]}') 
+                '{the_data["description"]}', {the_data["company"]}) 
     ''' 
                  
     cursor = db.get_db().cursor()
     cursor.execute(query)
     db.get_db().commit()
-  
-    response = make_response("New Coop Listing Posted")
+
+    response = make_response("Coop listing created successfully")
     response.status_code = 200
     return response
 
@@ -52,7 +52,7 @@ def add_role():
 def get_favorites(user_id):
     query = f'''
         SELECT 
-            c.jobId, 
+            c.coopId, 
             c.title, 
             cmp.companyName AS companyName, 
             c.locationCity, 
@@ -60,9 +60,9 @@ def get_favorites(user_id):
             c.locationCountry, 
             c.description
         FROM Favorite f
-        JOIN Coop c ON f.jobId = c.jobId
+        JOIN Coop c ON f.coopId = c.coopId
         JOIN Company cmp ON c.company = cmp.companyId
-        WHERE f.userId = '{user_id}'
+        WHERE f.userId = {user_id}
         ORDER BY c.title ASC
     '''
     cursor = db.get_db().cursor()
@@ -78,30 +78,30 @@ def get_favorites(user_id):
 def add_favorite(user_id):
     the_data = request.json
     query = f'''
-        INSERT INTO Favorite (userId, jobId)
-        VALUES ('{user_id}', '{the_data["jobId"]}')
+        INSERT INTO Favorite (userId, coopId)
+        VALUES ({user_id}, {the_data["coopId"]})
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)
     db.get_db().commit()
 
-    response = make_response("Job added to favorites")
+    response = make_response("Coop added to favorites successfully")
     response.status_code = 200
     return response
 
 #------------------------------------------------------------
 # Remove a job from the favorites list
-@role.route('/favorites/<user_id>', methods=['DELETE'])
+@coops.route('/favorites/<user_id>', methods=['DELETE'])
 def delete_favorite(user_id):
     the_data = request.json
     query = f'''
         DELETE FROM Favorite
-        WHERE userId = '{user_id}' AND jobId = '{the_data["jobId"]}'
+        WHERE userId = {user_id} AND coopId = {the_data["coopId"]}
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)
     db.get_db().commit()
 
-    response = make_response("Job removed from favorites")
+    response = make_response("Review updated successfully")
     response.status_code = 200
     return response

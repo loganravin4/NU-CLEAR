@@ -127,9 +127,9 @@ CREATE TABLE IF NOT EXISTS Favorite (
     coopId INT,
     PRIMARY KEY (userId, coopId),
     FOREIGN KEY (userId) REFERENCES Student (userId)
-        ON UPDATE cascade ON DELETE restrict,
+        ON UPDATE cascade ON DELETE cascade,
     FOREIGN KEY (coopId) REFERENCES Coop (coopId)
-        ON UPDATE cascade ON DELETE restrict
+        ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS Review (

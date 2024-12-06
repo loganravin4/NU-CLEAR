@@ -114,7 +114,7 @@ def post_announcement():
     ''')
     db.get_db().commit()
 
-    response = make_response("Announcement posted successfully")
+    response = make_response("Announcement updated successfully")
     response.status_code = 200
     return response
 

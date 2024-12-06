@@ -38,8 +38,9 @@ def post_modules():
     
     cursor = db.get_db().cursor()
     cursor.execute(query)
-    theData = cursor.fetchall()
-    response = make_response("Module created")
+    db.get_db().commit()
+
+    response = make_response("Module created successfully")
     response.status_code = 200
     return response
 
@@ -77,8 +78,9 @@ def add_user_perms (userId):
     
     cursor = db.get_db().cursor()
     cursor.execute(query)
-    theData = cursor.fetchall()
-    response = make_response("User Permission Created")
+    db.get_db().commit()
+
+    response = make_response("Permission created successfully")
     response.status_code = 200
     return response
 
@@ -98,8 +100,9 @@ def update_user_perms ():
     
     cursor = db.get_db().cursor()
     cursor.execute(query)
-    theData = cursor.fetchall()
-    response = make_response(jsonify(theData))
+    db.get_db().commit()
+
+    response = make_response("Permission updated successfully")
     response.status_code = 200
     return response
 

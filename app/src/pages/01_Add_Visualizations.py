@@ -27,7 +27,7 @@ if st.button("Add Visualization"):
         data = {
             "vizType": visualization_type,
             'filters': filters,
-            "createdBy": created_by,
+            "createdBy": created_by
         }
 
     

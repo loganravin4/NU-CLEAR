@@ -58,10 +58,10 @@ if st.button("Update Announcement"):
     data = {
             'coopId' : coopId,
             'title' : title,
-            'desc' : desc,
-            'city' : city,
-            'state' : state,
-            'country' : country
+            'description' : desc,
+            'locationCity' : city,
+            'locationState' : state,
+            'locationCountry' : country
         }
     url = f'http://api:4000/coop/coop'
 

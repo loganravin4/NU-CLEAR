@@ -18,10 +18,12 @@ st.title(f"Manage Users")
 search = st.text_input("Search for a user by name...", "")
 button_clicked = st.button("OK")
 
-results = requests.get('http://api:4000/adm/user_permissions').json()
+url = f'http://api:4000/adm/user_permissions'
 
-df = pd.DataFrame(results)
+results = requests.get(url, params=None)
 
-logger.info(results)
-
-st.dataframe(df, use_container_width=True)
+if results:
+        logger.info(results)
+        st.dataframe(results)
+else:
+        st.warning("error!")

@@ -49,13 +49,13 @@ def post_modules():
 @admin.route('/user_permissions', methods=['GET'])
 def get_user_perms():
 
-    query = f'''SELECT *
-                FROM Permission 
-    '''
-    
     cursor = db.get_db().cursor()
-    cursor.execute(query)
+    cursor.execute(f'''SELECT *
+                FROM Permission 
+    ''')
+
     theData = cursor.fetchall()
+
     response = make_response(jsonify(theData))
     response.status_code = 200
     return response

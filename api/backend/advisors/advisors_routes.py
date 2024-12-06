@@ -63,9 +63,9 @@ def get_students(user_id):
                         VALUES ({user_id}, {the_data["coopId"]})
     ''')
     
-    theData = cursor.fetchall()
+    db.get_db().commit()
     
-    the_response = make_response(jsonify(theData))
+    the_response = make_response("Advisor added co-op to favorites successfully")
     the_response.status_code = 200
     return the_response
 
@@ -78,8 +78,8 @@ def get_announcements():
     cursor.execute(f'''SELECT createdBy, announcementText
                         FROM Announcement
     ''')
+    theData = cursor.fetchall()
     
-    db.get_db().commit()
     
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
@@ -99,7 +99,7 @@ def post_announcement(userId):
     ''')
     db.get_db().commit()
 
-    response = make_response("Coop added to favorites successfully")
+    response = make_response("Announcement posted successfully")
     response.status_code = 200
     return response
 
@@ -117,10 +117,6 @@ def delete_announcement(announcement_id):
     ''')
     db.get_db().commit()
 
-    response = make_response("Coop added to favorites successfully")
+    response = make_response("Announcement deleted successfully")
     response.status_code = 200
     return response
-    
-    the_response = make_response(jsonify(theData))
-    the_response.status_code = 200
-    return the_response

@@ -16,7 +16,6 @@ company_id = st.text_input("Company ID")
 visualization_type = st.text_input("Visualization Type")
 filters = st.text_input("Filters")
 created_by = st.text_input("Created By (Data Analyst ID)")
-updated_by = st.text_input("Updated By (If Updated)")  
  
   
 
@@ -28,11 +27,8 @@ if st.button("Add Visualization"):
         data = {
             "vizType": visualization_type,
             'filters': filters,
-            "createdBy": created_by,
-        } 
- 
-        if updated_by.strip():   
-            data["updatedBy"] = updated_by
+            "createdBy": created_by
+        }
 
     
         api = f'http://localhost:4000/analysis/visualization/{company_id}'

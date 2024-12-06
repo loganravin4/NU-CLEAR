@@ -19,7 +19,7 @@ if st.button('My Company Reviews',
              use_container_width=True):
   st.switch_page('pages/00_My_Company.py')
 
-if st.button('Other Companies Reviews', 
+if st.button('Other Companies\' Reviews', 
              type='primary',
              use_container_width=True):
   st.switch_page('pages/00_Compare_Company.py')

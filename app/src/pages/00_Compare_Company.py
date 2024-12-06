@@ -9,13 +9,13 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()  
 
-st.title('Other Companies Reviews to Compare')
+st.title('Compare With Other Companies')
 
 col1, col2, col3 = st.columns(3)
 
 with col1:
     company_id = st.text_input('My Company (CompanyId)', placeholder= 'e.g, 123')
-    role = st.text_input('Filter by What Role (Job ID)', placeholder='e.g., 45')
+    role = st.text_input('Filter by  Role (Co-op ID)', placeholder='e.g., 45')
 
 with col2:
     date_from = st.date_input('Start Date')

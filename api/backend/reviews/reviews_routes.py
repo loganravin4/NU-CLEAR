@@ -16,10 +16,12 @@ review = Blueprint('review', __name__)
 def get_reviews():
     query = '''
         SELECT reviewId, createdAt, role, salary, rating, 
-               summary, bestPart, worstPart, wouldRecommend
-        FROM Review
+               summary, bestPart, worstPart, wouldRecommend, 
+               s.major, s.coopLevel, s.year
+        FROM Review r 
+        JOIN Students s on r.createdBy = s.userId 
     '''
-
+ 
     filters = []
     if request.args.get('role'):
         filters.append(f"role = {request.args.get('role')}")
@@ -47,7 +49,7 @@ def get_reviews():
         
     response = make_response(jsonify(theData))
     response.status_code = 200
-    return response
+    return response  
 
 # ------------------------------------------------------------
 # Return all reviews submitted and the student information
@@ -59,7 +61,7 @@ def get_user_reviews(user_id):
                s.major, s.coopLevel, s.year
         FROM Review r
         JOIN Students s ON r.createdBy = s.{user_id}
-    '''
+    '''     
 
     cursor = db.get_db().cursor()
     cursor.execute(query)

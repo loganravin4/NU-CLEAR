@@ -30,11 +30,11 @@ if st.button('Filter Reviews'):
     if year_input:
         params['year'] = year_input
 
-    url = 'http://localhost:4000/reviews'  
+    url = 'http://api:4000/rev/reviews'  
     response = requests.get(url, params=params)
         
     if response.status_code == 200:
-        reviews = response.json()
+        reviews = response.json() 
         if reviews:
             st.write(f"Found {len(reviews)} reviews")
             if coopLevel_input != 'All':

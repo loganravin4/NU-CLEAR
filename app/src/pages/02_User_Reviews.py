@@ -14,7 +14,7 @@ st.title('Your Existing Reviews')
 user_id = st.text_input("Enter your User ID", placeholder="e.g., 123")
 
 if user_id:
-    url = f"http://api:4000/rev/reviews/{st.session_state['first_name']}/{user_id}"
+    url = f"http://api:4000/rev/reviews/{user_id}"
     response = requests.get(url)
 
     if response.status_code == 200:
@@ -32,11 +32,7 @@ if user_id:
             key="review_id"
         )
 
-        try:
-            selected_review = next(review for review in reviews if review['reviewId'] == review_id)
-        except StopIteration:
-            st.error("Review not found. Please refresh the page.")
-            selected_review = {}
+        selected_review = next(review for review in reviews if review['reviewId'] == review_id)
 
         if selected_review:
             with st.form("update_review_form"):

@@ -47,15 +47,15 @@ def get_reviews():
 
 # ------------------------------------------------------------
 # Return all reviews submitted and the student information
-@review.route('/reviews/<user_firstName>/<user_id>', methods = ['GET'])
-def get_user_reviews(user_firstName, user_id):
+@review.route('/reviews/<user_id>', methods = ['GET'])
+def get_user_reviews(user_id):
     query = f'''
         SELECT r.reviewId, r.role,r.salary, r.rating, 
                r.summary, s.firstName, s.lastName, 
                s.major, s.coopLevel, s.year
         FROM Review r
-        JOIN Student s ON r.createdBy = {user_id}
-        WHERE s.firstName = '{user_firstName}'
+        JOIN Student s ON r.createdBy = s.userId
+        WHERE r.createdBy = {user_id}
     '''     
 
     cursor = db.get_db().cursor()
@@ -68,8 +68,8 @@ def get_user_reviews(user_firstName, user_id):
  
 # ------------------------------------------------------------
 # Add an anonymous review
-@review.route('/reviews/<user_firstName>/<user_id>', methods = ['POST'])
-def add_user_reviews(user_firstName, user_id):
+@review.route('/reviews/<user_id>', methods = ['POST'])
+def add_user_reviews(user_id):
     the_data = request.json
     query = f'''
         INSERT INTO Review (createdAt, createdBy, role, salary, rating, 
@@ -144,7 +144,7 @@ def get_company_reviews(companyName, company_id):
 
 # ------------------------------------------------------------
 # Return reviews for a specific role
-@review.route('/reviews/<company_id>/<coop_id>', methods = ['GET'])
+@review.route('/reviews/coops/<company_id>/<coop_id>', methods = ['GET'])
 def get_role_reviews(company_id, coop_id):
     query = f'''
         SELECT r.reviewId, c.title, r.createdAt, r.salary, r.rating, r.summary, 

@@ -40,7 +40,7 @@ if st.button('Find Co-ops',
     if country:
         filters['locationCountry'] = country
     
-    response = requests.get(url, params=filters)
+    response = requests.get(url, params=filters).json()
     logger.info(response)
     st.dataframe(response)
 

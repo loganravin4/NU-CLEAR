@@ -40,6 +40,8 @@ def DataAnalystHomeNav():
 def StudentHomeNav():
     st.sidebar.page_link("pages/02_Student_Home.py", label="Student Home")
 
+    st.sidebar.page_link("pages/02_Coop_Listings.py", label="View Co-op Listings")
+
     st.sidebar.page_link("pages/02_Coop_Reviews.py", label="View Co-op Reviews")
  
     st.sidebar.page_link("pages/02_Create_Review.py", label="Create a Review")

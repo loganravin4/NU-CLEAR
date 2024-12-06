@@ -47,7 +47,7 @@ def post_modules():
 #------------------------------------------------------------
 # Get/see a list of all users and their permissions 
 @admin.route('/user_permissions', methods=['GET'])
-def get_user_perms ():
+def get_user_perms():
 
     query = f'''SELECT *
                 FROM Permission 
@@ -109,7 +109,7 @@ def update_user_perms ():
 #------------------------------------------------------------
 # Delete a user or permissions 
 @admin.route('/user_permissions', methods=['DELETE'])
-def delete_user_perms ():
+def delete_user_perms(user_id):
     the_data = request.json
     query = f'''DELETE FROM User
                 WHERE userId = {the_data['userId']}; 

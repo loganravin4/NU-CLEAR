@@ -17,24 +17,24 @@ st.write('### What would you like to do today?')
 if st.button('View Co-op Listings', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/20_Coop_Listings.py')
+  st.switch_page('pages/02_Coop_Listings.py')
 
 if st.button('View Co-op Reviews', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/21_Coop_Reviews.py')
+  st.switch_page('pages/02_Coop_Reviews.py')
 
 if st.button('Create a Co-op Review', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/22_Create_Review.py')
+  st.switch_page('pages/02_Create_Review.py')
 
 if st.button("View Your Existing Reviews",
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/23_User_Reviews.py')
+  st.switch_page('pages/02_User_Reviews.py')
 
 if st.button("View Your Favorited Jobs",
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/24_Favorited_Jobs.py')
+  st.switch_page('pages/02_Favorited_Jobs.py')

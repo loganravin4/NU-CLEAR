@@ -54,7 +54,7 @@ state = st.text_input("Location State To Update (optional)")
 country = st.text_input("Location Country To Update (optional)")
 
 
-if st.button("Update Announcement"):
+if st.button("Update Co-op Listing"):
     data = {
             'coopId' : coopId,
             'title' : title,

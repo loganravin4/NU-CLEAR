@@ -44,20 +44,50 @@ if st.button('Add New Co-op Listing',
         else:
             st.error(f"Failed to add to listings. Error: {response.status_code} - {response.text}")
             
-if st.button("Update location", type='primary', use_container_width=True):
-    if not all([company_id,city,state,country]):
-        st.error("Company id, city, state, and country required to update!")
-    else:
-        filters = {
-            "locationCity": city,
-            "locationState": state,
-            "locationCountry": country,
-            "company": company_id
-        }
+st.title('Update A Co-op Listing')
 
-        response = requests.post(url, json=filters)
-        logger.info(response)
-        if response.status_code == 200:
-            st.success("Co-op succesfully added to co op listings!")
-        else:
-            st.error(f"Failed to add to listings. Error: {response.status_code} - {response.text}")
+coopId = st.text_input("Co-op ID To Update")
+title = st.text_input("Title To Update (optional)")
+desc = st.text_input("Description To Update (optional)")
+city = st.text_input("Location City To Update (optional)")
+state = st.text_input("Location State To Update (optional)")
+country = st.text_input("Location Country To Update (optional)")
+
+
+if st.button("Update Announcement"):
+    data = {
+            'coopId' : coopId,
+            'title' : title,
+            'description' : desc,
+            'locationCity' : city,
+            'locationState' : state,
+            'locationCountry' : country
+        }
+    url = 'http://api:4000/coop/coop'
+
+    response = requests.delete(url, json=data)
+    if response.status_code == 200:
+        st.success("Co-op listing updated succesfully!")
+    else:
+        st.error(f"Failed to update co-op listing. Error: {response.status_code} - {response.text}")
+
+
+st.title('Delete Co-op Listing')
+
+coopId = st.text_input("Co-op ID To Delete")
+
+
+if st.button("Delete Announcement"):
+    if not all([coopId]):
+        st.error("All required fields must be filled!")
+    else:
+        data = {
+            'coopId' : coopId,
+        }
+    url = 'http://api:4000/coop/coop'
+
+    response = requests.delete(url, json=data)
+    if response.status_code == 200:
+        st.success("Announcement deleted succesfully!")
+    else:
+        st.error(f"Failed to delete announcement. Error: {response.status_code} - {response.text}")

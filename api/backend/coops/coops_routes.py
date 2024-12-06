@@ -64,16 +64,18 @@ def add_role():
 #------------------------------------------------------------
 # Update a coop listing
 @coop.route('/coop', methods=['PUT'])
-def update_location():        
+def update_coop():        
     the_data = request.json
     query = f'''
     UPDATE Coop
     SET 
-        locationCity = {the_data['locationCity']}
-        locationState = {the_data['locationState']}
-        locationCountry = {the_data['locationCountry']}
+        title = '{the_data['title']}'
+        description = '{the_data['description']}'
+        locationCity = '{the_data['locationCity']}'
+        locationState = '{the_data['locationState']}'
+        locationCountry = '{the_data['locationCountry']}'
     WHERE 
-        company = '{the_data['company']}'
+        coopId = '{the_data['coopId']}'
     '''
 
     
@@ -81,7 +83,27 @@ def update_location():
     cursor.execute(query)
     db.get_db().commit()
 
-    response = make_response("Location updated successfully")
+    response = make_response("Co-op updated successfully")
+    response.status_code = 200
+    return response
+
+
+#------------------------------------------------------------
+# Delete a coop listing
+@coop.route('/coop', methods=['DELETE'])
+def delete_coop():        
+    the_data = request.json
+    query = f'''
+    DELETE FROM Coop
+    WHERE coopId = '{the_data['coopId']}'
+    '''
+
+    
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
+    response = make_response("Co-op deleted successfully")
     response.status_code = 200
     return response
 

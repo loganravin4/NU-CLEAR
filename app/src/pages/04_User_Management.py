@@ -20,7 +20,9 @@ button_clicked = st.button("OK")
 
 url = f'http://api:4000/adm/user_permissions'
 
-results = requests.get(url, params=None)
+results = requests.get(url, params=None).json()
+logger.info(results)
 
-df = pd.DataFrame(results)
-st.dataframe(df, use_container_width=True)
+st.dataframe(results)
+
+

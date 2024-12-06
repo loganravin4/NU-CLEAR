@@ -8,11 +8,11 @@ from backend.db_connection import db
 #------------------------------------------------------------
 # Create a new Blueprint object, which is a collection of 
 # routes.
-role = Blueprint('role', __name__)
+coops = Blueprint('coops', __name__)
 
 #------------------------------------------------------------
 # See all roles in a company 
-@role.route('/coops', methods=['GET'])
+@coops.route('/coops', methods=['GET'])
 def get_role():
     query = '''
         SELECT * 
@@ -28,7 +28,7 @@ def get_role():
 
 #------------------------------------------------------------
 # Add a new co-op listing 
-@role.route('/coop', methods=['POST'])
+@coops.route('/coop', methods=['POST'])
 def add_role():        
     
     the_data = request.json
@@ -48,7 +48,7 @@ def add_role():
 
 #------------------------------------------------------------
 # Return a list of favorited/saved jobs
-@role.route('/favorites/<user_id>', methods=['GET'])
+@coops.route('/favorites/<user_id>', methods=['GET'])
 def get_favorites(user_id):
     query = f'''
         SELECT 
@@ -74,7 +74,7 @@ def get_favorites(user_id):
 
 #------------------------------------------------------------
 # Add a job to the favorites list
-@role.route('/favorites/<user_id>', methods=['POST'])
+@coops.route('/favorites/<user_id>', methods=['POST'])
 def add_favorite(user_id):
     the_data = request.json
     query = f'''

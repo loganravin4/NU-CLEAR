@@ -4,7 +4,7 @@ from backend.db_connection import db
 from backend.admins.admins_routes import admin
 from backend.advisors.advisors_routes import advisor
 from backend.reviews.reviews_routes import reviews
-from backend.roles.roles_routes import role
+from api.backend.roles.coops_routes import role
 
 import os
 from dotenv import load_dotenv

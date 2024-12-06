@@ -18,7 +18,10 @@ st.title(f"Manage Users")
 search = st.text_input("Search for a user by name...", "")
 button_clicked = st.button("OK")
 
-# results = requests.get('http://api:4000/backend/').json()
+url = 'http://api:4000/announcements/'
+  
+response = requests.get(url)
+logger.info(response)
 
 ## dummy dataframe view for now bc endpoint for users hasn't been tested yet
 df = pd.DataFrame(

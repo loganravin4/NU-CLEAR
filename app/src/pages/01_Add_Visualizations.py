@@ -33,3 +33,11 @@ if st.button("Add Visualization"):
     
         api = f'http://api:4000/rev/analysis/visualization/{company_id}'
         response = requests.post(api, json=data)
+
+
+    if response.status_code == 200:
+        st.success("Visualization added succesfully!")
+    else:
+        st.error(f"Failed to add visualization. Error: {response.status_code} - {response.text}")
+ 
+

@@ -85,13 +85,13 @@ def get_announcements():
 #------------------------------------------------------------
 # Send out a new announcement
 @advisor.route('/announcements', methods=['POST'])
-def post_announcement(userId):
+def post_announcement():
     the_data = request.json
 
     cursor = db.get_db().cursor()
     cursor.execute(f'''
         INSERT INTO Announcement (createdBy, announcementText)
-        VALUES ({userId}, '{the_data["announcementText"]}')
+        VALUES ({the_data["userId"]}, '{the_data["announcement"]}')
     ''')
     db.get_db().commit()
 
@@ -103,16 +103,16 @@ def post_announcement(userId):
 #------------------------------------------------------------
 # Delete an announcement from board
 @advisor.route('/announcements', methods=['DELETE'])
-def delete_announcement(announcement_id):
+def delete_announcement():
     the_data = request.json
 
     cursor = db.get_db().cursor()
     cursor.execute(f'''
         DELETE FROM Announcement 
-        WHERE Announcement.announcementId = {the_data['announcementId']})
+        WHERE Announcement.announcementId = {the_data['announcementId']}
     ''')
     db.get_db().commit()
-
+ 
     response = make_response("Announcement deleted successfully")
     response.status_code = 200
-    return response
+    return response 

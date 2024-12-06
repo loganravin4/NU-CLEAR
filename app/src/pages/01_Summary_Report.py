@@ -36,4 +36,8 @@ if st.button("Add Summary"):
         api = f'http://api:4000/rev/analysis/summary_report/{company_id}'
         response = requests.post(api, json=data)
 
-    
+    if response.status_code == 200:
+        st.success("Summary added succesfully!")
+    else:
+        st.error(f"Failed to add Summary. Error: {response.status_code} - {response.text}")
+ 

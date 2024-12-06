@@ -15,8 +15,8 @@ review = Blueprint('review', __name__)
 @review.route('/reviews', methods = ['GET'])
 def get_reviews():
     query = '''
-        SELECT reviewId, createdAt, role, salary, rating, 
-               summary, bestPart, worstPart, wouldRecommend, 
+        SELECT r.reviewId, r.createdAt, r.role, r.salary, r.rating, 
+               r.summary, r.bestPart, r.worstPart, r.wouldRecommend, 
                s.major, s.coopLevel, s.year
         FROM Review r 
         JOIN Student s on r.createdBy = s.userId 

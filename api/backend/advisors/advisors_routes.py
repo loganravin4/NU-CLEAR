@@ -1,7 +1,3 @@
-########################################################
-# Sample customers blueprint of endpoints
-# Remove this file if you are not using it in your project
-########################################################
 from flask import Blueprint
 from flask import request
 from flask import jsonify
@@ -32,9 +28,9 @@ def get_students(advisor_id):
 
 
 #------------------------------------------------------------
-# Get a list of favorited/recommended jobs for a specific student
+# Get a list of favorited/recommended coops for a specific student
 @advisor.route('/student_dashboard/<user_id>/favorites', methods=['GET'])
-def get_favorited_jobs(studentId):
+def get_favorites_for_student(studentId):
     the_data = request.json
 
     cursor = db.get_db().cursor()
@@ -53,20 +49,19 @@ def get_favorited_jobs(studentId):
     return the_response
 
 #------------------------------------------------------------
-# Inserts list of recomended jobs into the students favorite 
-@advisor.route('/recommendations/<student_id>', methods=['POST'])
-def add_favorited_job(student_id):
+# Insert a favorited/recommended coop for a specific student
+@advisor.route('/student_dashboard/<user_id>/favorites', methods=['POST'])
+def add_favorite_for_student(user_id):
     the_data = request.json
 
     cursor = db.get_db().cursor()
-    cursor.execute(f'''
-        INSERT INTO Favorite (studentId, jobId)
-        VALUES ('{the_data["studentId"]}', '{the_data["jobId"]}')
+    cursor.execute(f'''INSERT INTO Favorite (userId, coopId)
+                        VALUES ({user_id}, {the_data["coopId"]})
     ''')
     
-    theData = cursor.fetchall()
+    db.get_db().commit()
     
-    the_response = make_response('Advisor recommended a job to a student' )
+    the_response = make_response("Advisor added co-op to favorites successfully")
     the_response.status_code = 200
     return the_response
 
@@ -79,8 +74,8 @@ def get_announcements():
     cursor.execute(f'''SELECT createdBy, announcementText
                         FROM Announcement
     ''')
-    
     theData = cursor.fetchall()
+    
     
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
@@ -100,7 +95,7 @@ def post_announcement(userId):
     ''')
     db.get_db().commit()
 
-    response = make_response("Coop added to favorites successfully")
+    response = make_response("Announcement posted successfully")
     response.status_code = 200
     return response
 
@@ -118,6 +113,6 @@ def delete_announcement(announcement_id):
     ''')
     db.get_db().commit()
 
-    response = make_response("Coop added to favorites successfully")
+    response = make_response("Announcement deleted successfully")
     response.status_code = 200
     return response

@@ -18,6 +18,12 @@ def AboutPageNav():
 def EmployerHomeNav():
     st.sidebar.page_link("pages/00_Employer_Home.py", label="Employer Home")
 
+    st.sidebar.page_link("pages/00_My_Company.py", label="My Company")
+
+    st.sidebar.page_link("pages/00_Compare_Company.py", label="Other Companies")
+
+    st.sidebar.page_link("pages/00_Summary_Review.py", label="Overall Reviews")
+
 
 #### ------------------------ Data Analyst Role ------------------------
 def DataAnalystHomeNav():

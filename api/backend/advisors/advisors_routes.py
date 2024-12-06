@@ -12,13 +12,13 @@ advisor = Blueprint('advisor', __name__)
 
 #------------------------------------------------------------
 # View all students
-@advisor.route('/student_dashboard', methods=['GET'])
-def get_students(advisor_id):
+@advisor.route('/student_dashboard/<user_id>', methods=['GET'])
+def get_students(user_id):
 
     cursor = db.get_db().cursor()
     cursor.execute(f'''SELECT userId, firstName, lastName, major, coopLevel, year
                        FROM Student
-                       WHERE advisor = {advisor_id}
+                       WHERE advisor = {user_id}
     ''')
     theData = cursor.fetchall()
     

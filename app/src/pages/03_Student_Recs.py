@@ -9,9 +9,9 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()  
 
-st.title('Make a Job Recommendation!')
+st.title('Make a Co-op Recommendation!')
 
-job_id = st.text_input("Job ID")
+job_id = st.text_input("Co-op ID")
 user_id = st.text_input("Student ID")
 
 

@@ -29,7 +29,7 @@ def EmployerHomeNav():
 def DataAnalystHomeNav():
     st.sidebar.page_link("pages/01_Data_Analyst_Home.py", label="Data Analyst Home")
 
-    st.sidebar.page_link("pages/01_Coop_Review_by_Demographic.py", label = "Coop Reviews by Demographics")
+    st.sidebar.page_link("pages/01_Coop_Review_by_Demographic.py", label = "Co-op Reviews by Demographics")
     
     st.sidebar.page_link("pages/01_Summary_Report.py", label="Add Summary Report")
 
@@ -48,7 +48,7 @@ def StudentHomeNav():
 
     st.sidebar.page_link("pages/02_User_Reviews.py", label="User Reviews")
 
-    st.sidebar.page_link("pages/02_Favorited_Jobs.py", label="Favorited Jobs")
+    st.sidebar.page_link("pages/02_Favorited_Jobs.py", label="Favorited Co-ops")
 
  
 #### ------------------------ Advisor Role ------------------------
@@ -58,6 +58,8 @@ def AdvisorHomeNav():
     st.sidebar.page_link("pages/03_Advisor_Student_Dashboard.py", label="Student Dashboard")
 
     st.sidebar.page_link("pages/03_Coop_Reviews.py", label="Co-op Reviews")
+
+    st.sidebar.page_link("pages/03_See_User_Favorites.py", label="See Student\'s Favorites")
 
     st.sidebar.page_link("pages/03_Student_Recs.py", label="Recommend Co-ops")
 

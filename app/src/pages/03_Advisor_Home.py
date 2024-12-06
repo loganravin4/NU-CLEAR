@@ -24,6 +24,11 @@ if st.button("View All Reviews",
              use_container_width=True):
   st.switch_page('pages/03_Coop_Reviews.py') 
 
+if st.button('See A Student\'s Favorited Co-ops', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/03_See_User_Favorites.py')
+
 if st.button('Recommend Co-ops to Students', 
              type='primary',
              use_container_width=True):

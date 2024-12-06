@@ -18,14 +18,13 @@ url = f'http://api:4000/adm/user_permissions'
 
 def clear_text():
   st.session_state["text1"] = ''
-  st.session_state["text3"] = ''
   st.session_state["text4"] = ''
 
 # popover to add a new permission type
 with st.popover("Add a new user", help=None, icon=None, disabled=False, use_container_width=True):
     userType = st.selectbox("User Type:", 
                             ('SystemAdmin', 'Student', 'Advisor',
-                             'Employer', 'DataAnalyst'))
+                             'Employer', 'DataAnalyst'), key="text3")
     
     if st.button("Add", on_click=clear_text):
         filters = {
@@ -43,7 +42,9 @@ with st.popover("Delete a user", help=None, icon=None, disabled=False, use_conta
 
 # popover to update permission
 with st.popover("Update a permission", help=None, icon=None, disabled=False, use_container_width=True):
-    userType = st.text_input("User Type:", key="text3")
+    userType = st.selectbox("User Type:", 
+                            ('SystemAdmin', 'Student', 'Advisor',
+                             'Employer', 'DataAnalyst'))
     
     ## create perms
     canCreateReview = st.selectbox('Able to create a review?', (0, 1), key="box1")

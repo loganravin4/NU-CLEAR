@@ -14,7 +14,7 @@ st.title('My Company\'s Reviews')
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    rating_min = st.number_input('Minimum Rating', min_value=0.0, max_value=5.0, step=1.0)
+    rating_min = st.number_input('Minimum Rating', min_value=0.0, max_value=5.0, step=0.1)
     role = st.text_input('Filter by Role (Co-op ID)', placeholder='e.g. 45')
 
 with col2:

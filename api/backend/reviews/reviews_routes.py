@@ -8,11 +8,11 @@ from backend.db_connection import db
 #------------------------------------------------------------
 # Create a new Blueprint object, which is a collection of 
 # routes.
-reviews = Blueprint('reviews', __name__)
+review = Blueprint('review', __name__)
 
 # ------------------------------------------------------------
 # Return all reviews written based on desired filters
-@reviews.route('/reviews', methods = ['GET'])
+@review.route('/reviews', methods = ['GET'])
 def get_reviews():
     query = '''
         SELECT reviewId, createdAt, role, salary, rating, 
@@ -51,7 +51,7 @@ def get_reviews():
 
 # ------------------------------------------------------------
 # Return all reviews submitted and the student information
-@reviews.route('/reviews/<user_id>', methods = ['GET'])
+@review.route('/reviews/<user_id>', methods = ['GET'])
 def get_user_reviews(user_id):
     query = f'''
         SELECT r.reviewId, r.role,r.salary, r.rating, 
@@ -71,7 +71,7 @@ def get_user_reviews(user_id):
  
 # ------------------------------------------------------------
 # Add an anonymous review
-@reviews.route('/reviews/<user_id>', methods = ['POST'])
+@review.route('/reviews/<user_id>', methods = ['POST'])
 def add_user_reviews(user_id):
     the_data = request.json
     query = f'''
@@ -90,7 +90,7 @@ def add_user_reviews(user_id):
 
 # ------------------------------------------------------------
 # Update a review
-@reviews.route('/reviews/<user_id>/,<review_id>', methods = ['PUT'])
+@review.route('/reviews/<user_id>/,<review_id>', methods = ['PUT'])
 def update_user_reviews(user_id):
     the_data = request.json
     query = f'''
@@ -109,7 +109,7 @@ def update_user_reviews(user_id):
 
 # ------------------------------------------------------------
 # Delete a specific review previously written by a student
-@reviews.route('/reviews/<user_id>/<review_id>', methods=['DELETE'])
+@review.route('/reviews/<user_id>/<review_id>', methods=['DELETE'])
 def delete_user_reviews(user_id, review_id):
     query = f'''
         DELETE FROM Review
@@ -125,7 +125,7 @@ def delete_user_reviews(user_id, review_id):
 
 # ------------------------------------------------------------
 # Return reviews for a specific company
-@reviews.route('/reviews/<company_id>', methods = ['GET'])
+@review.route('/reviews/<company_id>', methods = ['GET'])
 def get_company_reviews(company_id):
     query = f'''
         SELECT r.reviewId, r.createdAt, cp.companyName, r.rating, 
@@ -147,7 +147,7 @@ def get_company_reviews(company_id):
 
 # ------------------------------------------------------------
 # Return reviews for a specific role
-@reviews.route('/reviews/<company_id>/<coop_id>', methods = ['GET'])
+@review.route('/reviews/<company_id>/<coop_id>', methods = ['GET'])
 def get_role_reviews(company_id, coop_id):
     query = f'''
         SELECT r.reviewId, c.title, r.createdAt, r.salary, r.rating, r.summary, 
@@ -169,7 +169,7 @@ def get_role_reviews(company_id, coop_id):
 
 # ------------------------------------------------------------
 # Returns reviews for other companies to compare it to my company
-@reviews.route('/reviews/compare/<company_id>', methods = ['GET'])
+@review.route('/reviews/compare/<company_id>', methods = ['GET'])
 def get_company_comparisons(company_id, compare_company_id):
     query = '''
        SELECT r.reviewId, r.createdAt, r.role, r.salary, r.rating, 
@@ -200,7 +200,7 @@ def get_company_comparisons(company_id, compare_company_id):
 
 # ------------------------------------------------------------
 # Returns summary report of a specific company and total number of good/bad reviews
-@reviews.route('/analysis/summary_report/{company_id}', methods = ['GET'])
+@review.route('/analysis/summary_report/{company_id}', methods = ['GET'])
 
 def get_analysis_report_and_reviews(company_id):
     query = '''
@@ -228,7 +228,7 @@ def get_analysis_report_and_reviews(company_id):
 
 # ------------------------------------------------------------
 #  Add a summary report for a specific company
-@reviews.route('/analysis/summary_report/{company_id}', methods = ['POST'])
+@review.route('/analysis/summary_report/{company_id}', methods = ['POST'])
 
 def make_summary_report(company_id):
 
@@ -248,7 +248,7 @@ def make_summary_report(company_id):
 
 # ------------------------------------------------------------
 #  Add a visualization report for a specific company
-@reviews.route('analysis/visualization/{company_id}', methods = ['POST'])
+@review.route('analysis/visualization/{company_id}', methods = ['POST'])
 
 def add_visualization(company_id):
 

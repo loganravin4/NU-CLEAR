@@ -8,11 +8,11 @@ from backend.db_connection import db
 #------------------------------------------------------------
 # Create a new Blueprint object, which is a collection of 
 # routes.
-coops = Blueprint('coops', __name__)
+coop = Blueprint('coop', __name__)
 
 #------------------------------------------------------------
 # See all roles
-@coops.route('/coops', methods=['GET'])
+@coop.route('/coops', methods=['GET'])
 def get_role():
     query = '''
         SELECT c.coopId, c.title, cp.companyName, c.description, c.locationCity AS city, c.locationCountry AS country
@@ -28,7 +28,7 @@ def get_role():
 
 #------------------------------------------------------------
 # Add a new co-op listing 
-@coops.route('/coop', methods=['POST'])
+@coop.route('/coop', methods=['POST'])
 def add_role():        
     
     the_data = request.json
@@ -48,7 +48,7 @@ def add_role():
 
 #------------------------------------------------------------
 # Return a list of favorited/saved jobs
-@coops.route('/favorites/<user_id>', methods=['GET'])
+@coop.route('/favorites/<user_id>', methods=['GET'])
 def get_favorites(user_id):
     query = f'''
         SELECT 
@@ -74,7 +74,7 @@ def get_favorites(user_id):
 
 #------------------------------------------------------------
 # Add a job to the favorites list
-@coops.route('/favorites/<user_id>', methods=['POST'])
+@coop.route('/favorites/<user_id>', methods=['POST'])
 def add_favorite(user_id):
     the_data = request.json
     query = f'''
@@ -91,7 +91,7 @@ def add_favorite(user_id):
 
 #------------------------------------------------------------
 # Remove a job from the favorites list
-@coops.route('/favorites/<user_id>', methods=['DELETE'])
+@coop.route('/favorites/<user_id>', methods=['DELETE'])
 def delete_favorite(user_id):
     the_data = request.json
     query = f'''

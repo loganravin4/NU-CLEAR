@@ -29,10 +29,7 @@ if st.button("Add Visualization"):
             "vizType": visualization_type,
             'filters': filters,
             "createdBy": created_by,
-        } 
- 
-        if updated_by.strip():   
-            data["updatedBy"] = updated_by
+        }
 
     
         api = f'http://localhost:4000/analysis/visualization/{company_id}'

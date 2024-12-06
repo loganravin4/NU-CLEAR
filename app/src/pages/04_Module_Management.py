@@ -25,13 +25,19 @@ with st.popover("Assign a new module", help=None, icon=None, disabled=False, use
     moduleName = st.text_input("Module Name:", key="text1")
     createdBy = st.text_input("System Admin Id", key="text2")
     moduleStatus = st.selectbox('Module Status', ('active', 'inactive'))
-    if st.button("Assign", on_click=clear_text):
-        filters = {
+    
+    logger.info(f'moduleName = {moduleName}')
+    logger.info(f'createdBy = {createdBy}')
+    logger.info(f'moduleStatus = {moduleStatus}')
+
+    filters = {
             "moduleName": moduleName,
             "moduleStatus": moduleStatus,
             "createdBy": createdBy
-        }
-        requests.post(url, json=filters)
+    }
+    if st.button("Assign"):
+            requests.post(url, json=filters)
+            results = requests.get(url).json()
 
 results = requests.get(url).json()
 

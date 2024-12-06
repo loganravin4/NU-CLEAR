@@ -33,7 +33,9 @@ def post_modules():
 
     query = f'''
         INSERT INTO Module (moduleName, moduleStatus, createdBy)
-        VALUES ({the_data["moduleName"]}, {the_data["moduleStatus"]}, {the_data["createdBy"]})
+        VALUES (
+            '{the_data['moduleName']}', '{the_data['moduleStatus']}', {the_data['createdBy']}
+        )
     '''
     
     cursor = db.get_db().cursor()

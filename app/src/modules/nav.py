@@ -23,23 +23,49 @@ def EmployerHomeNav():
 def DataAnalystHomeNav():
     st.sidebar.page_link("pages/01_Data_Analyst_Home.py", label="Data Analyst Home")
 
+    st.sidebar.page_link("pages/01_Summary_Report.py", label="Add Summary Report")
+
+    st.sidebar.page_link("pages/01_Coop_Review_by_Demographic.py", label = "Coop Reviews by Demographics")
+
+    st.sidebar.page_link("pages/01_Add_Visualizations.py", label = "Add Visualizations")
+
 
 #### ------------------------ Student Role ------------------------
 def StudentHomeNav():
     st.sidebar.page_link("pages/02_Student_Home.py", label="Student Home")
 
+    st.sidebar.page_link("pages/02_Coop_Reviews.py", label="View Co-op Reviews")
+ 
+    st.sidebar.page_link("pages/02_Create_Review.py", label="Create a Review")
 
+    st.sidebar.page_link("pages/02_User_Reviews.py", label="User Reviews")
 
+    st.sidebar.page_link("pages/02_Favorited_Jobs.py", label="Favorited Jobs")
+
+ 
 #### ------------------------ Advisor Role ------------------------
 def AdvisorHomeNav():
     st.sidebar.page_link("pages/03_Advisor_Home.py", label="Advisor Home")
 
 
+    st.sidebar.page_link("pages/03_Advisor_Student_Dashboard.py", label="Student Dashboard")
+
+    st.sidebar.page_link("pages/02_Coop_Reviews.py", label="Co-op Reviews")
+
+    st.sidebar.page_link("pages/03_Student_Recs.py", label="Recommend Co-ops")
+
+    st.sidebar.page_link("pages/03_Make_and_Delete_Announcements.py", label="Delete Announcements")
+ 
 #### ------------------------ System Admin Role ------------------------
 def AdminPageNav():
     st.sidebar.page_link("pages/04_Admin_Home.py", label="System Admin")
 
+    st.sidebar.page_link("pages/04_User_Management.py", label="Manage User Permissions")
 
+    st.sidebar.page_link("pages/04_Module_Management.py", label="Manage Modules") 
+
+    st.sidebar.page_link("pages/04_Add_Coop_Listing.py", label="Publish a Co-op listing")
+    
 # --------------------------------Links Function -----------------------------------------------
 def SideBarLinks(show_home=False):
     """

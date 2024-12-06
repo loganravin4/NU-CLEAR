@@ -102,6 +102,6 @@ def delete_favorite(user_id):
     cursor.execute(query)
     db.get_db().commit()
 
-    response = make_response("Review updated successfully")
+    response = make_response("Coop removed from favorites successfully")
     response.status_code = 200
     return response

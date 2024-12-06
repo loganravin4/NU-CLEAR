@@ -16,7 +16,6 @@ company_id = st.text_input("Company ID")
 visualization_type = st.text_input("Visualization Type")
 filters = st.text_input("Filters")
 created_by = st.text_input("Created By (Data Analyst ID)")
-updated_by = st.text_input("Updated By (If Updated)")  
  
   
 

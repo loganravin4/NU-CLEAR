@@ -11,7 +11,6 @@ SideBarLinks()
 
 st.title('My Companies Reviews')
 
-
 col1, col2, col3 = st.columns(3)
 
 with col1:
@@ -20,7 +19,7 @@ with col1:
 
 with col2:
     date_from = st.date_input('Start Date')
-    company = st.text_input('What Company Reviews do You want', placeholder='e.g 123')
+    company_id = st.text_input('My Company', placeholder='e.g 123')
 
 with col3:
     date_to = st.date_input('End Date')

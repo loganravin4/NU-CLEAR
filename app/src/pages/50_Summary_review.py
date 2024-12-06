@@ -19,6 +19,7 @@ with col1:
     
 with col2:
     top_benefit = st.checkbox('Show Top Benefit')
+    company_id = st.text_input("Company ID", placeholder="e.g., 123", key="company_id")
 
 with col3:
     top_problem = st.checkbox('Show Top Problem')
@@ -30,7 +31,7 @@ logger.info(f'top_benefit = {top_benefit}')
 if st.button('Get Summary', 
              type='primary', 
              use_container_width=True):
-    url = 'http://api:4000/analysis/summary_report/{company_id}'
+    url = 'http://api:4000/rev/analysis/summary_report/{company_id}'
     filters = {}
     
     #need to add a line so it only filters by the users company

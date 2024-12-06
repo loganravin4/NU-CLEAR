@@ -12,23 +12,26 @@ SideBarLinks()
 st.title('Make a Job Recommendation!')
 
 job_id = st.text_input("Job ID")
-student_id = st.text_input("Student ID")
+user_id = st.text_input("Student ID")
 
 
-if st.button('Post Summary', 
+if st.button('Post Recommendation', 
              type='primary', 
              use_container_width=True):
-    url = f'http://api:4000/favorites/{user_id}'
+    url = f'http://api:4000/coop/favorites/{user_id}'
     filters = {}
     #need to add a line so it only filters by the users company
-    if not all([student_id,job_id]):
+    if not all([user_id,job_id]):
         st.error("All required fields must be filled!")
     else:
-        data = {
-            "comapny_id": student_id,
+        filters = {
+            "comapany_id": user_id,
             "job_id": job_id,
         }
 
-    response = requests.post(url, params=filters)
+    response = requests.post(url, json=filters)
     logger.info(response)
-    st.dataframe(response)
+    if response.status_code == 200:
+        st.success("Recommendations added succesfully!")
+    else:
+        st.error(f"Failed to add recommendations. Error: {response.status_code} - {response.text}")

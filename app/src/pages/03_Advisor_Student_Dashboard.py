@@ -24,8 +24,9 @@ if st.button("Search",type='primary',
             filters['userId'] = user_id
 
 
-        url = f'http://api:4000/advi/student_dashboard'
+        url = f'http://api:4000/advi/student_dashboard/{user_id}'
 
         response = requests.get(url, params=filters).json()
         logger.info(response)
         st.dataframe(response)  
+         

@@ -39,6 +39,6 @@ if st.button('Add New Co-op Listing',
         response = requests.post(url, json=filters)
         logger.info(response)
         if response.status_code == 200:
-            st.success("Job succesfully added to co op listings!")
+            st.success("Co-op succesfully added to co op listings!")
         else:
             st.error(f"Failed to add to listings. Error: {response.status_code} - {response.text}")

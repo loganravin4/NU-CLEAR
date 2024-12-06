@@ -12,7 +12,7 @@ advisor = Blueprint('advisor', __name__)
 
 #------------------------------------------------------------
 # View all students
-@advisor.route('/student_dashboard', methods=['GET'])
+@advisor.route('/student_dashboard/<user_id>', methods=['GET'])
 def get_students(user_id):
 
     cursor = db.get_db().cursor()

@@ -140,8 +140,15 @@ def get_company_reviews(companyName, company_id):
         JOIN Coop c ON r.role = c.coopId
         JOIN Company cp ON c.company = cp.companyId
         WHERE cp.companyId = {company_id} AND cp.companyName = '{companyName}'
-        ORDER BY r.createdAt DESC
     '''
+    filters = []
+    if request.args.get('rating'):
+        filters.append(f"r.rating >= {request.args.get('rating')}")
+
+    if filters:
+        query += " AND " + " AND ".join(filters)
+
+    query += " ORDER BY r.createdAt DESC"
 
     cursor = db.get_db().cursor()
     cursor.execute(query)

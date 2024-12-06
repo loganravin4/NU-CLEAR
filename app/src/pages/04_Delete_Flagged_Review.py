@@ -12,7 +12,7 @@ SideBarLinks()
 st.title("Delete a review")
 
 reviewId = st.text_input("Review Id: ")
-userId = st.text_input("User Id of reviewer: ")
+userId = st.text_input("Reviewer User Id: ")
 
 if st.button('Delete', 
              type='primary', 

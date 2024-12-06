@@ -29,9 +29,9 @@ def EmployerHomeNav():
 def DataAnalystHomeNav():
     st.sidebar.page_link("pages/01_Data_Analyst_Home.py", label="Data Analyst Home")
 
-    st.sidebar.page_link("pages/01_Summary_Report.py", label="Add Summary Report")
-
     st.sidebar.page_link("pages/01_Coop_Review_by_Demographic.py", label = "Coop Reviews by Demographics")
+    
+    st.sidebar.page_link("pages/01_Summary_Report.py", label="Add Summary Report")
 
     st.sidebar.page_link("pages/01_Add_Visualizations.py", label = "Add Visualizations")
 

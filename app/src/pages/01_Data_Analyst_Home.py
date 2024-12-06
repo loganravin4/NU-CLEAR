@@ -14,15 +14,16 @@ st.write('')
 st.write('')
 st.write('### What would you like to do today?')
 
-if st.button('Add a Summary Report for a Company', 
-             type='primary',
-             use_container_width=True):
-  st.switch_page('pages/01_Summary_Report.py')
- 
+
 if st.button('Look at Co-op Reviews and Student Demographics', 
              type='primary',
              use_container_width=True):
   st.switch_page('pages/01_Coop_Review_by_Demographic.py')
+  
+if st.button('Add a Summary Report for a Company', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/01_Summary_Report.py')
 
 if st.button("Add Visualizations from Reviews",
              type='primary', 

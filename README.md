@@ -24,12 +24,26 @@ E.g., *"An open-source tool to manage and organize personal tasks efficiently."*
 **Why does this project exist?**  
 Provide a short summary of what the project does and its goals.
 
+Every year, thousands of Northeastern students take on co-op placements, yet the feedback system doesn’t give students, employers, or advisors the insights they need. As a result, students struggle with limited information, employers lack guidance to improve their programs, and advisors can’t access real-time data to support students effectively. Meet NU CLEAR, a data-driven application designed to transform the way Northeastern students, advisors, and co-op employers engage with the acclaimed experiential learning initiative.  
+
+CLEAR collects, analyzes, and presents detailed co-op feedback, allowing students to review co-ops and access other peer insights, helping employers improve their programs, and providing advisors with real-time data to supplement their guidance—all in one place. Unlike basic surveys or feedback forms, CLEAR is a centralized solution that offers personalized dashboards for administrators needing a high-level view of program impact, as well as students looking for peer-to-peer co-op reviews and anonymous feedback to employers to provide movement for change. This platform isn’t just gathering data; it’s contextualizing it to reveal the bigger picture, making experiential learning at Northeastern more transparent, informed, and impactful.
+
 ---
 
 ## **Features**
 
 - Highlight key features and functionality of your project.  
 E.g., *"User authentication, task prioritization, email reminders, etc."*
+
+In NU-CLEAR, you can act as one of 5 personas or users who may want to use this application. 
+
+### Employer
+As an employer, you can view a list of reviews of your specific company, and filter by a variety of factors like minimum rating, role, and the start and end date. You can also view other reviews for other companies to compare against the reviews for your company to better guide decisions on your hiring process and efficiency of HR. 
+
+### Data Analyst
+As a data analyst, you can retrieve review data to generate reports and visualizations. You can add a summary report for a company with the company ID, the average rating, and a generated summary. You can also update a report for a company at any time. Another feature includes filtering reviews by student demographics, such as the student's level of co-op experience, year, and major. Lastly, you can add a visualization report, by adding the company ID, visualization type, and filters. You can also update this at any time.
+
+### 
 
 ---
 

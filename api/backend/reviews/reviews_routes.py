@@ -53,14 +53,14 @@ def get_reviews():
 
 # ------------------------------------------------------------
 # Return all reviews submitted and the student information
-@review.route('/reviews/<user_id>', methods = ['GET'])
-def get_user_reviews(user_id):
+@review.route('/reviews/<user_firstName>/<user_id>', methods = ['GET'])
+def get_user_reviews(user_firstName, user_id):
     query = f'''
         SELECT r.reviewId, r.role,r.salary, r.rating, 
-               r.summary, s.firstName, s.lastName, 
+               r.summary, {user_firstName}, s.lastName, 
                s.major, s.coopLevel, s.year
         FROM Review r
-        JOIN Students s ON r.createdBy = s.{user_id}
+        JOIN Student s ON r.createdBy = s.{user_id}
     '''     
 
     cursor = db.get_db().cursor()
@@ -73,8 +73,8 @@ def get_user_reviews(user_id):
  
 # ------------------------------------------------------------
 # Add an anonymous review
-@review.route('/reviews/<user_id>', methods = ['POST'])
-def add_user_reviews(user_id):
+@review.route('/reviews/<user_firstName>/<user_id>', methods = ['POST'])
+def add_user_reviews(user_firstName, user_id):
     the_data = request.json
     query = f'''
         INSERT INTO Review (createdAt, createdBy, role, salary, rating, 
@@ -92,14 +92,14 @@ def add_user_reviews(user_id):
 
 # ------------------------------------------------------------
 # Update a review
-@review.route('/reviews/<user_id>/,<review_id>', methods = ['PUT'])
-def update_user_reviews(user_id):
+@review.route('/reviews/<user_id>/<review_id>', methods = ['PUT'])
+def update_user_reviews(user_id, review_id):
     the_data = request.json
     query = f'''
         UPDATE Review
         SET summary = '{the_data["summary"]}', bestPart = '{the_data["bestPart"]}', 
             worstPart = '{the_data["worstPart"]}', rating = {the_data["rating"]}
-        WHERE reviewId = {the_data["reviewId"]} AND createdBy = {user_id}
+        WHERE reviewId = {review_id} AND createdBy = {user_id}
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)
@@ -127,10 +127,10 @@ def delete_user_reviews(user_id, review_id):
 
 # ------------------------------------------------------------
 # Return reviews for a specific company
-@review.route('/reviews/<company_id>', methods = ['GET'])
-def get_company_reviews(company_id):
+@review.route('/reviews/<companyName>/<company_id>', methods = ['GET'])
+def get_company_reviews(companyName, company_id):
     query = f'''
-        SELECT r.reviewId, r.createdAt, cp.companyName, r.rating, 
+        SELECT r.reviewId, r.createdAt, {companyName}, r.rating, 
                r.summary, r.bestPart, r.worstPart
         FROM Review r
         JOIN Coop c ON r.role = c.coopId
@@ -202,7 +202,7 @@ def get_company_comparisons(company_id, compare_company_id):
 
 # ------------------------------------------------------------
 # Returns summary report of a specific company and total number of good/bad reviews
-@review.route('/analysis/summary_report/{company_id}', methods = ['GET'])
+@review.route('/analysis/summary_report/<company_id>', methods = ['GET'])
 
 def get_analysis_report_and_reviews(company_id):
     query = '''
@@ -230,7 +230,7 @@ def get_analysis_report_and_reviews(company_id):
 
 # ------------------------------------------------------------
 #  Add a summary report for a specific company
-@review.route('/analysis/summary_report/{company_id}', methods = ['POST'])
+@review.route('/analysis/summary_report/<company_id>', methods = ['POST'])
 
 def make_summary_report(company_id):
 
@@ -250,7 +250,7 @@ def make_summary_report(company_id):
 
 # ------------------------------------------------------------
 #  Add a visualization report for a specific company
-@review.route('analysis/visualization/{company_id}', methods = ['POST'])
+@review.route('analysis/visualization/<company_id>', methods = ['POST'])
 
 def add_visualization(company_id):
 

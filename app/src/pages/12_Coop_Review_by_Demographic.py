@@ -24,7 +24,7 @@ major_input = st.text_input('Enter Major (Optional):', '')
 if st.button('Filter Reviews'):
     params = {}
     if coopLevel_input != 'All':
-        params['year'] = coopLevel_input
+        params['coopLevel'] = coopLevel_input
     if major_input:
         params['major'] = major_input
     if year_input:

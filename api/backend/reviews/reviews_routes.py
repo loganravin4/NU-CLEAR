@@ -61,7 +61,7 @@ def get_user_reviews(user_id):
     query = f'''
         SELECT r.reviewId, r.role,r.salary, r.rating, 
                r.summary, s.firstName, s.lastName, 
-               s.major, s.coopLevel, s.year
+               s.major, s.coopLevel, s.year, 
         FROM Review r
         JOIN Student s ON r.createdBy = s.userId
         WHERE r.createdBy = {user_id}

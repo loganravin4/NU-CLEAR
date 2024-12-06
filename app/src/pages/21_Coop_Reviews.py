@@ -16,7 +16,7 @@ col1, col2, col3 = st.columns(3)
 with col1:
     created_by = st.text_input('Filter by Created By (User ID)', placeholder='e.g., 123')
     role = st.text_input('Filter by Role (Job ID)', placeholder='e.g., 45')
-    rating_min = st.number_input('Minimum Rating', min_value=0.0, max_value=5.0, step=0.1)
+    rating_min = st.number_input('Minimum Rating', min_value=0.0, max_value=5.0, step=0.5)
 
 with col2:
     salary_min = st.number_input('Minimum Salary', min_value=0.0, value=0.0, step=500.0)

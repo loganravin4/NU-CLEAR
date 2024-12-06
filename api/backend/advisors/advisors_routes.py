@@ -71,8 +71,9 @@ def add_favorite_for_student(user_id):
 def get_announcements():
 
     cursor = db.get_db().cursor()
-    cursor.execute(f'''SELECT createdBy, announcementText
-                        FROM Announcement
+    cursor.execute(f'''SELECT an.announcementText, ad.firstName, ad.lastName
+                        FROM Announcement an
+                        JOIN Advisor ad ON ad.userId = an.createdBy
     ''')
     theData = cursor.fetchall()
     

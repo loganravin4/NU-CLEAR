@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS User (
     userId INT PRIMARY KEY AUTO_INCREMENT,
     userType VARCHAR(255) NOT NULL,
     FOREIGN KEY (userType) REFERENCES UserType (userType)
-        ON UPDATE cascade ON DELETE restrict
+        ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS SystemAdmin (
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS SystemAdmin (
     lastName VARCHAR(255) NOT NULL,
     email VARCHAR(255),
     FOREIGN KEY (userId) REFERENCES User (userId)
-        ON UPDATE cascade ON DELETE restrict
+        ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS Module (
@@ -33,9 +33,9 @@ CREATE TABLE IF NOT EXISTS Module (
     createdBy INT NOT NULL,
     updatedBy INT,
     FOREIGN KEY (createdBy) REFERENCES SystemAdmin (userId)
-        ON UPDATE cascade ON DELETE restrict,
+        ON UPDATE cascade ON DELETE cascade,
     FOREIGN KEY (updatedBy) REFERENCES SystemAdmin (userId)
-        ON UPDATE cascade ON DELETE restrict
+        ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS Permission (
@@ -55,9 +55,9 @@ CREATE TABLE IF NOT EXISTS Permission (
     canDeleteCoopListing BOOLEAN DEFAULT false,
     canDeleteModule BOOLEAN DEFAULT false,
     FOREIGN KEY (createdBy) REFERENCES SystemAdmin (userId)
-        ON UPDATE cascade ON DELETE restrict,
+        ON UPDATE cascade ON DELETE cascade,
     FOREIGN KEY (userType) REFERENCES UserType (userType)
-        ON UPDATE cascade ON DELETE restrict
+        ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS UserModule (
@@ -65,9 +65,9 @@ CREATE TABLE IF NOT EXISTS UserModule (
     moduleId INT,
     PRIMARY KEY (userType, moduleId),
     FOREIGN KEY (userType) REFERENCES UserType (userType)
-        ON UPDATE cascade ON DELETE restrict,
+        ON UPDATE cascade ON DELETE cascade,
     FOREIGN KEY (moduleId) REFERENCES Module (moduleId)
-        ON UPDATE cascade ON DELETE restrict
+        ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS Advisor (
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS Advisor (
     email VARCHAR(255),
     department VARCHAR(255),
     FOREIGN KEY (userId) REFERENCES User (userId)
-        ON UPDATE cascade ON DELETE restrict
+        ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS Announcement (
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS Announcement (
     createdBy INT NOT NULL,
     announcementText TEXT NOT NULL,
     FOREIGN KEY (createdBy) REFERENCES Advisor (userId)
-        ON UPDATE cascade ON DELETE restrict
+        ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS Student (
@@ -99,9 +99,9 @@ CREATE TABLE IF NOT EXISTS Student (
     year INT,
     advisor INT NOT NULL,
     FOREIGN KEY (userId) REFERENCES User (userId)
-        ON UPDATE cascade ON DELETE restrict,
+        ON UPDATE cascade ON DELETE cascade,
     FOREIGN KEY (advisor) REFERENCES Advisor (userId)
-        ON UPDATE cascade ON DELETE restrict
+        ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS Company (
@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS Coop (
     description TEXT,
     company INT NOT NULL,
     FOREIGN KEY (company) REFERENCES Company (companyId)
-        ON UPDATE cascade ON DELETE restrict
+        ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS Favorite (
@@ -144,9 +144,9 @@ CREATE TABLE IF NOT EXISTS Review (
     worstPart TEXT,
     wouldRecommend BOOLEAN NOT NULL DEFAULT true,
     FOREIGN KEY (createdBy) REFERENCES Student (userId)
-        ON UPDATE cascade ON DELETE restrict,
+        ON UPDATE cascade ON DELETE cascade,
     FOREIGN KEY (role) REFERENCES Coop (coopId)
-        ON UPDATE cascade ON DELETE restrict
+        ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS Employer (
@@ -158,9 +158,9 @@ CREATE TABLE IF NOT EXISTS Employer (
     department VARCHAR(255),
     company INT NOT NULL,
     FOREIGN KEY (userId) REFERENCES User (userId)
-        ON UPDATE cascade ON DELETE restrict,
+        ON UPDATE cascade ON DELETE cascade,
     FOREIGN KEY (company) REFERENCES Company (companyId)
-        ON UPDATE cascade ON DELETE restrict
+        ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS DataAnalyst (
@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS DataAnalyst (
     firstName VARCHAR(255) NOT NULL,
     lastName VARCHAR(255) NOT NULL,
     FOREIGN KEY (userId) REFERENCES User (userId)
-        ON UPDATE cascade ON DELETE restrict
+        ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS Visualization (
@@ -179,11 +179,11 @@ CREATE TABLE IF NOT EXISTS Visualization (
     createdBy INT NOT NULL,
     updatedBy INT,
     FOREIGN KEY (company) REFERENCES Company (companyId)
-        ON UPDATE cascade ON DELETE restrict,
+        ON UPDATE cascade ON DELETE cascade,
     FOREIGN KEY (createdBy) REFERENCES DataAnalyst (userId)
-        ON UPDATE cascade ON DELETE restrict,
+        ON UPDATE cascade ON DELETE cascade,
     FOREIGN KEY (updatedBy) REFERENCES DataAnalyst (userId)
-        ON UPDATE cascade ON DELETE restrict
+        ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE IF NOT EXISTS SummaryReport (
@@ -194,9 +194,9 @@ CREATE TABLE IF NOT EXISTS SummaryReport (
     generatedBy INT NOT NULL,
     updatedBy INT,
     FOREIGN KEY (company) REFERENCES Company (companyId)
-        ON UPDATE cascade ON DELETE restrict,
+        ON UPDATE cascade ON DELETE cascade,
     FOREIGN KEY (generatedBy) REFERENCES DataAnalyst (userId)
-        ON UPDATE cascade ON DELETE restrict,
+        ON UPDATE cascade ON DELETE cascade,
     FOREIGN KEY (updatedBy) REFERENCES DataAnalyst (userId)
-        ON UPDATE cascade ON DELETE restrict
+        ON UPDATE cascade ON DELETE cascade
 );

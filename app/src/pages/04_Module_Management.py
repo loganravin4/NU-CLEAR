@@ -24,15 +24,19 @@ def clear_text():
 with st.popover("Assign a new module", help=None, icon=None, disabled=False, use_container_width=False):
     moduleName = st.text_input("Module Name:", key="text1")
     createdBy = st.text_input("System Admin Id", key="text2")
+    moduleStatus = st.selectbox('Module Status', ('active', 'inactive'))
     if st.button("Assign", on_click=clear_text):
         filters = {
             "moduleName": moduleName,
-            "moduleStatus": 'pending',
+            "moduleStatus": moduleStatus,
             "createdBy": createdBy
         }
         requests.post(url, json=filters)
 
 results = requests.get(url).json()
+
+if st.button("Refresh"):
+    results = requests.get(url).json()
 
 df = pd.DataFrame(results)
 

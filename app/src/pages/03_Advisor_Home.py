@@ -27,15 +27,9 @@ if st.button("View All Reviews",
 if st.button('Recommend Co-ops to Students', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/63_Recs_students.py')
+  st.switch_page('pages/03_Student_Recs.py')
 
-if st.button('Make an Announcement', 
+if st.button('Announcements', 
              type='primary', 
              use_container_width=True):
-  st.switch_page('pages/61_Make_announcement.py')
-
-if st.button('Delete and View Announcements', 
-             type='primary',
-             use_container_width=True):
-  st.switch_page('pages/62_Announcements.py')
-  
+  st.switch_page('pages/03_Announcements.py')

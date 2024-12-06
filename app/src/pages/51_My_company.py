@@ -16,10 +16,11 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     rating_min = st.number_input('Minimum Rating', min_value=0.0, max_value=5.0, step=1.0)
-    role = st.text_input('Filter by Role (Job ID)', placeholder='e.g., 45')
+    role = st.text_input('Filter by Role (Job ID)', placeholder='e.g. 45')
 
 with col2:
     date_from = st.date_input('Start Date')
+    company = st.text_input('What Company Reviews do You want', placeholder='e.g 123')
 
 with col3:
     date_to = st.date_input('End Date')

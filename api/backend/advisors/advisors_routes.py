@@ -17,7 +17,7 @@ advisor = Blueprint('advisor', __name__)
 #------------------------------------------------------------
 # View all students
 @advisor.route('/student_dashboard', methods=['GET'])
-def get_announcements(advisor_id):
+def get_students(advisor_id):
 
     cursor = db.get_db().cursor()
     cursor.execute(f'''SELECT userId, firstName, lastName, major, coopLevel, year
@@ -34,7 +34,7 @@ def get_announcements(advisor_id):
 #------------------------------------------------------------
 # Get a list of favorited/recommended coops for a specific student
 @advisor.route('/student_dashboard/<user_id>/favorites', methods=['GET'])
-def get_students(studentId):
+def get_favorites_for_student(studentId):
     the_data = request.json
 
     cursor = db.get_db().cursor()
@@ -55,7 +55,7 @@ def get_students(studentId):
 #------------------------------------------------------------
 # Insert a favorited/recommended coop for a specific student
 @advisor.route('/student_dashboard/<user_id>/favorites', methods=['POST'])
-def get_students(user_id):
+def add_favorite_for_student(user_id):
     the_data = request.json
 
     cursor = db.get_db().cursor()

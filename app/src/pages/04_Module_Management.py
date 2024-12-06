@@ -21,15 +21,10 @@ button_clicked = st.button("OK")
 # popover to add a new module
 st.popover("Assign a new module", help=None, icon=None, disabled=False, use_container_width=False)
 
-# results = requests.get('http://api:4000/backend/').json()
+results = requests.get('http://api:4000/adm/modules').json()
 
 ## dummy dataframe view for now bc endpoint for modules hasn't been tested yet
-df = pd.DataFrame(
-    [ 
-        {"command": "st.selectbox", "rating": 4, "is_widget": True},
-        {"command": "st.balloons", "rating": 5, "is_widget": False},
-        {"command": "st.time_input", "rating": 3, "is_widget": True},
-    ]
-)
+df = pd.DataFrame(results)
+print(results)
 
 st.dataframe(df, use_container_width=True)

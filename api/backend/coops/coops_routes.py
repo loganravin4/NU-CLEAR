@@ -15,7 +15,7 @@ coop = Blueprint('coop', __name__)
 @coop.route('/coop', methods=['GET'])
 def get_role():
     query = '''
-        SELECT c.coopId, c.title, cp.companyName, c.description, c.locationCity AS city, c.locationCountry AS country
+        SELECT c.coopId, c.title, cp.companyName, c.description, c.locationState AS state, c.locationCity AS city, c.locationCountry AS country
         FROM Coop c JOIN Company cp ON c.company = cp.companyId
      
     ''' 

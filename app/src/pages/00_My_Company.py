@@ -18,34 +18,27 @@ with col1:
     role = st.text_input('Filter by Role (Co-op ID)', placeholder='e.g. 45')
 
 with col2:
-    date_from = st.date_input('Start Date')
     company_id = st.text_input('My Company', placeholder='e.g 123')
-
-with col3:
-    date_to = st.date_input('End Date')
+    company_name = st.text_input('My Company Name', placeholder='e.g. Google')
 
 logger.info(f'role = {role}')
 logger.info(f'rating_min = {rating_min}')
-logger.info(f'date_from = {date_from}')
-logger.info(f'date_to = {date_to}')
+logger.info(f'company_id = {company_id}')
+logger.info(f'company_name = {company_name}')
 
 
 if st.button('Get Reviews', 
              type='primary', 
              use_container_width=True):
-    url = f'http://api:4000/rev/reviews/{company_id}'
+    url = f'http://api:4000/rev/reviews/{company_name}/{company_id}'
     filters = {}
     #need to add a line so it only filters by the users company
     if role:
         filters['role'] = role
     if rating_min > 0.0:
         filters['rating'] = rating_min
-    if date_from:
-        filters['dateFrom'] = date_from.strftime('%Y-%m-%d')
-    if date_to:
-        filters['dateTo'] = date_to.strftime('%Y-%m-%d')
 
-    response = requests.get(url, params=filters)
+    response = requests.get(url, params=filters).json()
     logger.info(response)
     st.dataframe(response)
 

@@ -33,6 +33,13 @@ def get_reviews():
         filters.append(f"r.wouldRecommend = {request.args.get('wouldRecommend').lower() == 'true'}")
     if request.args.get('salary'):
         filters.append(f"r.salary >= {request.args.get('salary')}")
+    if request.args.get('coopLevel'):
+        filters.append(f"s.coopLevel = {request.args.get('coopLevel')}")
+    if request.args.get('major'):
+        filters.append(f"s.major = '{request.args.get('major')}'")
+    if request.args.get('year'):
+        filters.append(f"s.year = {request.args.get('year')}")  
+
 
     if filters:
         query += " WHERE " + " AND ".join(filters)

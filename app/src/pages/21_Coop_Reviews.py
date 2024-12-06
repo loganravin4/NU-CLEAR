@@ -23,18 +23,12 @@ with col2:
     is_anonymous = st.checkbox('Show Only Anonymous Reviews')
     would_recommend = st.checkbox('Would Recommend')
 
-with col3:
-    date_from = st.date_input('Start Date')
-    date_to = st.date_input('End Date')
-
 logger.info(f'created_by = {created_by}')
 logger.info(f'role = {role}')
 logger.info(f'rating_min = {rating_min}')
 logger.info(f'salary_min = {salary_min}')
 logger.info(f'is_anonymous = {is_anonymous}')
 logger.info(f'would_recommend = {would_recommend}')
-logger.info(f'date_from = {date_from}')
-logger.info(f'date_to = {date_to}')
 
 if st.button('Get Reviews', 
              type='primary', 
@@ -53,10 +47,6 @@ if st.button('Get Reviews',
         filters['isAnonymous'] = 'true'
     if would_recommend:
         filters['wouldRecommend'] = 'true'
-    if date_from:
-        filters['dateFrom'] = date_from.strftime('%Y-%m-%d')
-    if date_to:
-        filters['dateTo'] = date_to.strftime('%Y-%m-%d')
 
     response = requests.get(url, params=filters)
     logger.info(response)

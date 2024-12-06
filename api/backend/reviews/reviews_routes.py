@@ -31,12 +31,6 @@ def get_reviews():
         filters.append(f"wouldRecommend = {request.args.get('wouldRecommend').lower() == 'true'}")
     if request.args.get('salary'):
         filters.append(f"salary >= {request.args.get('salary')}")
-    if request.args.get('dateFrom') and request.args.get('dateTo'):
-        filters.append(f"createdAt BETWEEN '{request.args.get('dateFrom')}' AND '{request.args.get('dateTo')}'")
-    elif request.args.get('dateFrom'):
-        filters.append(f"createdAt >= '{request.args.get('dateFrom')}'")
-    elif request.args.get('dateTo'):
-        filters.append(f"createdAt <= '{request.args.get('dateTo')}'")
 
     if filters:
         query += " WHERE " + " AND ".join(filters)

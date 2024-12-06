@@ -18,11 +18,12 @@ city = st.text_input("Location City")
 state = st.text_input("Location State")
 country = st.text_input("Location Country")
 
+url = f'http://api:4000/coop/coop'
+filters = {}
+
 if st.button('Add New Co-op Listing', 
              type='primary', 
              use_container_width=True):
-    url = f'http://api:4000/coop/coop'
-    filters = {}
     #need to add a line so it only filters by the users company
     if not all([company_id,title,desc,city,state,country]):
         st.error("All required fields must be filled!")
@@ -33,6 +34,24 @@ if st.button('Add New Co-op Listing',
             "locationCountry": country,
             "title": title,
             "description": desc,
+            "company": company_id
+        }
+
+        response = requests.post(url, json=filters)
+        logger.info(response)
+        if response.status_code == 200:
+            st.success("Co-op succesfully added to co op listings!")
+        else:
+            st.error(f"Failed to add to listings. Error: {response.status_code} - {response.text}")
+            
+if st.button("Update location", type='primary', use_container_width=True):
+    if not all([company_id,city,state,country]):
+        st.error("Company id, city, state, and country required to update!")
+    else:
+        filters = {
+            "locationCity": city,
+            "locationState": state,
+            "locationCountry": country,
             "company": company_id
         }
 

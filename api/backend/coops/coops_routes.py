@@ -62,6 +62,30 @@ def add_role():
     return response
 
 #------------------------------------------------------------
+# Update a coop listing
+@coop.route('/coop', methods=['PUT'])
+def update_location():        
+    the_data = request.json
+    query = f'''
+    UPDATE Coop
+    SET 
+        locationCity = {the_data['locationCity']}
+        locationState = {the_data['locationState']}
+        locationCountry = {the_data['locationCountry']}
+    WHERE 
+        company = '{the_data['company']}'
+    '''
+
+    
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
+    response = make_response("Location updated successfully")
+    response.status_code = 200
+    return response
+
+#------------------------------------------------------------
 # Return a list of favorited/saved jobs
 @coop.route('/favorites/<user_id>', methods=['GET'])
 def get_favorites(user_id):

@@ -59,6 +59,8 @@ def AdvisorHomeNav():
 
     st.sidebar.page_link("pages/03_Coop_Reviews.py", label="Co-op Reviews")
 
+    st.sidebar.page_link("pages/03_See_User_Favorites.py", label="See Student\'s Favorites")
+
     st.sidebar.page_link("pages/03_Student_Recs.py", label="Recommend Co-ops")
 
     st.sidebar.page_link("pages/03_View_Announcements.py", label="View Announcements")

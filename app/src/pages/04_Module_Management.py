@@ -14,14 +14,21 @@ SideBarLinks()
 
 st.title(f"Manage Modules")
 
-# search for a module
-search = st.text_input("Search for a module...", "")
-button_clicked = st.button("OK")
+url = f'http://api:4000/adm/modules'
 
 # popover to add a new module
-st.popover("Assign a new module", help=None, icon=None, disabled=False, use_container_width=False)
+with st.popover("Assign a new module", help=None, icon=None, disabled=False, use_container_width=False):
+    moduleName = st.text_input("Module Name:")
+    createdBy = st.text_input("System Admin Id")
+    if st.button("Assign"):
+        filters = {
+            "moduleName": moduleName,
+            "moduleStatus": 'pending',
+            "createdBy": createdBy
+        }
+        requests.post(url, json=filters)
 
-results = requests.get('http://api:4000/adm/modules').json()
+results = requests.get(url).json()
 
 df = pd.DataFrame(results)
 

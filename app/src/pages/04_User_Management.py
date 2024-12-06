@@ -14,15 +14,9 @@ SideBarLinks()
 
 st.title(f"Manage Users")
 
-# search for a module
-search = st.text_input("Search for a user by name...", "")
-button_clicked = st.button("OK")
-
 url = f'http://api:4000/adm/user_permissions'
 
 results = requests.get(url, params=None).json()
 logger.info(results)
 
 st.dataframe(results)
-
-

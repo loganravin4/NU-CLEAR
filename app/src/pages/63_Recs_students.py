@@ -18,7 +18,7 @@ student_id = st.text_input("Student ID")
 if st.button('Post Summary', 
              type='primary', 
              use_container_width=True):
-    url = 'http://api:4000/favorites/{user_id}'
+    url = f'http://api:4000/favorites/{user_id}'
     filters = {}
     #need to add a line so it only filters by the users company
     if not all([student_id,job_id]):

@@ -70,12 +70,12 @@ def update_coop():
     UPDATE Coop
     SET 
         title = '{the_data['title']}'
-        description = '{the_data['description']}'
-        locationCity = '{the_data['locationCity']}'
-        locationState = '{the_data['locationState']}'
-        locationCountry = '{the_data['locationCountry']}'
+        description = '{the_data['desc']}'
+        locationCity = '{the_data['city']}'
+        locationState = '{the_data['state']}'
+        locationCountry = '{the_data['country']}'
     WHERE 
-        coopId = '{the_data['coopId']}'
+        coopId = {the_data['coopId']}
     '''
 
     

@@ -48,7 +48,7 @@ def StudentHomeNav():
 
     st.sidebar.page_link("pages/02_User_Reviews.py", label="User Reviews")
 
-    st.sidebar.page_link("pages/02_Favorited_Jobs.py", label="Favorited Jobs")
+    st.sidebar.page_link("pages/02_Favorited_Jobs.py", label="Favorited Co-ops")
 
  
 #### ------------------------ Advisor Role ------------------------

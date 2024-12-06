@@ -9,7 +9,7 @@ st.set_page_config(layout='wide')
 
 SideBarLinks()
 
-st.title("Your Favorited Jobs")
+st.title("Your Favorited Co-ops")
 
 user_id = st.text_input("Enter your User ID", placeholder="e.g., 123")
 
@@ -18,7 +18,7 @@ if user_id:
     response = requests.get(url).json()
 
     if response:
-        st.subheader("Favorited Jobs")
+        st.subheader("Favorited Co-ops")
         st.dataframe(response)
 
         coop_id_to_delete = st.text_input("Enter the Coop ID to remove from favorites", placeholder="e.g., 45")
@@ -34,10 +34,10 @@ if user_id:
                     if response:
                         st.dataframe(response)
                     else:
-                        st.warning("You haven't favorited any jobs yet!")
+                        st.warning("You haven't favorited any co-ops yet!")
                 else:
                     st.error(f"Failed to remove coop. Error: {delete_response.text}")
             else:
                 st.error("Please enter a Coop ID to remove.")
     else:
-        st.warning("You haven't favorited any jobs yet!")
+        st.warning("You haven't favorited any co-ops yet!")

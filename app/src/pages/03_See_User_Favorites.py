@@ -18,8 +18,8 @@ if user_id:
     response = requests.get(url).json()
 
     if response:
-        st.subheader("Favorited Jobs")
+        st.subheader("Favorited Co-ops")
         st.dataframe(response)
 
     else:
-        st.warning("You haven't favorited any jobs yet!")
+        st.warning("The student hasn't favorited any co-ops yet!")

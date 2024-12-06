@@ -15,7 +15,7 @@ col1, col2 = st.columns(2)
 
 with col1:
     created_by = st.text_input('Filter by Created By (User ID)', placeholder='e.g., 123')
-    role = st.text_input('Filter by Role (Job ID)', placeholder='e.g., 45')
+    role = st.text_input('Filter by Role (Co-op ID)', placeholder='e.g., 45')
 
 with col2:
     rating_min = st.number_input('Minimum Rating', min_value=0.0, max_value=5.0, step=0.5)

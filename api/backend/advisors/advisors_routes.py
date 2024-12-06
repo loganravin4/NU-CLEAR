@@ -32,7 +32,7 @@ def get_announcements(advisor_id):
 
 
 #------------------------------------------------------------
-# Get a list of favorited/recommended jobs for a specific student
+# Get a list of favorited/recommended coops for a specific student
 @advisor.route('/student_dashboard/<user_id>/favorites', methods=['GET'])
 def get_students(studentId):
     the_data = request.json
@@ -53,20 +53,19 @@ def get_students(studentId):
     return the_response
 
 #------------------------------------------------------------
-# Inserts list of recomended jobs into the students favorite 
-@advisor.route('/recommendations/<student_id>', methods=['POST'])
-def add_favorite(student_id):
+# Insert a favorited/recommended coop for a specific student
+@advisor.route('/student_dashboard/<user_id>/favorites', methods=['POST'])
+def get_students(user_id):
     the_data = request.json
 
     cursor = db.get_db().cursor()
-    cursor.execute(f'''
-        INSERT INTO Favorite (studentId, jobId)
-        VALUES ('{the_data["studentId"]}', '{the_data["jobId"]}')
+    cursor.execute(f'''INSERT INTO Favorite (userId, coopId)
+                        VALUES ({user_id}, {the_data["coopId"]})
     ''')
     
     theData = cursor.fetchall()
     
-    the_response = make_response('Advisor recommended a job to a student' )
+    the_response = make_response(jsonify(theData))
     the_response.status_code = 200
     return the_response
 
@@ -80,7 +79,7 @@ def get_announcements():
                         FROM Announcement
     ''')
     
-    theData = cursor.fetchall()
+    db.get_db().commit()
     
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200

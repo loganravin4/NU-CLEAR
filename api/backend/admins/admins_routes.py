@@ -61,22 +61,14 @@ def get_user_perms():
     return response
 
 #------------------------------------------------------------
-# Add a new user and permissions 
+# Add a new user 
 @admin.route('/user_permissions', methods=['POST'])
 def add_user_perms (userId):
     the_data = request.json
     query = f'''
-    INSERT INTO Permission (
-        createdBy, userType, canEditPerms, canEditModule, canEditAccSettings, 
-        canCreateReview, canCreateCoopListing, canCreateModule, canViewReview, 
-        canViewCoopListing, canViewModule, canDeleteReview, canDeleteCoopListing, canDeleteModule
-    )
+    INSERT INTO User (userType)
     VALUES (
-        {userId}, '{the_data['userType']}', {the_data['canEditPerms']}, {the_data['canEditModule']}, 
-        {the_data['canEditAccSettings']}, {the_data['canCreateReview']}, {the_data['canCreateCoopListing']}, 
-        {the_data['canCreateModule']}, {the_data['canViewReview']}, {the_data['canViewCoopListing']}, 
-        {the_data['canViewModule']}, {the_data['canDeleteReview']}, {the_data['canDeleteCoopListing']}, 
-        {the_data['canDeleteModule']}
+        {the_data['userType']}
     )
     '''
 
@@ -85,7 +77,7 @@ def add_user_perms (userId):
     cursor.execute(query)
     db.get_db().commit()
 
-    response = make_response("Permission created successfully")
+    response = make_response("User added successfully")
     response.status_code = 200
     return response
 

@@ -31,5 +31,5 @@ if st.button("Add Visualization"):
         }
 
     
-        api = f'http://localhost:4000/analysis/visualization/{company_id}'
+        api = f'http://api:4000/rev/analysis/visualization/{company_id}'
         response = requests.post(api, json=data)

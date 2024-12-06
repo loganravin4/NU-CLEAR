@@ -33,7 +33,7 @@ if st.button("Add Summary"):
         if updated_by.strip():   
                 data["updatedBy"] = updated_by
 
-        api = f'http://localhost:4000/analysis/summary_report/{company_id}'
+        api = f'http://api:4000/rev/analysis/summary_report/{company_id}'
         response = requests.post(api, json=data)
 
     

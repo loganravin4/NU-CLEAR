@@ -36,7 +36,7 @@ if st.button('Get Reviews',
         st.error("Company Name is required.")
     url = f'http://api:4000/rev/reviews/{company_name}/{company_id}'
     filters = {}
-    #need to add a line so it only filters by the users company
+    
     if role:
         filters['role'] = role
     if rating_min > 0.0:

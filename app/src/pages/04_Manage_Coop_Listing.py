@@ -9,7 +9,7 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()  
 
-st.title('Publish a Co-op Listing')
+st.title('Publish or Delete a Co-op Listing')
 
 company_id = st.text_input("Company ID")
 title = st.text_input("Title")
@@ -36,9 +36,13 @@ if st.button('Add New Co-op Listing',
             "company": company_id
         }
 
-    response = requests.post(url, json=filters)
-    logger.info(response)
-    if response.status_code == 200:
-        st.success("Job succesfully added to co op listings!")
-    else:
-        st.error(f"Failed to add to listings. Error: {response.status_code} - {response.text}")
+        response = requests.post(url, json=filters)
+        logger.info(response)
+        if response.status_code == 200:
+            st.success("Job succesfully added to co op listings!")
+        else:
+            st.error(f"Failed to add to listings. Error: {response.status_code} - {response.text}")
+
+reviewId = st.text_input("Review Id: ")
+userId = st.text_input("User Id of reviewer: ")
+

@@ -16,11 +16,15 @@ st.title(f"Manage Modules")
 
 url = f'http://api:4000/adm/modules'
 
+def clear_text():
+  st.session_state["text1"] = ''
+  st.session_state["text2"] = ''
+
 # popover to add a new module
 with st.popover("Assign a new module", help=None, icon=None, disabled=False, use_container_width=False):
-    moduleName = st.text_input("Module Name:")
-    createdBy = st.text_input("System Admin Id")
-    if st.button("Assign"):
+    moduleName = st.text_input("Module Name:", key="text1")
+    createdBy = st.text_input("System Admin Id", key="text2")
+    if st.button("Assign", on_click=clear_text):
         filters = {
             "moduleName": moduleName,
             "moduleStatus": 'pending',

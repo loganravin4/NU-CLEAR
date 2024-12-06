@@ -37,8 +37,8 @@ if st.button('Get Reviews',
    
     if role:
         filters['role'] = role
-    if company:
-        filters['company'] = company
+    if company_id:
+        filters['company'] = company_id
     if date_from:
         filters['dateFrom'] = date_from.strftime('%Y-%m-%d')
     if date_to:

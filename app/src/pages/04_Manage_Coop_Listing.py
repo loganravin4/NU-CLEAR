@@ -65,7 +65,7 @@ if st.button("Update Announcement"):
         }
     url = 'http://api:4000/coop/coop'
 
-    response = requests.delete(url, json=data)
+    response = requests.put(url, json=data)
     if response.status_code == 200:
         st.success("Co-op listing updated succesfully!")
     else:
@@ -77,7 +77,7 @@ st.title('Delete Co-op Listing')
 coopId = st.text_input("Co-op ID To Delete")
 
 
-if st.button("Delete Announcement"):
+if st.button("Delete Co-op Listing"):
     if not all([coopId]):
         st.error("All required fields must be filled!")
     else:
@@ -88,6 +88,6 @@ if st.button("Delete Announcement"):
 
     response = requests.delete(url, json=data)
     if response.status_code == 200:
-        st.success("Announcement deleted succesfully!")
+        st.success("Co-op listing deleted succesfully!")
     else:
-        st.error(f"Failed to delete announcement. Error: {response.status_code} - {response.text}")
+        st.error(f"Failed to delete co-op listing. Error: {response.status_code} - {response.text}")

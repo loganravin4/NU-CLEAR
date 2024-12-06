@@ -45,7 +45,7 @@ if submitted:
             "isAnonymous": is_anonymous
         }
 
-    url = f"http://api:4000/rev/reviews/{user_id}"
+    url = f"http://api:4000/rev/reviews/{st.session_state['first_name']}/{user_id}"
 
     response = requests.post(url, json=review_data)
     logger.info(response)

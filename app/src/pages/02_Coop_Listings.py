@@ -47,4 +47,4 @@ if st.button('Find Co-ops',
 if st.button('Add Job Listing to Favorites List',
              type='primary',
              use_container_width=True):
-    st.switch_page('pages/02_Favorited_Jobs.py')
+    st.switch_page('pages/02_Add_Favorited_Jobs.py')

@@ -51,10 +51,11 @@ def get_reviews():
 def get_user_reviews(user_firstName, user_id):
     query = f'''
         SELECT r.reviewId, r.role,r.salary, r.rating, 
-               r.summary, {user_firstName}, s.lastName, 
+               r.summary, s.firstName, s.lastName, 
                s.major, s.coopLevel, s.year
         FROM Review r
-        JOIN Student s ON r.createdBy = s.{user_id}
+        JOIN Student s ON r.createdBy = {user_id}
+        WHERE s.firstName = '{user_firstName}'
     '''     
 
     cursor = db.get_db().cursor()

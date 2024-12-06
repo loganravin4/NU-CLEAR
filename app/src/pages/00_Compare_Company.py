@@ -16,7 +16,6 @@ col1, col2, col3 = st.columns(3)
 with col1:
     company_id = st.text_input('My Company (CompanyId)', placeholder= 'e.g, 123')
     role = st.text_input('Filter by What Role (Job ID)', placeholder='e.g., 45')
-    
 
 with col2:
     date_from = st.date_input('Start Date')

@@ -74,15 +74,15 @@ def get_favorites(user_id):
         JOIN Coop c ON f.coopId = c.coopId
         JOIN Company cmp ON c.company = cmp.companyId
         WHERE f.userId = {user_id}
-        ORDER BY c.title ASC
+        ORDER BY c.title ASC 
     '''
     cursor = db.get_db().cursor()
-    cursor.execute(query)
+    cursor.execute(query) 
     theData = cursor.fetchall()
     response = make_response(jsonify(theData))
-    response.status_code = 200
-    return response
-
+    response.status_code = 200   
+    return response   
+ 
 #------------------------------------------------------------
 # Add a job to the favorites list
 @coop.route('/favorites/<user_id>', methods=['POST'])

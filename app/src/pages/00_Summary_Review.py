@@ -9,13 +9,13 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()  
 
-st.title('Summaries of my Companies Data')
+st.title('Summary of My Company\'s Reviews')
 
 col1, col2, col3 = st.columns(3)
 
 with col1:
     avg_rating = st.checkbox('Show Average Ratings by Year')
-    count = st.checkbox('Count of bad reviews and good reviews')
+    count = st.checkbox('Count of Bad and Good Reviews')
     
 with col2:
     top_benefit = st.checkbox('Show Top Benefit')

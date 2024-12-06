@@ -138,12 +138,13 @@ List all required secrets and their purposes.
 
 ## **Team Members**
 
-| **Name**          | **Role**               |  
+| **Name**          | **Email**               |  
 |--------------------|------------------------|  
-| Alice Johnson      | Project Manager       |  
-| Bob Smith          | Backend Developer     |  
-| Charlie Davis      | Frontend Developer    |  
-| Dana Lee           | DevOps Engineer       |  
+| Diya Ganesh      | ganesh.di@northeastern.edu       |  
+| Thillainayaki Sudhakar          | sudhakar.th@northeastern.edu     |  
+| Logan Ravinuthala      | ravinuthala.l@northeastern.edu    |  
+| Diya Kadakia           | kadakia.d@northeastern.edu       |  
+| Deekshita Madhalam           | madhalam.d@northeastern.edu       |  
 
 ---
 

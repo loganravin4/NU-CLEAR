@@ -11,7 +11,7 @@ def HomeNav():
 
 
 def AboutPageNav():
-    st.sidebar.page_link("pages/30_About.py", label="About")
+    st.sidebar.page_link("pages/About.py", label="About")
 
 
 #### ------------------------ Employer Role ------------------------

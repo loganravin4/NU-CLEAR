@@ -17,25 +17,29 @@ def get_role():
     query = '''
         SELECT c.coopId, c.title, cp.companyName, c.description, c.locationState AS state, c.locationCity AS city, c.locationCountry AS country
         FROM Coop c JOIN Company cp ON c.company = cp.companyId
-     
     ''' 
 
     filters = []
+
     if request.args.get('title'):
-        filters.append(f"title = {request.args.get('title')}")
+        filters.append(f"c.title = '{request.args.get('title')}'")
     if request.args.get('locationCity'):
-        filters.append(f"locationCity = {request.args.get('locationCity')}")
+        filters.append(f"c.locationCity = '{request.args.get('locationCity')}'")
     if request.args.get('locationState'):
-        filters.append(f"locationState = {request.args.get('locationState')}")
+        filters.append(f"c.locationState = '{request.args.get('locationState')}'")
     if request.args.get('locationCountry'):
-        filters.append(f"locationCountry = {request.args.get('locationCountry')}")
+        filters.append(f"c.locationCountry = '{request.args.get('locationCountry')}'")
+
+    if filters:
+        query += " WHERE " + " AND ".join(filters)
 
     cursor = db.get_db().cursor()
     cursor.execute(query)
     theData = cursor.fetchall()
     response = make_response(jsonify(theData))
     response.status_code = 200
-    return response 
+    return response
+ 
 
 #------------------------------------------------------------
 # Add a new co-op listing 
@@ -76,6 +80,7 @@ def get_favorites(user_id):
         WHERE f.userId = {user_id}
         ORDER BY c.title ASC 
     '''
+
     cursor = db.get_db().cursor()
     cursor.execute(query) 
     theData = cursor.fetchall()

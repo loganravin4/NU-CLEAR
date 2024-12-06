@@ -48,7 +48,7 @@ if st.button("Delete Announcement"):
 
     response = requests.delete(url, json=data)
     if response.status_code == 200:
-        st.success("Announcement posted succesfully!")
+        st.success("Announcement deleted succesfully!")
     else:
         st.error(f"Failed to delete announcement. Error: {response.status_code} - {response.text}")
  

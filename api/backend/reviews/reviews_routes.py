@@ -23,14 +23,16 @@ def get_reviews():
     '''
  
     filters = []
+    if request.args.get('createdBy'):
+        filters.append(f"r.createdBy = {request.args.get('createdBy')}")
     if request.args.get('role'):
-        filters.append(f"role = {request.args.get('role')}")
+        filters.append(f"r.role = {request.args.get('role')}")
     if request.args.get('rating'):
-        filters.append(f"rating >= {request.args.get('rating')}")
+        filters.append(f"r.rating >= {request.args.get('rating')}")
     if request.args.get('wouldRecommend'):
-        filters.append(f"wouldRecommend = {request.args.get('wouldRecommend').lower() == 'true'}")
+        filters.append(f"r.wouldRecommend = {request.args.get('wouldRecommend').lower() == 'true'}")
     if request.args.get('salary'):
-        filters.append(f"salary >= {request.args.get('salary')}")
+        filters.append(f"r.salary >= {request.args.get('salary')}")
 
     if filters:
         query += " WHERE " + " AND ".join(filters)
@@ -125,12 +127,12 @@ def delete_user_reviews(user_id, review_id):
 @review.route('/reviews/<companyName>/<company_id>', methods = ['GET'])
 def get_company_reviews(companyName, company_id):
     query = f'''
-        SELECT r.reviewId, r.createdAt, c.companyName, r.rating, 
+        SELECT r.reviewId, r.createdAt, cp.companyName, r.rating, 
                r.summary, r.bestPart, r.worstPart
         FROM Review r
         JOIN Coop c ON r.role = c.coopId
         JOIN Company cp ON c.company = cp.companyId
-        WHERE c.company = {company_id} AND cp.companyName = '{companyName}'
+        WHERE cp.companyId = {company_id} AND cp.companyName = '{companyName}'
         ORDER BY r.createdAt DESC
     '''
 
@@ -167,23 +169,19 @@ def get_role_reviews(company_id, coop_id):
 # ------------------------------------------------------------
 # Returns reviews for other companies to compare it to my company
 @review.route('/reviews/compare/<company_id>', methods = ['GET'])
-def get_company_comparisons(company_id, compare_company_id):
-    query = '''
-       SELECT r.reviewId, r.createdAt, r.role, r.salary, r.rating, 
+def get_company_comparisons(company_id):
+    role = request.args.get('role', None)
+    query = f'''
+       SELECT c.company, r.reviewId, r.createdAt, r.role, r.salary, r.rating, 
                r.summary, r.bestPart, r.worstPart
         FROM Review r
-        JOIN Coop c ON r.role = c.jobId
-        WHERE c.companyId = {company_id}
-        ORDER BY r.createdAt DESC
-
-        SELECT r.reviewId, r.createdAt, r.role, r.salary, r.rating, 
-               r.summary, r.bestPart, r.worstPart
-        FROM Review r
-        JOIN Coop c ON r.role = c.jobId
-        JOIN Company cp ON c.company = cp.companyId
-        WHERE c.company = {compare_company_id}
-        ORDER BY r.createdAt DESC
+        JOIN Coop c ON r.role = c.coopId
+        WHERE c.company != {company_id}
     '''
+    if role:
+        query += f" AND r.role = {role}"
+
+    query += " ORDER BY r.createdAt DESC"
 
     cursor = db.get_db().cursor()
     cursor.execute(query)
@@ -200,19 +198,18 @@ def get_company_comparisons(company_id, compare_company_id):
 @review.route('/analysis/summary_report/<company_id>', methods = ['GET'])
 
 def get_analysis_report_and_reviews(company_id):
-    query = '''
+    query = f'''
     SELECT  
         SUM(r.rating < 3) AS bad_reviews_count,
         SUM(r.rating >= 3) AS good_reviews_count,
         sr.company, 
         sr.generatedSummary
     FROM Review r
-    JOIN Coop c ON r.role = c.jobId
+    JOIN Coop c ON r.role = c.coopId
     JOIN Company co ON c.company = co.companyId
     JOIN SummaryReport sr ON co.companyId = sr.company
     WHERE co.companyId = {company_id}
-    GROUP BY sr.company, sr.generatedSummary;
-
+    GROUP BY sr.company, sr.generatedSummary
     '''  
 
     cursor = db.get_db().cursor()

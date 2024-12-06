@@ -18,19 +18,28 @@ url = f'http://api:4000/adm/user_permissions'
 
 def clear_text():
   st.session_state["text1"] = ''
-  st.session_state["text2"] = ''
   st.session_state["text3"] = ''
   st.session_state["text4"] = ''
 
 # popover to add a new permission type
 with st.popover("Add a new user", help=None, icon=None, disabled=False, use_container_width=True):
-    userType = st.text_input("User Type:", key="text2")
+    userType = st.selectbox("User Type:", 
+                            ('SystemAdmin', 'Student', 'Advisor',
+                             'Employer', 'DataAnalyst'))
     
     if st.button("Add", on_click=clear_text):
         filters = {
             "userType": userType,
         }
         requests.post(url, json=filters)
+        
+with st.popover("Delete a user", help=None, icon=None, disabled=False, use_container_width=True):
+    userId = st.text_input("User Id:", key="text4")
+    if st.button("Delete", on_click=clear_text):
+        filters = {
+            "userId": userId
+        }
+        requests.delete(url, json=filters)
 
 # popover to update permission
 with st.popover("Update a permission", help=None, icon=None, disabled=False, use_container_width=True):
@@ -73,14 +82,6 @@ with st.popover("Update a permission", help=None, icon=None, disabled=False, use
             "canDeleteModule": canDeleteModule
         }
         requests.put(url, json=filters)
-
-with st.popover("Delete a user", help=None, icon=None, disabled=False, use_container_width=True):
-    userId = st.text_input("User Id:", key="text4")
-    if st.button("Delete", on_click=clear_text):
-        filters = {
-            "userId": userId
-        }
-        requests.delete(url, json=filters)
 
 results = requests.get(url, params=None).json()
 logger.info(results)

@@ -72,7 +72,6 @@ def add_user_perms (userId):
     )
     '''
 
-    
     cursor = db.get_db().cursor()
     cursor.execute(query)
     db.get_db().commit()

@@ -19,7 +19,7 @@ def get_reviews():
                summary, bestPart, worstPart, wouldRecommend, 
                s.major, s.coopLevel, s.year
         FROM Review r 
-        JOIN Students s on r.createdBy = s.userId 
+        JOIN Student s on r.createdBy = s.userId 
     '''
  
     filters = []

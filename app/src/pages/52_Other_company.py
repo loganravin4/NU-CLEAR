@@ -14,7 +14,7 @@ st.title('Other Companies Reviews to Compare')
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    company = st.text_input('My Company (CompanyId)', placeholder= 'e.g, 123')
+    company_id = st.text_input('My Company (CompanyId)', placeholder= 'e.g, 123')
     role = st.text_input('Filter by What Role (Job ID)', placeholder='e.g., 45')
 
 with col2:
@@ -24,7 +24,7 @@ with col3:
     date_to = st.date_input('End Date')
 
 logger.info(f'role = {role}')
-logger.info(f'rating_min = {company}')
+logger.info(f'rating_min = {company_id}')
 logger.info(f'date_from = {date_from}')
 logger.info(f'date_to = {date_to}')
 
@@ -32,7 +32,7 @@ logger.info(f'date_to = {date_to}')
 if st.button('Get Reviews', 
              type='primary', 
              use_container_width=True):
-    url = 'http://api:4000/reviews/compare/{company_id}'
+    url = 'http://api:4000/rev/reviews/compare/{company_id}'
     filters = {}
    
     if role:

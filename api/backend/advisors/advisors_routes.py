@@ -103,7 +103,7 @@ def post_announcement():
 #------------------------------------------------------------
 # Update an announcement
 @advisor.route('/announcements', methods=['PUT'])
-def post_announcement():
+def put_announcement():
     the_data = request.json
 
     cursor = db.get_db().cursor()

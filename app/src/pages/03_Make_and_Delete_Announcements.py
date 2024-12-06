@@ -48,7 +48,7 @@ if st.button("Update Announcement"):
         }
     url = 'http://api:4000/advi/announcements'
 
-    response = requests.delete(url, json=data)
+    response = requests.put(url, json=data)
     if response.status_code == 200:
         st.success("Announcement updated succesfully!")
     else:

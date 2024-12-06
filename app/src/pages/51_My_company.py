@@ -34,7 +34,7 @@ logger.info(f'date_to = {date_to}')
 if st.button('Get Reviews', 
              type='primary', 
              use_container_width=True):
-    url = 'http://api:4000/reviews/{company_id}'
+    url = f'http://api:4000/rev/reviews/{company_id}'
     filters = {}
     #need to add a line so it only filters by the users company
     if role:

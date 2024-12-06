@@ -9,7 +9,7 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()  
 
-st.title('View My Announcements')
+st.title('View Announcements')
 
 
 url = f'http://api:4000/advi/announcements'

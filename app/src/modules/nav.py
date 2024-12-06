@@ -20,16 +20,16 @@ def EmployerHomeNav():
 
     st.sidebar.page_link("pages/00_My_Company.py", label="My Company")
 
-    st.sidebar.page_link("pages/00_Compare_Company.py", label="Other Companies")
+    st.sidebar.page_link("pages/00_Compare_Company.py", label="Compare With Other Companies")
 
-    st.sidebar.page_link("pages/00_Summary_Review.py", label="Overall Reviews")
+    st.sidebar.page_link("pages/00_Summary_Review.py", label="Review Summary")
 
 
 #### ------------------------ Data Analyst Role ------------------------
 def DataAnalystHomeNav():
     st.sidebar.page_link("pages/01_Data_Analyst_Home.py", label="Data Analyst Home")
 
-    st.sidebar.page_link("pages/01_Coop_Review_by_Demographic.py", label = "Co-op Reviews by Demographics")
+    st.sidebar.page_link("pages/01_Coop_Review_by_Demographic.py", label = "Co-op Reviews by Demographic")
     
     st.sidebar.page_link("pages/01_Summary_Report.py", label="Add Summary Report")
 
@@ -46,9 +46,9 @@ def StudentHomeNav():
  
     st.sidebar.page_link("pages/02_Create_Review.py", label="Create a Review")
 
-    st.sidebar.page_link("pages/02_User_Reviews.py", label="User Reviews")
+    st.sidebar.page_link("pages/02_User_Reviews.py", label="My Reviews")
 
-    st.sidebar.page_link("pages/02_Favorited_Jobs.py", label="Favorited Co-ops")
+    st.sidebar.page_link("pages/02_Favorited_Jobs.py", label="My Favorites")
 
  
 #### ------------------------ Advisor Role ------------------------
@@ -75,7 +75,7 @@ def AdminPageNav():
 
     st.sidebar.page_link("pages/04_Module_Management.py", label="Manage Modules") 
 
-    st.sidebar.page_link("pages/04_Manage_Coop_Listing.py", label="Publish a Co-op listing")
+    st.sidebar.page_link("pages/04_Manage_Coop_Listing.py", label="Manage Co-op Listings")
     
     st.sidebar.page_link("pages/04_Delete_Flagged_Review.py", label="Delete Flagged Reviews")
     

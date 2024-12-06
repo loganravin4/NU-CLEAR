@@ -23,6 +23,11 @@ if st.button('Manage Modules',
              type='primary',
              use_container_width=True):
   st.switch_page('pages/04_Module_Management.py')
+  
+if st.button('Publish a Co-op Listing', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/04_Add_Coop_Listing.py')
 
 ## this last button can go to co op listing page, 
 

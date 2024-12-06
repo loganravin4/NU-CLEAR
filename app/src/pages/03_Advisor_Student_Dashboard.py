@@ -25,7 +25,7 @@ if st.button("Search",type='primary',
             filters['userId'] = user_id
 
 
-        url = f'http://api:4000/coop/favorites/{user_id}'
+        url = f'http://api:4000/student_dashboard'
 
         response = requests.get(url, params=filters).json()
         logger.info(response)

@@ -95,7 +95,7 @@ def delete_coop():
     the_data = request.json
     query = f'''
     DELETE FROM Coop
-    WHERE coopId = '{the_data['coopId']}'
+    WHERE coopId = {the_data['coopId']}
     '''
 
     

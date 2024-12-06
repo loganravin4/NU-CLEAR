@@ -124,12 +124,12 @@ def delete_user_reviews(user_id, review_id):
 @review.route('/reviews/<companyName>/<company_id>', methods = ['GET'])
 def get_company_reviews(companyName, company_id):
     query = f'''
-        SELECT r.reviewId, r.createdAt, {companyName}, r.rating, 
+        SELECT r.reviewId, r.createdAt, c.companyName, r.rating, 
                r.summary, r.bestPart, r.worstPart
         FROM Review r
         JOIN Coop c ON r.role = c.coopId
         JOIN Company cp ON c.company = cp.companyId
-        WHERE c.company = {company_id}
+        WHERE c.company = {company_id} AND cp.companyName = '{companyName}'
         ORDER BY r.createdAt DESC
     '''
 

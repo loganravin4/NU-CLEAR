@@ -18,8 +18,8 @@ with col1:
     city = st.text_input('Location City', placeholder='e.g., Boston')
 
 with col2:
-    state = st.text_input('Location State', placeholder='e.g., MA')
-    country = st.text_input('Location Country', placeholder='e.g., USA')
+    state = st.text_input('Location State', placeholder='e.g., Massachusetts')
+    country = st.text_input('Location Country', placeholder='e.g., United States')
 
 logger.info(f'job_title = {job_title}')
 logger.info(f'city = {city}')
@@ -47,4 +47,4 @@ if st.button('Find Co-ops',
 if st.button('Add Job Listing to Favorites List',
              type='primary',
              use_container_width=True):
-    st.switch_page('pages/24_Favorited_Jobs.py')
+    st.switch_page('pages/02_Favorited_Jobs.py')

@@ -33,7 +33,7 @@ def post_modules():
 
     query = f'''
         INSERT INTO Module (moduleName, moduleStatus, createdBy)
-        VALUES ('{the_data["moduleName"]}', '{the_data["moduleStatus"]}', {the_data["createdBy"]}),
+        VALUES ('{the_data["moduleName"]}', '{the_data["moduleStatus"]}', {the_data["createdBy"]})
     '''
     
     cursor = db.get_db().cursor()
@@ -65,16 +65,21 @@ def get_user_perms():
 @admin.route('/user_permissions', methods=['POST'])
 def add_user_perms (userId):
     the_data = request.json
-    query = f'''INSERT INTO Permission (createdBy, userType, canEditPerms, canEditModule, canEditAccSettings, 
-                    canCreateReview, canCreateCoopListing, canCreateModule, canViewReview, canViewCoopListing, 
-                    canViewModule, canDeleteReview, canDeleteCoopListing, canDeleteModule)
-                VALUES ({userId},'{the_data['userType']}',{the_data['canEditPerms']}, {the_data['canEditModule']}, 
-                {the_data['canEditAccSettings']}, {the_data['canCreateReview']}, {the_data['canCreateCoopListing']}, 
-                {the_data['canCreateModule']}, {the_data['canViewReview']}, {the_data['canViewCoopListing']}, 
-                {the_data['canViewModule']}, {the_data['canDeleteReview']}, {the_data['canDeleteCoopListing']}, 
-                {the_data['canDeleteModule']}) 
-
+    query = f'''
+    INSERT INTO Permission (
+        createdBy, userType, canEditPerms, canEditModule, canEditAccSettings, 
+        canCreateReview, canCreateCoopListing, canCreateModule, canViewReview, 
+        canViewCoopListing, canViewModule, canDeleteReview, canDeleteCoopListing, canDeleteModule
+    )
+    VALUES (
+        {userId}, '{the_data['userType']}', {the_data['canEditPerms']}, {the_data['canEditModule']}, 
+        {the_data['canEditAccSettings']}, {the_data['canCreateReview']}, {the_data['canCreateCoopListing']}, 
+        {the_data['canCreateModule']}, {the_data['canViewReview']}, {the_data['canViewCoopListing']}, 
+        {the_data['canViewModule']}, {the_data['canDeleteReview']}, {the_data['canDeleteCoopListing']}, 
+        {the_data['canDeleteModule']}
+    )
     '''
+
     
     cursor = db.get_db().cursor()
     cursor.execute(query)
@@ -89,14 +94,25 @@ def add_user_perms (userId):
 @admin.route('/user_permissions', methods=['PUT'])
 def update_user_perms ():
     the_data = request.json
-    query = f'''UPDATE Permission
-                SET canEditPerms = {the_data['canEditPerms']}, canEditModule = {the_data['canEditModule']}, 
-                canEditAccSettings = {the_data['canEditAccSettings']}, canCreateReview = {the_data['canCreateReview']}, canCreateCoopListing = {the_data['canCreateCoopListing']}, canCreateModule = {the_data['canCreateModule']}, canViewReview = {the_data['canViewReview']}, canViewCoopListing = {the_data['canViewCoopListing']}, 
-                canViewModule = {the_data['canViewModule']}, canDeleteReview = {the_data['canDeleteReview']}, 
-                canDeleteCoopListing = {the_data['canDeleteCoopListing']}, canDeleteModule = {the_data['canDeleteModule']})
-                {the_data['canEditModule']}
-                WHERE userType = {the_data['userType']}
+    query = f'''
+    UPDATE Permission
+    SET 
+        canEditPerms = {the_data['canEditPerms']}, 
+        canEditModule = {the_data['canEditModule']}, 
+        canEditAccSettings = {the_data['canEditAccSettings']}, 
+        canCreateReview = {the_data['canCreateReview']}, 
+        canCreateCoopListing = {the_data['canCreateCoopListing']}, 
+        canCreateModule = {the_data['canCreateModule']}, 
+        canViewReview = {the_data['canViewReview']}, 
+        canViewCoopListing = {the_data['canViewCoopListing']}, 
+        canViewModule = {the_data['canViewModule']}, 
+        canDeleteReview = {the_data['canDeleteReview']}, 
+        canDeleteCoopListing = {the_data['canDeleteCoopListing']}, 
+        canDeleteModule = {the_data['canDeleteModule']}
+    WHERE 
+        userType = '{the_data['userType']}'
     '''
+
     
     cursor = db.get_db().cursor()
     cursor.execute(query)

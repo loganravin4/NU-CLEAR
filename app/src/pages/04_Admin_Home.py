@@ -28,11 +28,3 @@ if st.button('Publish a Co-op Listing',
              type='primary',
              use_container_width=True):
   st.switch_page('pages/04_Add_Coop_Listing.py')
-
-## this last button can go to co op listing page, 
-
-
-# if st.button("View Classification Demo",
-#              type='primary',
-#              use_container_width=True):
-#   st.switch_page('pages/13_Classification.py')

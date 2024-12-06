@@ -19,6 +19,7 @@ with col1:
 
 with col2:
     date_from = st.date_input('Start Date')
+    compare_company_id = st.text_input('What Company you want to compare to', placeholder='e.g. 53')
 
 with col3:
     date_to = st.date_input('End Date')

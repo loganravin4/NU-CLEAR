@@ -11,7 +11,7 @@ SideBarLinks()
 
 st.title('Make Announcement to Students')
 
-announcement = st.text_area("Start typing your announcement here")
+announcement = st.text_area("Announcement Text")
 user = st.text_input("What is your User ID?")
 
 

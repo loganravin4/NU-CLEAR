@@ -34,12 +34,12 @@ if st.button('Recommend Co-ops to Students',
              use_container_width=True):
   st.switch_page('pages/03_Student_Recs.py')
 
-if st.button('Make and Delete Announcement', 
-             type='primary', 
-             use_container_width=True):
-  st.switch_page('pages/03_Make_and_Delete_Announcements.py')
-
 if st.button('View Announcements', 
              type='primary', 
              use_container_width=True):
   st.switch_page('pages/03_View_Announcements.py')
+
+if st.button('Create, Update, Delete Announcements', 
+             type='primary', 
+             use_container_width=True):
+  st.switch_page('pages/03_Make_and_Delete_Announcements.py')

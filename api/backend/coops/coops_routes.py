@@ -12,13 +12,24 @@ coop = Blueprint('coop', __name__)
 
 #------------------------------------------------------------
 # See all roles
-@coop.route('/coops', methods=['GET'])
+@coop.route('/coop', methods=['GET'])
 def get_role():
     query = '''
         SELECT c.coopId, c.title, cp.companyName, c.description, c.locationCity AS city, c.locationCountry AS country
         FROM Coop c JOIN Company cp ON c.company = cp.companyId
      
     ''' 
+
+    filters = []
+    if request.args.get('title'):
+        filters.append(f"title = {request.args.get('title')}")
+    if request.args.get('locationCity'):
+        filters.append(f"locationCity = {request.args.get('locationCity')}")
+    if request.args.get('locationState'):
+        filters.append(f"locationState = {request.args.get('locationState')}")
+    if request.args.get('locationCountry'):
+        filters.append(f"locationCountry = {request.args.get('locationCountry')}")
+
     cursor = db.get_db().cursor()
     cursor.execute(query)
     theData = cursor.fetchall()

@@ -11,7 +11,7 @@ SideBarLinks()
 
 st.title('Co-op Reviews')
 
-col1, col2, col3 = st.columns(3)
+col1, col2 = st.columns(2)
 
 with col1:
     created_by = st.text_input('Filter by Created By (User ID)', placeholder='e.g., 123')

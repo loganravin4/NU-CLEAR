@@ -19,23 +19,17 @@ if st.button('See My Students',
              use_container_width=True):
   st.switch_page('pages/03_Advisor_Student_Dashboard.py')
 
-if st.button('Recommend Co-ops to Students', 
-             type='primary',
-             use_container_width=True):
-  st.switch_page('pages/63_Recs_students.py')
-
-if st.button('Make an Announcement', 
-             type='primary', 
-             use_container_width=True):
-  st.switch_page('pages/61_Make_announcement.py')
-
-if st.button('Delete and View Announcements', 
-             type='primary',
-             use_container_width=True):
-  st.switch_page('pages/62_Announcements.py')
-
 if st.button("View All Reviews",
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/21_Coop_Reviews.py') 
-  
+  st.switch_page('pages/02_Coop_Reviews.py') 
+
+if st.button('Recommend Co-ops to Students', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/03_Student_Recs.py')
+
+if st.button('Announcements', 
+             type='primary', 
+             use_container_width=True):
+  st.switch_page('pages/03_Announcements.py')

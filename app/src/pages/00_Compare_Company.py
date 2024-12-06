@@ -11,8 +11,8 @@ SideBarLinks()
 
 st.title('Compare With Other Companies')
 
-company_id = st.text_input('My Company (CompanyId)', placeholder= 'e.g, 123')
-role = st.text_input('Filter by What Role (Job ID)', placeholder='e.g., 45')
+company_id = st.text_input('My Company (CompanyId)', placeholder= 'e.g, 13')
+role = st.text_input('Filter by Role (Co-op ID)', placeholder='e.g., 45')
 
 logger.info(f'role = {role}')
 logger.info(f'company_id = {company_id}')

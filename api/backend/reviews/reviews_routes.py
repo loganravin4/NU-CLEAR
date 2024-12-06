@@ -19,7 +19,7 @@ def get_reviews():
                summary, bestPart, worstPart, wouldRecommend, 
                s.major, s.coopLevel, s.year
         FROM Review r 
-        JOIN Students s on r.createdBy = s.userId 
+        JOIN Student s on r.createdBy = s.userId 
     '''
  
     filters = []
@@ -60,7 +60,7 @@ def get_user_reviews(user_id):
                r.summary, s.firstName, s.lastName, 
                s.major, s.coopLevel, s.year
         FROM Review r
-        JOIN Students s ON r.createdBy = s.{user_id}
+        JOIN Student s ON r.createdBy = s.{user_id}
     '''     
 
     cursor = db.get_db().cursor()

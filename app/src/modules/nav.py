@@ -72,6 +72,8 @@ def AdminPageNav():
 
     st.sidebar.page_link("pages/04_Add_Coop_Listing.py", label="Publish a Co-op listing")
     
+    st.sidebar.page_link("pages/04_Delete_Flagged_Review.py", label="Delete Flagged Reviews")
+    
 # --------------------------------Links Function -----------------------------------------------
 def SideBarLinks(show_home=False):
     """

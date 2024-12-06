@@ -9,7 +9,7 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()  
 
-st.title('Other Companies Reviews to Compare')
+st.title('Compare With Another Company')
 
 col1, col2, col3 = st.columns(3)
 

@@ -23,14 +23,16 @@ def get_reviews():
     '''
  
     filters = []
+    if request.args.get('createdBy'):
+        filters.append(f"r.createdBy = {request.args.get('createdBy')}")
     if request.args.get('role'):
-        filters.append(f"role = {request.args.get('role')}")
+        filters.append(f"r.role = {request.args.get('role')}")
     if request.args.get('rating'):
-        filters.append(f"rating >= {request.args.get('rating')}")
+        filters.append(f"r.rating >= {request.args.get('rating')}")
     if request.args.get('wouldRecommend'):
-        filters.append(f"wouldRecommend = {request.args.get('wouldRecommend').lower() == 'true'}")
+        filters.append(f"r.wouldRecommend = {request.args.get('wouldRecommend').lower() == 'true'}")
     if request.args.get('salary'):
-        filters.append(f"salary >= {request.args.get('salary')}")
+        filters.append(f"r.salary >= {request.args.get('salary')}")
 
     if filters:
         query += " WHERE " + " AND ".join(filters)

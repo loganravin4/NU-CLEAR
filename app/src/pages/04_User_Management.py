@@ -108,7 +108,7 @@ with st.popover("Update a permission", help=None, icon=None, disabled=False, use
         }
         requests.put(url, json=filters)
 
-with st.popover("Delete a user:", help=None, icon=None, disabled=False, use_container_width=True):
+with st.popover("Delete a user", help=None, icon=None, disabled=False, use_container_width=True):
     userId = st.text_input("User Id:", key="text4")
     if st.button("Delete", on_click=clear_text):
         filters = {

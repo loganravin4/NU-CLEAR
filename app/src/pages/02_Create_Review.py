@@ -22,8 +22,6 @@ with col2:
     best_part = st.text_area("Best Part", placeholder="What was the best part of this co-op?", key="best_part")
     worst_part = st.text_area("Worst Part", placeholder="What was the worst part of this co-op?", key="worst_part")
 
-    submitted = st.form_submit_button("Submit Review")
-
 if st.button("Submit Review"):
     if not user_id:
         st.error("User ID is required.")

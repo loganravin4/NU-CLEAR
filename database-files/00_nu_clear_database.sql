@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS Review (
     reviewId INT PRIMARY KEY AUTO_INCREMENT,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     createdBy INT NOT NULL,
-    role INT NOT NULL,
+    coop INT NOT NULL,
     salary DECIMAL(6,2),
     rating FLOAT NOT NULL,
     summary TEXT,
@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS Review (
     wouldRecommend BOOLEAN NOT NULL DEFAULT true,
     FOREIGN KEY (createdBy) REFERENCES Student (userId)
         ON UPDATE cascade ON DELETE cascade,
-    FOREIGN KEY (role) REFERENCES Coop (coopId)
+    FOREIGN KEY (coop) REFERENCES Coop (coopId)
         ON UPDATE cascade ON DELETE cascade
 );
 
@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS Employer (
     firstName VARCHAR(255) NOT NULL,
     lastName VARCHAR(255) NOT NULL,
     email VARCHAR(255),
-    role VARCHAR(255),
+    title VARCHAR(255),
     department VARCHAR(255),
     company INT NOT NULL,
     FOREIGN KEY (userId) REFERENCES User (userId)

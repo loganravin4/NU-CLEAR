@@ -23,9 +23,6 @@ with col2:
     worst_part = st.text_area("Worst Part", placeholder="What was the worst part of this co-op?", key="worst_part")
 
 if st.button("Submit Review"):
-    st.session_state['authenticated'] = True
-    st.session_state['role'] = 'student'
-    
     if not user_id:
         st.error("User ID is required.")
     elif not role:
@@ -49,3 +46,7 @@ if st.button("Submit Review"):
         st.success("Review added successfully!")
     else:
         st.error(f"Failed to add review. Error: {response.status_code} - {response.text}")
+
+    st.session_state['authenticated'] = True
+    st.session_state['role'] = 'student'
+    st.switch_page('pages/02_Create_Review.py')

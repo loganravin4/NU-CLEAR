@@ -11,15 +11,11 @@ SideBarLinks()
 
 st.title('Co-op Reviews')
 
-col1, col2 = st.columns(2)
 
-with col1:
-    created_by = st.text_input('Filter by Created By (User ID)', placeholder='e.g., 123')
-    role = st.text_input('Filter by Role (Job ID)', placeholder='e.g., 45')
-
-with col2:
-    rating_min = st.number_input('Minimum Rating', min_value=0.0, max_value=5.0, step=0.5)
-    salary_min = st.number_input('Minimum Salary', min_value=0.0, value=0.0, step=500.0)
+role = st.text_input('Filter by Role (Job ID)', placeholder='e.g., 45')
+rating_min = st.number_input('Minimum Rating', min_value=0.0, max_value=5.0, step=0.5)
+salary_min = st.number_input('Minimum Salary', min_value=0.0, value=0.0, step=500.0)
+    
 
 logger.info(f'role = {role}')
 logger.info(f'rating_min = {rating_min}')

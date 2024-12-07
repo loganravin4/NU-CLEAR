@@ -34,15 +34,13 @@ if submitted:
     elif rating < 0.0 or rating > 5.0:
         st.error("Please select a valid rating between 0.0 and 5.0.")
     else:
-        is_anonymous = 1 if is_anonymous else 0
         review_data = {
             "role": role,
             "salary": salary,
             "rating": rating,
             "summary": summary,
             "bestPart": best_part,
-            "worstPart": worst_part,
-            "isAnonymous": is_anonymous
+            "worstPart": worst_part
         }
 
     url = f"http://api:4000/rev/reviews/{user_id}"

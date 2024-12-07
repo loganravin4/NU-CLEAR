@@ -1,7 +1,7 @@
 # NU-CLEAR
 
 > **Project Description**  
-E.g., *"An open-source tool to manage and organize personal tasks efficiently."*
+NU CLEAR is a centralized, data-driven platform that empowers Northeastern students, advisors, and employers by transforming co-op feedback into actionable insights, enabling informed decision-making and continuous improvement for the university’s experiential learning programs.
 
 ---
 
@@ -14,8 +14,7 @@ E.g., *"An open-source tool to manage and organize personal tasks efficiently."*
 5. [Running the Project](#running-the-project)  
 6. [Environment Variables & Secrets](#environment-variables--secrets)  
 7. [Contributing](#contributing)  
-8. [Team Members](#team-members)  
-9. [License](#license)
+8. [Team Members](#team-members)
 
 ---
 
@@ -64,17 +63,10 @@ As a system administrator, you can manage all the users of the site and their pe
 
 1. **Clone the Repository:**  
    ```bash
-   git clone https://github.com/your-username/your-project.git
-   cd your-project
+   git clone https://github.com/your-username/your-project.git](https://github.com/loganravin4/NU-CLEAR.git)
    ```
 
-2. **Install Dependencies:**  
-   Follow specific commands to install required dependencies.  
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Setup Environment Variables:**  
+2. **Setup Environment Variables:**  
    Refer to [Environment Variables & Secrets](#environment-variables--secrets).
 
 ---
@@ -89,7 +81,7 @@ As a system administrator, you can manage all the users of the site and their pe
 
 2. **Run the Containers:**  
    ```bash
-   docker compose up -d
+   docker compose up db -d
    ```
 
 3. **Access the Application:**  
@@ -109,30 +101,11 @@ List all required secrets and their purposes.
 
 ### **How to Set Secrets:**
 1. Create a `.env` file at the root of the project.
-2. Add your environment variables:
+2. Copy and paste the code from .env.template
+3. Edit DB_PASSWORD with a password of your choice:
    ```env
    DB_PASSWORD=your_db_password
-   SECRET_KEY=random-string
    ```
-
----
-
-## **Contributing**
-
-1. Fork the repository.  
-2. Create a new feature branch:  
-   ```bash
-   git checkout -b feature-name
-   ```
-3. Commit changes:  
-   ```bash
-   git commit -m "Added a new feature"
-   ```
-4. Push the branch:  
-   ```bash
-   git push origin feature-name
-   ```
-5. Open a Pull Request.
 
 ---
 
@@ -146,20 +119,6 @@ List all required secrets and their purposes.
 | Diya Kadakia           | kadakia.d@northeastern.edu       |  
 | Deekshita Madhalam           | madhalam.d@northeastern.edu       |  
 
----
-
-## **License**
-
-This project is licensed under the MIT License. See `LICENSE` file for details.
-
----
-
-## **Contact**
-
-For questions or issues, reach out to **Team [Your Project Name]** at:  
-- Email: team@example.com  
-- GitHub Issues: [GitHub Issues Page](https://github.com/your-username/your-project/issues)
+For questions or issues, reach out to **Team NEXUS** at: ganesh.di@northeastern.edu
 
 --- 
-
-You can customize this template further based on your project's needs.

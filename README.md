@@ -2,6 +2,8 @@
 
 > **Project Description**  
 NU CLEAR is a centralized, data-driven platform that empowers Northeastern students, advisors, and employers by transforming co-op feedback into actionable insights, enabling informed decision-making and continuous improvement for the university’s experiential learning programs.
+>
+> **Link to application demo:** https://drive.google.com/file/d/1_PiGyZjMVYR2Ahyp5HcwQNAQJU2_POIZ/view?usp=sharing
 
 ---
 
@@ -12,9 +14,8 @@ NU CLEAR is a centralized, data-driven platform that empowers Northeastern stude
 3. [Tech Stack](#tech-stack)  
 4. [Setup and Installation](#setup-and-installation)  
 5. [Running the Project](#running-the-project)  
-6. [Environment Variables & Secrets](#environment-variables--secrets)  
-7. [Contributing](#contributing)  
-8. [Team Members](#team-members)
+6. [Environment Variables & Secrets](#environment-variables--secrets)   
+7. [Team Members](#team-members)
 
 ---
 

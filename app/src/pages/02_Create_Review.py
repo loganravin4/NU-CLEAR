@@ -8,6 +8,7 @@ import requests
 st.set_page_config(layout = 'wide')
 
 # Hard coding nav bar due to issues that are unexplicable
+st.sidebar.image("assets/logo.png", width=200)
 HomeNav()
 StudentHomeNav()
 AboutPageNav()

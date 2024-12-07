@@ -14,8 +14,7 @@ E.g., *"An open-source tool to manage and organize personal tasks efficiently."*
 5. [Running the Project](#running-the-project)  
 6. [Environment Variables & Secrets](#environment-variables--secrets)  
 7. [Contributing](#contributing)  
-8. [Team Members](#team-members)  
-9. [License](#license)
+8. [Team Members](#team-members)
 
 ---
 
@@ -146,20 +145,6 @@ List all required secrets and their purposes.
 | Diya Kadakia           | kadakia.d@northeastern.edu       |  
 | Deekshita Madhalam           | madhalam.d@northeastern.edu       |  
 
----
-
-## **License**
-
-This project is licensed under the MIT License. See `LICENSE` file for details.
-
----
-
-## **Contact**
-
-For questions or issues, reach out to **Team [Your Project Name]** at:  
-- Email: team@example.com  
-- GitHub Issues: [GitHub Issues Page](https://github.com/your-username/your-project/issues)
+For questions or issues, reach out to **Team NEXUS** at: ganesh.di@northeastern.edu
 
 --- 
-
-You can customize this template further based on your project's needs.

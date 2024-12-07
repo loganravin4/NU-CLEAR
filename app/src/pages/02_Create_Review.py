@@ -27,7 +27,7 @@ with st.form("add_review_form"):
     submitted = st.form_submit_button("Submit Review")
 
 if submitted:
-    SideBarLinks()
+    st.session_state["role"] == "student"
     if not user_id:
         st.error("User ID is required.")
     elif not role:

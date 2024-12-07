@@ -47,6 +47,4 @@ if st.button("Submit Review"):
     else:
         st.error(f"Failed to add review. Error: {response.status_code} - {response.text}")
 
-    st.session_state['authenticated'] = True
-    st.session_state['role'] = 'student'
-    st.switch_page('pages/02_Create_Review.py')
+    SideBarLinks()

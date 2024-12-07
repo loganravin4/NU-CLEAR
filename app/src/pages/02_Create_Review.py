@@ -2,7 +2,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 import streamlit as st
-from modules.nav import SideBarLinks
+from modules.nav import SideBarLinks, StudentHomeNav
 import requests
 
 st.set_page_config(layout = 'wide')
@@ -23,6 +23,7 @@ with col2:
     worst_part = st.text_area("Worst Part", placeholder="What was the worst part of this co-op?", key="worst_part")
 
 if st.button("Submit Review"):
+    StudentHomeNav()
     if not user_id:
         st.error("User ID is required.")
     elif not role:
@@ -41,7 +42,7 @@ if st.button("Submit Review"):
     api = f"http://api:4000/rev/reviews/{user_id}"
    
     response = requests.post(api, json=review_data)
-    
+
     if response.status_code == 200:
         st.success("Review added successfully!")
     else:

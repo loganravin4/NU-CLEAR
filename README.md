@@ -63,17 +63,10 @@ As a system administrator, you can manage all the users of the site and their pe
 
 1. **Clone the Repository:**  
    ```bash
-   git clone https://github.com/your-username/your-project.git
-   cd your-project
+   git clone https://github.com/your-username/your-project.git](https://github.com/loganravin4/NU-CLEAR.git)
    ```
 
-2. **Install Dependencies:**  
-   Follow specific commands to install required dependencies.  
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Setup Environment Variables:**  
+2. **Setup Environment Variables:**  
    Refer to [Environment Variables & Secrets](#environment-variables--secrets).
 
 ---
@@ -88,7 +81,7 @@ As a system administrator, you can manage all the users of the site and their pe
 
 2. **Run the Containers:**  
    ```bash
-   docker compose up -d
+   docker compose up db -d
    ```
 
 3. **Access the Application:**  
@@ -108,30 +101,11 @@ List all required secrets and their purposes.
 
 ### **How to Set Secrets:**
 1. Create a `.env` file at the root of the project.
-2. Add your environment variables:
+2. Copy and paste the code from .env.template
+3. Edit DB_PASSWORD with a password of your choice:
    ```env
    DB_PASSWORD=your_db_password
-   SECRET_KEY=random-string
    ```
-
----
-
-## **Contributing**
-
-1. Fork the repository.  
-2. Create a new feature branch:  
-   ```bash
-   git checkout -b feature-name
-   ```
-3. Commit changes:  
-   ```bash
-   git commit -m "Added a new feature"
-   ```
-4. Push the branch:  
-   ```bash
-   git push origin feature-name
-   ```
-5. Open a Pull Request.
 
 ---
 

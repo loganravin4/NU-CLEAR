@@ -14,7 +14,7 @@ st.title('Submit a Co-op Review')
 col1, col2 = st.columns(2)
 with col1:
     user_id = st.text_input("User ID", placeholder="e.g., 123", key="user_id")
-    role = st.text_input("Role ID", placeholder="e.g., 1", key="role")
+    coop = st.text_input("Coop ID", placeholder="e.g., 1", key="coop")
     salary = st.number_input("Salary", min_value=0.0, step=1.0, key="salary")
     rating = st.slider("Rating", min_value=0.0, max_value=5.0, step=0.1, key="rating")
 with col2:
@@ -25,13 +25,13 @@ with col2:
 if st.button("Submit Review"):
     if not user_id:
         st.error("User ID is required.")
-    elif not role:
-        st.error("Role is required.")
+    elif not coop:
+        st.error("Coop is required.")
     elif rating < 0.0 or rating > 5.0:
         st.error("Please select a valid rating between 0.0 and 5.0.")
     else:
         review_data = {
-            "role": role,
+            "coop": coop,
             "salary": salary,
             "rating": rating,
             "summary": summary,

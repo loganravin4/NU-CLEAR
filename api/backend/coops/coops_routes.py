@@ -11,9 +11,9 @@ from backend.db_connection import db
 coop = Blueprint('coop', __name__)
 
 #------------------------------------------------------------
-# See all roles
+# See all coops
 @coop.route('/coop', methods=['GET'])
-def get_role():
+def get_coop():
     query = '''
         SELECT c.coopId, c.title, cp.companyName, c.description, c.locationState AS state, c.locationCity AS city, c.locationCountry AS country
         FROM Coop c JOIN Company cp ON c.company = cp.companyId
@@ -44,7 +44,7 @@ def get_role():
 #------------------------------------------------------------
 # Add a new co-op listing 
 @coop.route('/coop', methods=['POST'])
-def add_role():        
+def add_coop():        
     
     the_data = request.json
     query = f'''

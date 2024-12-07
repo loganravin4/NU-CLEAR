@@ -15,7 +15,7 @@ review = Blueprint('review', __name__)
 @review.route('/reviews', methods = ['GET'])
 def get_reviews():
     query = '''
-        SELECT r.reviewId, r.createdAt, r.role, r.salary, r.rating, 
+        SELECT r.reviewId, r.createdAt, r.coop, r.salary, r.rating, 
                r.summary, r.bestPart, r.worstPart, r.wouldRecommend, 
                s.major, s.coopLevel, s.year
         FROM Review r 
@@ -25,8 +25,8 @@ def get_reviews():
     filters = []
     if request.args.get('createdBy'):
         filters.append(f"r.createdBy = {request.args.get('createdBy')}")
-    if request.args.get('role'):
-        filters.append(f"r.role = {request.args.get('role')}")
+    if request.args.get('coop'):
+        filters.append(f"r.coop = {request.args.get('coop')}")
     if request.args.get('rating'):
         filters.append(f"r.rating >= {request.args.get('rating')}")
     if request.args.get('wouldRecommend'):
@@ -59,7 +59,7 @@ def get_reviews():
 @review.route('/reviews/<user_id>', methods = ['GET'])
 def get_user_reviews(user_id):
     query = f'''
-        SELECT r.reviewId, r.role,r.salary, r.rating, 
+        SELECT r.reviewId, r.coop,r.salary, r.rating, 
                r.summary, s.firstName, s.lastName, 
                s.major, s.coopLevel, s.year
         FROM Review r
@@ -81,9 +81,9 @@ def get_user_reviews(user_id):
 def add_user_reviews(user_id):
     the_data = request.json
     query = f'''
-        INSERT INTO Review (createdAt, createdBy, role, salary, rating, 
+        INSERT INTO Review (createdAt, createdBy, coop, salary, rating, 
                             summary, bestPart, worstPart)
-        VALUES (now(), {user_id}, '{the_data["role"]}', {the_data["salary"]}, {the_data["rating"]}, 
+        VALUES (now(), {user_id}, '{the_data["coop"]}', {the_data["salary"]}, {the_data["rating"]}, 
                 '{the_data["summary"]}', '{the_data["bestPart"]}', '{the_data["worstPart"]}')
     '''
     cursor = db.get_db().cursor()
@@ -137,7 +137,7 @@ def get_company_reviews(companyName, company_id):
         SELECT r.reviewId, r.createdAt, cp.companyName, r.rating, 
                r.summary, r.bestPart, r.worstPart
         FROM Review r
-        JOIN Coop c ON r.role = c.coopId
+        JOIN Coop c ON r.coop = c.coopId
         JOIN Company cp ON c.company = cp.companyId
         WHERE cp.companyId = {company_id} AND cp.companyName = '{companyName}'
     '''
@@ -159,15 +159,15 @@ def get_company_reviews(companyName, company_id):
     return response
 
 # ------------------------------------------------------------
-# Return reviews for a specific role
+# Return reviews for a specific coop
 @review.route('/reviews/coops/<company_id>/<coop_id>', methods = ['GET'])
-def get_role_reviews(company_id, coop_id):
+def get_coop_reviews(company_id, coop_id):
     query = f'''
         SELECT r.reviewId, c.title, r.createdAt, r.salary, r.rating, r.summary, 
                r.bestPart, r.worstPart
         FROM Review r
-        JOIN Coop c ON r.role = c.coopId
-        WHERE r.role = {coop_id} AND c.company = {company_id}
+        JOIN Coop c ON r.coop = c.coopId
+        WHERE r.coop = {coop_id} AND c.company = {company_id}
         ORDER BY createdAt DESC
     '''
 
@@ -184,16 +184,16 @@ def get_role_reviews(company_id, coop_id):
 # Returns reviews for other companies to compare it to my company
 @review.route('/reviews/compare/<company_id>', methods = ['GET'])
 def get_company_comparisons(company_id):
-    role = request.args.get('role', None)
+    coop = request.args.get('coop', None)
     query = f'''
-       SELECT c.company, r.reviewId, r.createdAt, r.role, r.salary, r.rating, 
+       SELECT c.company, r.reviewId, r.createdAt, r.coop, r.salary, r.rating, 
                r.summary, r.bestPart, r.worstPart
         FROM Review r
-        JOIN Coop c ON r.role = c.coopId
+        JOIN Coop c ON r.coop = c.coopId
         WHERE c.company != {company_id}
     '''
-    if role:
-        query += f" AND r.role = {role}"
+    if coop:
+        query += f" AND r.coop = {coop}"
 
     query += " ORDER BY r.createdAt DESC"
 
@@ -219,7 +219,7 @@ def get_analysis_report_and_reviews(company_id):
         sr.company, 
         sr.generatedSummary
     FROM Review r
-    JOIN Coop c ON r.role = c.coopId
+    JOIN Coop c ON r.coop = c.coopId
     JOIN Company co ON c.company = co.companyId
     JOIN SummaryReport sr ON co.companyId = sr.company
     WHERE co.companyId = {company_id}

@@ -11,24 +11,20 @@ SideBarLinks()
 
 st.title('Submit a Co-op Review')
 
-with st.form("add_review_form"):
-    col1, col2 = st.columns(2)
-    with col1:
-        user_id = st.text_input("User ID", placeholder="e.g., 123", key="user_id")
-        role = st.text_input("Role ID", placeholder="e.g., 1", key="role")
-        salary = st.number_input("Salary", min_value=0.0, step=1.0, key="salary")
-        rating = st.slider("Rating", min_value=0.0, max_value=5.0, step=0.1, key="rating")
-    with col2:
-        summary = st.text_area("Summary", placeholder="A short summary of your experience", key="summary")
-        best_part = st.text_area("Best Part", placeholder="What was the best part of this co-op?", key="best_part")
-        worst_part = st.text_area("Worst Part", placeholder="What was the worst part of this co-op?", key="worst_part")
-        is_anonymous = st.checkbox("Post Anonymously", key="is_anonymous", value=True)
+col1, col2 = st.columns(2)
+with col1:
+    user_id = st.text_input("User ID", placeholder="e.g., 123", key="user_id")
+    role = st.text_input("Role ID", placeholder="e.g., 1", key="role")
+    salary = st.number_input("Salary", min_value=0.0, step=1.0, key="salary")
+    rating = st.slider("Rating", min_value=0.0, max_value=5.0, step=0.1, key="rating")
+with col2:
+    summary = st.text_area("Summary", placeholder="A short summary of your experience", key="summary")
+    best_part = st.text_area("Best Part", placeholder="What was the best part of this co-op?", key="best_part")
+    worst_part = st.text_area("Worst Part", placeholder="What was the worst part of this co-op?", key="worst_part")
 
     submitted = st.form_submit_button("Submit Review")
 
-if submitted:
-    st.session_state["role"] = "student"
-
+if st.button("Submit Review"):
     if not user_id:
         st.error("User ID is required.")
     elif not role:

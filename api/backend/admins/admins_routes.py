@@ -70,7 +70,7 @@ def add_user_perms():
     query = f'''
     INSERT INTO User (userType)
     VALUES (
-        {the_data['userType']}
+        '{the_data['userType']}'
     )
     '''
 
@@ -126,7 +126,8 @@ def delete_user_perms():
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)
-    theData = cursor.fetchall()
-    response = make_response(jsonify(theData))
+    db.get_db().commit()
+
+    response = make_response("User deleted successfully")
     response.status_code = 200
     return response

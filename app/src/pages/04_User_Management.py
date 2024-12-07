@@ -34,7 +34,7 @@ with st.popover("Add a new user", help=None, icon=None, disabled=False, use_cont
         
 with st.popover("Delete a user", help=None, icon=None, disabled=False, use_container_width=True):
     userId = st.text_input("User Id:", key="text4")
-    if st.button("Delete", on_click=clear_text):
+    if st.button("Delete"):
         filters = {
             "userId": userId
         }

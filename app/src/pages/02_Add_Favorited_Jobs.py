@@ -25,8 +25,8 @@ if st.button('Add Favorite',
         st.error("All required fields must be filled!")
     else:
         filters = {
-            "user_id": user_id,
-            "job_id": job_id,
+            "userId": user_id,
+            "coopId": job_id,
         }
 
     response = requests.post(url, json=filters)

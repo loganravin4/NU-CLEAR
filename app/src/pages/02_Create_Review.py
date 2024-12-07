@@ -27,8 +27,7 @@ with st.form("add_review_form"):
     submitted = st.form_submit_button("Submit Review")
 
 if submitted:
-    if 'user_id' not in st.session_state:
-        st.session_state["role"] = "student"
+    st.session_state["role"] = "student"
 
     if not user_id:
         st.error("User ID is required.")

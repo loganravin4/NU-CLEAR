@@ -2,23 +2,12 @@ import logging
 logger = logging.getLogger(__name__)
 
 import streamlit as st
-from modules.nav import HomeNav, StudentHomeNav, AboutPageNav
+from modules.nav import SideBarLinks
 import requests
 
 st.set_page_config(layout = 'wide')
 
-# Hard coding nav bar due to issues that are unexplicable
-st.sidebar.image("assets/logo.png", width=200)
-HomeNav()
-StudentHomeNav()
-AboutPageNav()
-if st.session_state["authenticated"]:
-        # Always show a logout button if there is a logged in user
-        if st.sidebar.button("Logout"):
-            del st.session_state["role"]
-            del st.session_state["authenticated"]
-            st.switch_page("Home.py")
-
+SideBarLinks()
 
 st.title('Submit a Co-op Review')
 

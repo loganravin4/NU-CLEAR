@@ -1,7 +1,7 @@
 # NU-CLEAR
 
 > **Project Description**  
-E.g., *"An open-source tool to manage and organize personal tasks efficiently."*
+NU CLEAR is a centralized, data-driven platform that empowers Northeastern students, advisors, and employers by transforming co-op feedback into actionable insights, enabling informed decision-making and continuous improvement for the university’s experiential learning programs.
 
 ---
 

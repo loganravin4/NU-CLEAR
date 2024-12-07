@@ -38,12 +38,10 @@ if st.button("Submit Review"):
             "bestPart": best_part,
             "worstPart": worst_part
         }
-
-    url = f"http://api:4000/rev/reviews/{user_id}"
-
-    response = requests.post(url, json=review_data)
-    logger.info(response)
-
+    api = f"http://api:4000/rev/reviews/{user_id}"
+   
+    response = requests.post(api, json=review_data)
+    
     if response.status_code == 200:
         st.success("Review added successfully!")
     else:

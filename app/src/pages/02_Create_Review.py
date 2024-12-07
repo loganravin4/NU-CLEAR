@@ -2,12 +2,22 @@ import logging
 logger = logging.getLogger(__name__)
 
 import streamlit as st
-from modules.nav import SideBarLinks, StudentHomeNav
+from modules.nav import HomeNav, StudentHomeNav, AboutPageNav
 import requests
 
 st.set_page_config(layout = 'wide')
 
-SideBarLinks()
+# Hard coding nav bar due to issues that are unexplicable
+HomeNav()
+StudentHomeNav()
+AboutPageNav()
+if st.session_state["authenticated"]:
+        # Always show a logout button if there is a logged in user
+        if st.sidebar.button("Logout"):
+            del st.session_state["role"]
+            del st.session_state["authenticated"]
+            st.switch_page("Home.py")
+
 
 st.title('Submit a Co-op Review')
 
@@ -23,7 +33,6 @@ with col2:
     worst_part = st.text_area("Worst Part", placeholder="What was the worst part of this co-op?", key="worst_part")
 
 if st.button("Submit Review"):
-    StudentHomeNav()
     if not user_id:
         st.error("User ID is required.")
     elif not role:

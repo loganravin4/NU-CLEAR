@@ -70,7 +70,7 @@ def add_user_perms():
     query = f'''
     INSERT INTO User (userType)
     VALUES (
-        {the_data['userType']}
+        '{the_data['userType']}'
     )
     '''
 

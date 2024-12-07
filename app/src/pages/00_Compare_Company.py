@@ -12,9 +12,9 @@ SideBarLinks()
 st.title('Compare With Other Companies')
 
 company_id = st.text_input('My Company (CompanyId)', placeholder= 'e.g, 13')
-role = st.text_input('Filter by Role (Co-op ID)', placeholder='e.g., 45')
+coop = st.text_input('Filter by Co-op (Co-op ID)', placeholder='e.g., 45')
 
-logger.info(f'role = {role}')
+logger.info(f'coop = {coop}')
 logger.info(f'company_id = {company_id}')
 
 
@@ -25,8 +25,8 @@ if st.button('Get Reviews',
         st.error("Company ID is required.")
     filters = {}
    
-    if role:
-        filters['role'] = role
+    if coop:
+        filters['coop'] = coop
 
     url = f'http://api:4000/rev/reviews/compare/{company_id}'
 
